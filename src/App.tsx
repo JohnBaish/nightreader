@@ -7,6 +7,7 @@ import { Component, useEffect, useState, type ReactNode } from 'react'
 import { MoonFace } from './components/MoonFace.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
 import { SkyTonight } from './components/SkyTonight.tsx'
+import { WhereToLook } from './components/WhereToLook.tsx'
 import { lineColour } from './lib/lineColour.ts'
 import { clock } from './lib/format.ts'
 import { district, outwardCode, POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
@@ -87,6 +88,16 @@ function Place({ d, now }: { d: District; now: Date }) {
         <Lines lines={planets.lines} marks />
       </section>
 
+      {v.series && (
+        <section>
+          <div className="sec-head">
+            <h2>Where to look</h2>
+            <p className="sub">Facing south, with east on the left and west on the right. The towns along the horizon are where they really lie from here. Slide through the night.</p>
+          </div>
+          <WhereToLook key={v.date} v={v} d={d} now={now} />
+        </section>
+      )}
+
       <section>
         <div className="sec-head"><h2>Looking ahead</h2></div>
         <Lines lines={ahead.lines} />
@@ -147,7 +158,7 @@ export default function App() {
         </p>
         <p>
           Times are UK local time. {POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
-          {' '}Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
+          {' '}Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue. Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
         </p>
       </footer>
     </div>

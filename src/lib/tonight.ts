@@ -2,7 +2,7 @@
 // heights of the Moon and planets through the night for "The sky tonight" (SPEC §6.1).
 // Worked out in a worker (tonight.worker.ts), so the page stays quick.
 
-import { Body } from 'astronomy-engine'
+import { Body, SiderealTime } from 'astronomy-engine'
 import { moonLook, night, PLANETS, position, sky, type InView, type Night, type PlanetName } from './night.ts'
 import { opening, sentences, type Group } from './sentences.ts'
 import { dayFigures, sunPosition, type Place } from './sun.ts'
@@ -18,19 +18,27 @@ export function tonightDate(place: Place, now: Date): string {
 
 export const STEP_MINUTES = 5, MARGIN_MINUTES = 40
 
-/** Heights in degrees every five minutes, from 40 minutes before sunset to 40 after sunrise. */
-export type Series = { from: number; step: number; sun: number[]; moon: number[]; planets: Record<PlanetName, number[]> }
+/** Heights in degrees every five minutes, from 40 minutes before sunset to 40 after sunrise;
+ *  and for "Where to look", directions (degrees from north), the Moon's tilt, and the local
+ *  sidereal time in degrees, which places the stars. */
+export type Series = {
+  from: number; step: number; sun: number[]; moon: number[]; planets: Record<PlanetName, number[]>
+  sunAz: number[]; moonAz: number[]; moonTilt: number[]; planetAz: Record<PlanetName, number[]>; lst: number[]
+}
 
 export function series(place: Place, n: Night): Series {
   const step = STEP_MINUTES * 60_000
   const from = Math.floor((n.sunset!.getTime() - MARGIN_MINUTES * 60_000) / step) * step
   const to = n.sunrise!.getTime() + MARGIN_MINUTES * 60_000
-  const s: Series = { from, step, sun: [], moon: [], planets: { Mercury: [], Venus: [], Mars: [], Jupiter: [], Saturn: [] } }
+  const five = (): Record<PlanetName, number[]> => ({ Mercury: [], Venus: [], Mars: [], Jupiter: [], Saturn: [] })
+  const s: Series = { from, step, sun: [], moon: [], planets: five(), sunAz: [], moonAz: [], moonTilt: [], planetAz: five(), lst: [] }
   for (let t = from; t <= to + step; t += step) {
     const at = new Date(t)
-    s.sun.push(sunPosition(place, at).altitude)
-    s.moon.push(position(place, Body.Moon, at).altitude)
-    for (const p of PLANETS) s.planets[p].push(position(place, Body[p], at).altitude)
+    const sun = sunPosition(place, at), look = moonLook(place, at)
+    s.sun.push(sun.altitude); s.sunAz.push(sun.azimuth)
+    s.moon.push(look.altitude); s.moonAz.push(look.azimuth); s.moonTilt.push(look.tilt)
+    for (const p of PLANETS) { const q = position(place, Body[p], at); s.planets[p].push(q.altitude); s.planetAz[p].push(q.azimuth) }
+    s.lst.push((((SiderealTime(at) * 15 + place.longitude) % 360) + 360) % 360)
   }
   return s
 }

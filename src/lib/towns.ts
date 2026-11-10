@@ -42,6 +42,16 @@ export function townToward(from: Place, azimuth: number, own: string, bigOnly = 
 }
 
 /** How far either side of the sun's direction the two towns of "between … and …" may lie. */
+/** The towns and cities round a place, for the horizon of "Where to look": each with its
+ *  direction and distance, nearest first; within 25 miles, or 60 where that finds fewer than
+ *  three. */
+export function townsRound(from: Place, own: string): { name: string; bearing: number; miles: number }[] {
+  const all = TOWNS.filter((t) => t.big && t.name !== own).map((t) => ({ name: t.name, ...bearingAndMiles(from, t) }))
+    .filter((t) => t.miles >= TOWN_MILES[0]).sort((a, b) => a.miles - b.miles)
+  const near = all.filter((t) => t.miles <= TOWN_MILES[1])
+  return near.length >= 3 ? near : all.filter((t) => t.miles <= FAR_MILES)
+}
+
 export const BETWEEN_DEGREES = 20
 
 export type Between = { left: Toward; right: Toward; near: Toward | null }

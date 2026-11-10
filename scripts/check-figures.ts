@@ -11,7 +11,7 @@ import { LOW, WELL, fists, moonLook, moonUp, night, nights, sky, sunDepthNeeded 
 import { placeNames } from '../src/lib/places.ts'
 import { opening, phaseLine, sentences } from '../src/lib/sentences.ts'
 import { dayFigures, type Place } from '../src/lib/sun.ts'
-import { describeToward } from '../src/lib/towns.ts'
+import { describeToward, townsRound } from '../src/lib/towns.ts'
 import { district } from '../src/lib/postcode.ts'
 import { skyAt } from '../src/lib/skyColour.ts'
 import { series, tonight, tonightDate } from '../src/lib/tonight.ts'
@@ -223,6 +223,25 @@ check('the page: which night is "tonight", the heights for the picture, the post
   assert.deepEqual(skyAt(-30), [13, 18, 51]) // true night is the page's own colour, #0d1233
   assert.deepEqual([district('CF10')!.name, district('CF10')!.own], ['Caerdydd', 'Cardiff'])
   assert.equal(district('BT1'), null)
+})
+
+check('Where to look: directions through the night, the towns on the horizon, the star file', () => {
+  const n = night(RG1, '2026-11-10'), s = series(RG1, n)
+  // Saturn at its highest (21:20) is due south, as its sentence says
+  const i = Math.round((new Date('2026-11-10T21:20:00Z').getTime() - s.from) / s.step)
+  assert.ok(Math.abs(s.planetAz.Saturn[i] - 180) < 3 && Math.round(s.planets.Saturn[i]) === 40)
+  assert.ok(s.lst.every((x) => x >= 0 && x < 360) && s.sunAz.length === s.sun.length && s.moonTilt.length === s.sun.length)
+  const towns = townsRound(RG1, 'Reading')
+  assert.ok(towns.length > 20 && towns.every((t) => t.miles >= 3 && t.miles <= 25) && !towns.some((t) => t.name === 'Reading'))
+  assert.ok(towns.some((t) => t.name === 'Basingstoke' && t.bearing > 190 && t.bearing < 215))
+  // few towns near Wick (only Thurso within 25 miles), so the reach grows to 60; none round Lerwick
+  assert.deepEqual(townsRound(place('KW1'), 'Wick').slice(0, 2).map((t) => t.name), ['Thurso', 'Stromness'])
+  assert.equal(townsRound(ZE1, 'Lerwick').length, 0)
+  const stars = JSON.parse(readFileSync(new URL('../src/data/stars.json', import.meta.url), 'utf8')) as { stars: (number | string)[][]; lines: number[][][] }
+  assert.equal(stars.stars[0][4], 'Sirius') // brightest first
+  assert.ok(stars.stars.length > 800 && stars.stars.every((x, k) => k === 0 || (x[2] as number) >= (stars.stars[k - 1][2] as number)))
+  // Polaris is within a degree of the pole
+  assert.ok(stars.stars.some((x) => (x[1] as number) > 89))
 })
 
 console.log(`\n${passed} checks passed`)

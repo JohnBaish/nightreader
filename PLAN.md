@@ -47,6 +47,9 @@ opening and the first picture. Checked at 1200px, 390px and 844 by 390 with touc
 
 The view south with its slider, towns, stars and fists.
 
+**Built November 10th 2026** on branch `claude/adoring-davinci-drczxf` (pictures in
+`design/previews/stage4/`). Not merged.
+
 ## Stage 5: "The year in darkness"
 
 The year picture with its keys and the chosen night's figures.

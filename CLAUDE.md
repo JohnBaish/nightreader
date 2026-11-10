@@ -42,14 +42,50 @@ Key points:
   within 25) and `src/data/towns.json` (`npm run towns <Refueller's data/places.json>`).
 - `src/lib/sentences.ts`: every sentence the page says (wording agreed with John, November 10th 2026).
   `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
-- **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `PostcodeBox`),
+- **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `WhereToLook`, `PostcodeBox`),
   `src/lib/tonight.ts` with its worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
-  `src/styles/global.css`. `npm run dev`, `npm run build`, `npm run lint`.
+  `src/styles/global.css`. `src/data/stars.json` (`npm run stars`). `npm run dev`, `npm run build`, `npm run lint`.
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — stage 4: "Where to look" (same branch, not merged)
+
+**John:** stage 3 approved ("Nothing to change"), so on to stage 4.
+
+**What:**
+- `src/components/WhereToLook.tsx`, from the agreed mock-up: the view south on a canvas (the
+  sky, the Sun's glow, real stars and constellation lines, fading with twilight and
+  moonlight) with the Moon, planets, their paths, the towns and the compass words drawn over
+  it; a ruler of fists at the left; the slider from sunset to sunrise, opening on now if it's
+  night, else a little way into the darkest stretch; the list beneath (direction, towns,
+  fists). On a phone the picture is wider than the screen with true shapes, opens on south
+  and is swiped (option B).
+- `scripts/build-stars.ts` (`npm run stars`) writes `src/data/stars.json` (868 stars to
+  magnitude 4.7, 17 named, 121 lines; 11 KB compressed, fetched only when the picture is
+  drawn) from the d3-celestial files, turned to the equator of 2027.
+- `tonight.ts`: the night's figures gain each body's direction, the Moon's tilt and the
+  sidereal time. `towns.ts`: `townsRound()` for the horizon (25 miles, or 60 where fewer than
+  three lie within 25).
+- A planet shows by the agreed rule for how dark the sky must be. One below 10° is drawn but
+  its line in the list is dimmed and reads "Very low in the west, …" (Claude's, for John).
+- The footer gains a draft star credit.
+
+**Verified:** `npm run check` (22, exit code read; the commit step waits on it), typecheck,
+lint, build. In Chromium at 1200px, 390px with touch and 844 by 390 with touch, five nights
+and places (Reading tonight, by day, at full Moon, at midsummer; Lerwick): no errors, no
+sideways scrolling; the picture 365px tall on a computer, 426px on a phone (opening on
+south), 301px on a 390px-tall screen; the slider moved by keyboard to 03:15 changes the
+clock, the picture and the list. Pictures in `design/previews/stage4/`.
+**On the way:** a new check's example was a wrong guess of mine (Inverness has eight towns
+within 25 miles); it now uses Wick and Lerwick, with the real results.
+**Couldn't be checked:** a real phone (swiping the picture, dragging the slider); Safari.
+**Still open before launch:** the star data's own terms (the files are BSD; the catalogue
+behind them is ESA's Hipparcos) and the credit's wording. **Noticed:** from Lerwick the
+horizon has no towns at all, so the strip under the sky is empty and the line "The towns
+along the horizon…" doesn't apply there.
 
 ### 2026-11-10 — Vercel project created; stage 3 approved (same branch)
 

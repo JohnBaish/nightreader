@@ -9,6 +9,7 @@
     "figures-sheet": "node scripts/figures-sheet.ts",
     "sentence-sheet": "node scripts/sentence-sheet.ts",
     "towns": "node scripts/build-towns.ts",
+    "stars": "node scripts/build-stars.ts",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
