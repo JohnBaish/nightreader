@@ -51,6 +51,15 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — the star data's terms: not yet readable (notes only)
+
+d3-celestial's own licence (BSD, Olaf Frohn 2015) read and fine with a credit; its stars are from
+XHIP (Anderson and Francis, 2012), held by CDS Strasbourg (VizieR V/137D). John allowed
+`vizier.cds.unistra.fr` and `cdsarc.cds.unistra.fr`, but CDS is partly offline after a
+cybersecurity incident (its notice is dated November 9th 2026): the usage rules and the
+catalogue's ReadMe return "This page is currently unavailable". Its mirror at Harvard
+(`vizier.cfa.harvard.edu`) is blocked here. The magnetic north figure isn't needed (John).
+
 ### 2026-11-10 — stage 7 started; "Delete merged branches" workflow added
 
 **John:** move to testing in the tracker (done) and go on to stage 7. First, the task noted for
