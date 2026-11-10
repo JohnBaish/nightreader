@@ -81,7 +81,7 @@ function Place({ d, now }: { d: District; now: Date }) {
       <section>
         <div className="sec-head">
           <h2>The sky tonight</h2>
-          <p className="sub">From sunset to sunrise. Each arc is how high the Moon or a planet stands: solid where it’s in view, dotted where it’s up but lost in a bright sky or too low.</p>
+          <p className="sub">From sunset to sunrise. Each arc is the height of the Moon or a planet: solid where it’s in view, dotted where it’s up but lost in a bright sky or too low.</p>
         </div>
         {v.series && <SkyTonight v={v} now={now} />}
         <Lines lines={planets.lines} marks />
@@ -133,7 +133,7 @@ export default function App() {
         {(!d || changing) && (
           <div className="welcome">
             {!d && <h1>The night sky from your postcode</h1>}
-            {!d && <p className="lede">How dark tonight gets, when the Moon is out of the way, and which planets you can see, anywhere in Great Britain.</p>}
+            {!d && <p className="lede">Proper darkness tonight, with the Moon out of the way, and the visible planets, anywhere in Great Britain.</p>}
             <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
           </div>
         )}

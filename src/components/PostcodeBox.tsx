@@ -15,7 +15,7 @@ export function PostcodeBox({ onChoose, onCancel }: { onChoose: (d: District) =>
     if (!code) return setError('That doesn’t look like a postcode. Try one like RG1 or RG1 8FR.')
     const d = district(code)
     if (!d) return setError(/^BT/.test(code)
-      ? 'Northern Ireland isn’t covered yet: its postcodes aren’t in the open data Nightreader uses.'
+      ? 'Northern Ireland isn’t covered yet: its postcodes aren’t in the open data used by Nightreader.'
       : `${code} isn’t a postcode district in Great Britain that Nightreader knows.`)
     onChoose(d)
   }

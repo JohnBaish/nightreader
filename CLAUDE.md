@@ -51,6 +51,15 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — stage 3's wording, from John (same branch, not merged)
+
+**John:** the first visit's heading as drafted; its line "Proper darkness tonight, with the
+Moon out of the way, and the visible planets, anywhere in Great Britain." (the full stop is
+Claude's); "Each arc is the height of the Moon or a planet: …"; the footer as drafted; "…in the
+open data used by Nightreader." He'd like to try it himself: a Vercel project is his next step
+(his message was cut short after "Yes please, I'm").
+**Verified:** `npm run check` (21, exit code read), typecheck, lint, build.
+
 ### 2026-11-10 — stage 3: the page, with "The sky tonight" (branch `claude/adoring-davinci-drczxf`, not merged)
 
 **John:** agreed the "poor year" rule; go ahead with stage 3.
