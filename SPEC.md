@@ -135,5 +135,12 @@ faint eclipses of the Moon left out ("I think so"); phase names fine as they are
 Answered on November 10th 2026: "Looking ahead" is the right list ("spot on"); where there are
 no towns in reach (Shetland, Scilly), the compass point alone.
 
-Open now: the 16 numbered points at the end of the sentence sheet
-(`design/sentence-sheet-2026-11-10.pdf`).
+Answered on November 10th 2026 (the sentence sheet): a spell in view for less than 15 minutes,
+or well placed for less than three, doesn't count; degrees and fists are both given; new and
+full Moon by date only; each Moon phase's name is followed by what it means; a district in
+Wales with two names shows the Welsh one; the eclipse safety sentence is "Looking at the Sun
+without proper protection is dangerous and should be avoided."
+
+Open now: the nine points at the end of the sentence sheet's second version
+(`design/sentence-sheet-2026-11-10.pdf`), and trimming "Looking ahead", to be worked on with
+John.

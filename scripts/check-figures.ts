@@ -8,7 +8,8 @@ import { readFileSync } from 'node:fs'
 import { SHOWERS, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, sunReaches } from '../src/lib/ahead.ts'
 import { clock, duration } from '../src/lib/format.ts'
 import { LOW, WELL, fists, moonLook, moonUp, night, nights, sky, sunDepthNeeded } from '../src/lib/night.ts'
-import { opening, sentences } from '../src/lib/sentences.ts'
+import { placeNames } from '../src/lib/places.ts'
+import { PHASE_MEANS, opening, sentences } from '../src/lib/sentences.ts'
 import { dayFigures, type Place } from '../src/lib/sun.ts'
 import { describeToward } from '../src/lib/towns.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
@@ -153,14 +154,33 @@ check('a shower peaking tonight is found, not skipped to next year', () => {
 
 check('the sentences: Reading on November 10th, a full Moon, midsummer, and a shower tonight', () => {
   const a = sentences(RG1, 'Reading', '2026-11-10')
-  assert.deepEqual(a.opening, { figure: '11h\u00a02m', under: 'of Moon-free true night', line: 'True night runs from 18:17 to 05:19, 11h\u00a02m in all. The Moon stays down throughout.' })
-  assert.deepEqual(a.groups[0].lines, ['New Moon, 3% lit.', 'It stays below the horizon all night.'])
+  assert.deepEqual(a.opening, { figure: '11h\u00a02m', under: 'of Moon-free true night', note: '', line: 'True night runs from 18:17 to 05:19, 11h\u00a02m in all. The Moon stays down throughout.' })
+  assert.deepEqual(a.groups[0].lines, ['New Moon, 3% lit. At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.', 'It stays below the horizon all night.'])
+  assert.equal(Object.keys(PHASE_MEANS).length, 8)
   assert.equal(a.groups[1].lines[4], 'Mercury: not in view tonight, too close to the Sun.')
   assert.equal(opening(night(RG1, '2026-11-24')).figure, 'No Moon-free night')
-  assert.match(opening(night(RG1, '2027-06-21')).line, /^There\u2019s no true night tonight: the darkest the sky gets is \u201cvery dark\u201d, from 23:26 to 02:45/)
+  // summer: the opening says which kinds of night aren't reached
+  assert.deepEqual(opening(night(RG1, '2027-06-21')), { figure: 'No Moon-free night', under: 'True night is not reached tonight', note: '', line: 'The sky is \u201cvery dark\u201d from 23:26 to 02:45, 3h\u00a019m in all. The Moon is up throughout.' })
+  const h = opening(night(EH1, '2027-06-21'))
+  assert.deepEqual([h.figure, h.under, h.note], ['42m', 'of Moon-free \u201cdark\u201d night', '(\u201cVery dark\u201d and true night are not reached tonight.)'])
+  // a well-placed planet; a direction already given isn't repeated; like reasons together
+  assert.equal(a.groups[1].lines[0], 'Saturn is well placed from 17:28 to 01:12, and in view for 29m before and 1h\u00a08m after that window. At its highest, at 21:20, it stands 40° up (four fists) in the south, between Bordon and Alton (near Hook).')
+  assert.match(a.groups[1].lines[1], /^Mars is well placed from 01:21 to 06:38, and in view for 1h\u00a05m before that\. .* in the same direction as Saturn\.$/)
+  const l = sentences(place('CF10'), 'Cardiff', '2027-08-12').groups
+  assert.ok(l[1].lines.includes('Mercury, Venus and Jupiter: not in view tonight, too close to the Sun.'))
+  assert.ok(l[2].lines.includes('Perseids meteor shower: best tonight. A fair year for this annual event: 2h\u00a02m of the night is Moon-free.'))
+  // a spell of a few minutes doesn't count: Mercury on November 17th was in view for three
+  assert.equal(sentences(RG1, 'Reading', '2026-11-17').groups[1].lines[4], 'Mercury: not in view tonight, too low while the sky is dark.')
+  assert.ok(sentences(RG1, 'Reading', '2027-08-12').groups[2].lines.some((x) => x.endsWith('Looking at the Sun without proper protection is dangerous and should be avoided.')))
   assert.ok(sentences(RG1, 'Reading', '2026-11-24').groups[2].lines.includes('Full Moon: today (November 24th).'))
-  assert.ok(sentences(place('CF10'), 'Cardiff', '2027-08-12').groups[2].lines.some((l) => l.startsWith('Perseids: best tonight.')))
   for (const g of a.groups) for (const l of g.lines) assert.ok(!/undefined|NaN|null/.test(l), l)
+})
+
+check('place names: Welsh in Wales, one name elsewhere, the English name kept for directions', () => {
+  assert.deepEqual(placeNames('CF10', 'Cardiff / Caerdydd'), { shown: 'Caerdydd', own: 'Cardiff' })
+  assert.deepEqual(placeNames('SA1', 'Abertawe / Swansea'), { shown: 'Abertawe', own: 'Swansea' })
+  assert.deepEqual(placeNames('IV1', 'Inverness / Inbhir Nis'), { shown: 'Inverness', own: 'Inverness' })
+  assert.deepEqual(placeNames('RG1', 'Reading'), { shown: 'Reading', own: 'Reading' })
 })
 
 console.log(`\n${passed} checks passed`)

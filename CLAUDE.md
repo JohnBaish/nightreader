@@ -48,6 +48,27 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — the sentences, second version: John's changes
+
+**John:** the eclipse safety sentence ("Looking at the Sun without proper protection is
+dangerous and should be avoided."); a description after each Moon phase's name; planets not in
+view for the same reason listed together; meteor showers "for this annual event"; the summer
+opening reworked; a well-placed planet as "well placed from … to …, and in view for 29m before
+and 1h 8m after that window"; degrees and fists both; new and full Moon by date only; a spell
+in view for less than 15 minutes, or well placed for less than three, doesn't count; a
+direction given once only; Welsh place names in Wales. Points 2 to 4, 6, 7 and 11 to 13 agreed.
+"Looking ahead" to be trimmed together (not done).
+
+**What:** `sentences.ts` (`PHASE_MEANS`, `planetLines()`, the opening's `note`); `night.ts`
+(`MIN_IN_VIEW`, `MIN_WELL`); new `src/lib/places.ts` (`placeNames()`: the Welsh half of a
+double name in Wales, the English half kept for directions; Gaelic not shown yet, asked).
+The sheet remade (13 cases, nine points; one new case, a summer new Moon) as `.md` and `.pdf`.
+Claude's additions, flagged to John: "meteor shower" after each shower's name; lengths the
+site's way ("29m"); "in the same direction as Saturn".
+
+**Verified:** `npm run check` (18, exit code read), `npm run typecheck`; the figures sheet
+is unchanged by the short-spell rule; PDF fonts loaded; pages 13, 14, 23 and 24 looked at.
+
 ### 2026-11-10 — stage 2 started: the sentences, and a sheet for John
 
 **John:** islands with no towns in reach get the compass point alone; the "Looking ahead" list

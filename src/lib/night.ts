@@ -175,12 +175,16 @@ export type InView = {
 }
 
 /** One body through the night from `from` (sunset) to `to` (sunrise), minute by minute. */
+/** The shortest spells that count, in minutes. */
+export const MIN_IN_VIEW = 15, MIN_WELL = 3
+
 export function inView(place: Place, name: PlanetName | 'Moon', from: Date, to: Date): InView {
   const body = Body[name]
   const middle = new Date((from.getTime() + to.getTime()) / 2)
   const magnitude = name === 'Moon' ? null : Illumination(body, middle).mag
   const depth = name === 'Moon' ? 0.833 : sunDepthNeeded(magnitude!)
-  const seen: Span[] = [], well: Span[] = []
+  let seen: Span[] = [], well: Span[] = []
+  const bests: InView['best'][] = []
   let best: InView['best'] = null
   let everUp = false
   let openSeen: Date | null = null, openWell: Date | null = null
@@ -194,11 +198,18 @@ export function inView(place: Place, name: PlanetName | 'Moon', from: Date, to: 
     const low = !!p && darkEnough && p.altitude >= LOW
     const high = low && p!.altitude >= WELL
     if (low && !openSeen) openSeen = at
-    if (!low && openSeen) { seen.push({ from: openSeen, to: new Date(t - MINUTE) }); openSeen = null }
+    if (!low && openSeen) { seen.push({ from: openSeen, to: new Date(t - MINUTE) }); bests.push(best); best = null; openSeen = null }
     if (high && !openWell) openWell = at
     if (!high && openWell) { well.push({ from: openWell, to: new Date(t - MINUTE) }); openWell = null }
     if (low && (!best || p!.altitude > best.altitude)) best = { at, altitude: p!.altitude, azimuth: p!.azimuth }
   }
+  // A spell too short to be worth going out for doesn't count (John, November 10th 2026):
+  // in view for less than 15 minutes, or well placed for less than three.
+  const lasts = (s: Span, minutes: number) => s.to.getTime() - s.from.getTime() >= minutes * MINUTE
+  const kept = seen.map((s, i) => ({ s, best: bests[i] })).filter((k) => lasts(k.s, MIN_IN_VIEW))
+  seen = kept.map((k) => k.s)
+  well = well.filter((w) => lasts(w, MIN_WELL) && seen.some((s) => w.from >= s.from && w.to <= s.to))
+  best = kept.reduce<InView['best']>((top, k) => (k.best && (!top || k.best.altitude > top.altitude) ? k.best : top), null)
   const fromSun = AngleFromSun(body, middle)
   const level: Level | null = well.length ? 'well' : seen.length ? 'low' : null
   const why = level ? null : !everUp ? 'below the horizon all night' : fromSun < 15 ? 'too close to the Sun' : 'too low while the sky is dark'
