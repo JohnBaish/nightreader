@@ -51,6 +51,13 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — the footer's two paragraphs swapped (merged to `main`)
+
+**John** (after seeing the live page): the credits first, then the paragraph about the
+project beneath them. Done in `src/App.tsx`. He also asked for mock-ups of ways to show
+compass readings (as on a phone's compass, "96° E"), with no compass technology in the page.
+**Verified:** `npm run check` (22, exit code read), typecheck, lint, build.
+
 ### 2026-11-10 — stages 3 and 4 merged to `main`
 
 **John:** "Very low in the west, …" is right for now; drop the line about towns where there

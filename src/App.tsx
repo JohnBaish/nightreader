@@ -155,13 +155,13 @@ export default function App() {
       </main>
       <footer>
         <p>
+          Times are UK local time. {POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
+          {' '}Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue. Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
+        </p>
+        <p>
           Nightreader is a free-to-use personal project by John Baish. More free tools at{' '}
           <a href="https://www.baish.net/" target="_blank" rel="noopener noreferrer">www.baish.net</a>. Contact: workshop@baish.net.
           {' '}Everything is worked out on your device: nothing you type is sent anywhere. Your device, rather than the website, stores your postcode, so the page opens the same way next time.
-        </p>
-        <p>
-          Times are UK local time. {POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
-          {' '}Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue. Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
         </p>
       </footer>
     </div>
