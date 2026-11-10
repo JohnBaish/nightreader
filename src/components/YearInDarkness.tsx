@@ -130,9 +130,8 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
   const span = ([a, b]: [string, string]) => `From ${dayIn(a, y.from)} to ${dayIn(b, y.from)}`
   return (
     <>
-      <div className="readrow"><Readout n={y.nights[chosen]} first={chosen === 0} today={y.from} /><div className="cp cp-read cp-c">{share}</div></div>
+      <div className="readrow"><Readout n={y.nights[chosen]} first={chosen === 0} today={y.from} /><div className="cp cp-read cp-wide">{share}</div></div>
       <div className="frame year" ref={frame}>
-        <div className="cp cp-frame">{share}</div>
         <canvas ref={canvas} style={{ height: H }} />
         {W > 0 && (
           <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A year of nights at ${name}, coloured by how dark the sky is, with moonlight. Point at or tap a night for its figures.`}

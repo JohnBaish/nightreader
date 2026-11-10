@@ -51,6 +51,19 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — option C for "Copy"; everything since stage 5 merged to `main`
+
+**John:** C ("You've solved it"), and "Share" on a phone. **What:** the buttons sit in rows
+already there on a computer (the heading row of "The sky tonight", the end of the time row,
+the end of the year's line of figures); phones as before. The `?copy=` switch, options A and B
+and their extra copies of the button removed. `claude/gracious-wright-pc7vy5` merged into `main`
+(fast-forward): the shorter planet lines, "Where and when to look", the layout, the Sun key,
+the footer and "Copy"/"Share" all go live. SPEC §6 notes the buttons.
+**Verified:** `npm run check` (23, exit code read), typecheck, lint, build; in Chromium at
+1200px, 390px with touch and 844 by 390 with touch, Reading and Lerwick: no errors, no sideways
+scrolling, the line beside each heading level on a computer; all three pictures copied (1200px)
+or saved (touch). **Couldn't be checked:** a real phone's share sheet; Safari.
+
 ### 2026-11-10 — "Copy" and "Share"; three places for the button on a computer (same branch, not merged)
 
 **John:** on a computer the buttons fall awkwardly; just "Copy" (a break with the house style's

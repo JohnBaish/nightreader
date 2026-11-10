@@ -112,10 +112,10 @@ function Place({ d, now }: { d: District; now: Date }) {
       <section ref={skyRef}>
         <div className="sec-head">
           <h2>The sky tonight</h2>
-          {v.series && <div className="cp cp-head cp-c">{skyShare}</div>}
+          {v.series && <div className="cp cp-head cp-wide">{skyShare}</div>}
           <p className="sub">From sunset to sunrise. Each arc is the height of the Moon or a planet: solid where it’s in view, dotted where it’s up but lost in a bright sky or too low.</p>
         </div>
-        {v.series && <div className="frame-wrap"><SkyTonight v={v} now={now} /><div className="cp cp-frame">{skyShare}</div></div>}
+        {v.series && <SkyTonight v={v} now={now} />}
         {v.series && <div className="cp cp-below cp-phone">{skyShare}</div>}
         <Lines lines={planets.lines} marks />
       </section>
@@ -124,7 +124,6 @@ function Place({ d, now }: { d: District; now: Date }) {
         <section ref={lookRef}>
           <div className="sec-head">
             <h2>Where and when to look</h2>
-            <div className="cp cp-head">{lookShare}</div>
             <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.</p>
           </div>
           <WhereToLook key={v.date} v={v} d={d} now={now}
@@ -135,7 +134,6 @@ function Place({ d, now }: { d: District; now: Date }) {
       <section ref={yearRef}>
         <div className="sec-head">
           <h2>The year in darkness</h2>
-          {yearShare && <div className="cp cp-head">{yearShare}</div>}
           <p className="sub">Every night from tonight for a year, dusk at the top and dawn at the bottom. The pale slanting bands are moonlight.</p>
         </div>
         {year ? <YearInDarkness key={year.from + d.code} y={year} name={d.name}

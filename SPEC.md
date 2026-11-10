@@ -82,6 +82,10 @@ full it is; it isn't a measurement of brightness, and the page says so.
    coloured by the Sun's depth, with moonlight as pale slanting bands. Two keys: the sky, and
    moonlight by phase. Tapping a night gives its figures.
 
+Each of the three has a button for a picture of it, in the Ember colours, with the place, the
+night and the credits (John, November 10th 2026): "Copy" on a computer, in a row already beside
+the picture; "Share" on a phone, to the phone's share sheet.
+
 The opening is the Moon beside one figure (Moon-free true night), smaller than first drawn.
 
 ## 7. Looking ahead (Agreed)
@@ -124,7 +128,7 @@ there. Eclipse and planet dates are still to compare with a published source.
 
 ## 11. Ideas for later
 
-A light "almanac" look for printing and "Share chart" pictures; comparing with another date or
+A light "almanac" look for printing; comparing with another date or
 place, as Lightreader does; a full-circle view; star names on tapping.
 
 ## 12. Open questions for John
