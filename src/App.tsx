@@ -66,13 +66,13 @@ function Lines({ lines, marks }: { lines: string[]; marks?: boolean }) {
 const CREDIT = `nightreader.baish.net · Times in UK local time for the middle of the postcode district, calculated with Astronomy Engine (MIT licence). ${POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}`
 const STARS = 'Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue.'
 
-/** "Copy chart" / "Share chart" under a picture: the drawing found in `section` by `selector`. */
+/** "Copy" / "Share" for a picture: the drawing found in `section` by `selector`. */
 function Share({ section, selector, heading, sub, credit, file, date, code }: {
   section: React.RefObject<HTMLElement | null>; selector: string; heading: string; sub: () => string[]; credit: string; file: string; date: string; code: string
 }) {
   return (
     <div className="share-row">
-      <ShareButton what="chart" make={() => deliver(async () => {
+      <ShareButton what="" make={() => deliver(async () => {
         const area = section.current?.querySelector<HTMLElement>(selector)
         if (!area) throw new Error('No picture')
         return chartPicture(area, { heading, sub: sub(), credit })
@@ -91,6 +91,9 @@ function Place({ d, now }: { d: District; now: Date }) {
   const hasTowns = townsRound(d, d.own).some((t) => t.bearing > 47 && t.bearing < 313)
   const where = `${d.name} (${d.code})`
   const text = (sel: string) => (sec: React.RefObject<HTMLElement | null>) => sec.current?.querySelector(sel)?.textContent?.trim() ?? ''
+  const skyShare = <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} />
+  const lookShare = <Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} />
+  const yearShare = year && <Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} />
   return (
     <>
       <div className="hero">
@@ -109,10 +112,11 @@ function Place({ d, now }: { d: District; now: Date }) {
       <section ref={skyRef}>
         <div className="sec-head">
           <h2>The sky tonight</h2>
+          {v.series && <div className="cp cp-head cp-c">{skyShare}</div>}
           <p className="sub">From sunset to sunrise. Each arc is the height of the Moon or a planet: solid where it’s in view, dotted where it’s up but lost in a bright sky or too low.</p>
         </div>
-        {v.series && <SkyTonight v={v} now={now} />}
-        {v.series && <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} />}
+        {v.series && <div className="frame-wrap"><SkyTonight v={v} now={now} /><div className="cp cp-frame">{skyShare}</div></div>}
+        {v.series && <div className="cp cp-below cp-phone">{skyShare}</div>}
         <Lines lines={planets.lines} marks />
       </section>
 
@@ -120,20 +124,22 @@ function Place({ d, now }: { d: District; now: Date }) {
         <section ref={lookRef}>
           <div className="sec-head">
             <h2>Where and when to look</h2>
+            <div className="cp cp-head">{lookShare}</div>
             <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.</p>
           </div>
           <WhereToLook key={v.date} v={v} d={d} now={now}
-            share={<Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} />} />
+            share={lookShare} />
         </section>
       )}
 
       <section ref={yearRef}>
         <div className="sec-head">
           <h2>The year in darkness</h2>
+          {yearShare && <div className="cp cp-head">{yearShare}</div>}
           <p className="sub">Every night from tonight for a year, dusk at the top and dawn at the bottom. The pale slanting bands are moonlight.</p>
         </div>
         {year ? <YearInDarkness key={year.from + d.code} y={year} name={d.name}
-          share={<Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} />} /> : <p className="working" role="status">Working out the year…</p>}
+          share={yearShare} /> : <p className="working" role="status">Working out the year…</p>}
       </section>
 
       <section>

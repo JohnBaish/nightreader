@@ -79,7 +79,7 @@ async function layers(area: HTMLElement, w: number, h: number, scale: number): P
   const frame = area.closest('.frame') ?? area
   const origin = area.getBoundingClientRect()
   const els = [...frame.querySelectorAll<HTMLCanvasElement | SVGSVGElement>('canvas, svg')]
-    .filter((el) => !el.closest('.tip') && el.getBoundingClientRect().width > 0 && (el instanceof HTMLCanvasElement || !el.parentElement?.closest('svg')))
+    .filter((el) => !el.closest('.tip, .share-row') && el.getBoundingClientRect().width > 0 && (el instanceof HTMLCanvasElement || !el.parentElement?.closest('svg')))
   for (const el of els) {
     const r = el.getBoundingClientRect()
     const ruler = el.classList.contains('ruler')

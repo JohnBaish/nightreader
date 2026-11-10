@@ -1,5 +1,5 @@
-// The button that shares a picture (John, November 10th 2026, as Lightreader's): "Share chart" on a touch screen,
-// which opens the phone's share sheet; "Copy chart" on a computer, with "Copied" just under it once done. If neither works
+// The button that shares a picture (John, November 10th 2026, from Lightreader's, but just "Share" on a touch screen,
+// which opens the phone's share sheet, and "Copy" on a computer, with "Copied" just under it once done). If neither works
 // the picture is saved.
 import { useEffect, useRef, useState } from 'react'
 import { shareVerb, type Delivered } from '../lib/shareImage.ts'
@@ -32,7 +32,7 @@ export function ShareButton({ what, make, disabled }: { what: string; make: () =
             <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
           </svg>
         )}
-        {verb} {what}
+        {verb}{what ? ` ${what}` : ''}
       </button>
       <span className="share-status" role="status">{status}</span>
     </span>

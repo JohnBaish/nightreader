@@ -51,6 +51,21 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — "Copy" and "Share"; three places for the button on a computer (same branch, not merged)
+
+**John:** on a computer the buttons fall awkwardly; just "Copy" (a break with the house style's
+"Copy chart"), and options for moving them. **What:** the button reads "Copy" on a computer and
+"Share" on a touch screen. Three mock-ups in the real page behind `?copy=a`, `b` or `c` (set in
+`main.tsx`; without it the page is as it was; to remove once John chooses): A, at the right of
+each heading row; B, over each picture's top-right corner; C, in a row already there (the
+heading row for "The sky tonight", the time row for "Where and when to look", the night's
+figures for "The year in darkness"). Each place holds its own copy of the button (`.cp-*` in
+`global.css`), shown by the option; phones are unchanged. Pictures in `design/previews/copy/`.
+**Found and fixed on the way:** in B the year picture's own drawing rule caught the button's
+icon and squashed it. **Verified:** `npm run check` (23, exit code read), typecheck, lint,
+build; in Chromium at 1200px, all four layouts: no errors, no sideways scrolling, all three
+pictures copied in each; at 390px and 844 by 390 with touch: "Share", as before.
+
 ### 2026-11-10 — larger Suns in the key; the copy buttons moved (same branch, not merged)
 
 **John:** keep the "not in view" lines; the dark look for the copied pictures is right; no copy
