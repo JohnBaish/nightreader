@@ -142,11 +142,11 @@ export const SOON_DAYS = 30, BIG_SHOWER_DAYS = 92, BIG_SHOWER_PER_HOUR = 50
 /** Looking ahead, in date order: what shows at once, and what is folded away. */
 export function aheadLines(place: Place, date: string): { soon: string[]; later: string[] } {
   const from = dayFigures(place, date).noon, until = new Date(from.getTime() + 370 * 86_400_000)
-  const out: { at: Date; line: string; always?: boolean; days?: number }[] = []
+  const out: { at: Date; line: string; always?: boolean; days?: number; eclipse?: boolean }[] = []
   const seen = new Set<string>()
   for (const q of moonPhases(from, 8)) if ((q.phase === 'New Moon' || q.phase === 'Full Moon') && !seen.has(q.phase)) { seen.add(q.phase); out.push({ at: q.at, line: `${q.phase}: ${onDay(ukDate(q.at), date)}.` }) }
-  for (const e of solarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, from ${clock(e.begin)} to ${clock(e.end)}. At ${clock(e.peak)} the Moon covers ${Math.round(e.covered * 100)}% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.`, always: e.covered >= SMALL_ECLIPSE })
-  for (const e of lunarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Moon: ${onDay(ukDate(e.peak), date)}. At ${clock(e.peak)} the Earth’s shadow covers ${e.kind === 'total' ? 'all' : `${Math.round(e.covered * 100)}%`} of the Moon, which is ${Math.round(e.altitude)}° up.`, always: e.kind === 'total' || e.covered >= SMALL_ECLIPSE })
+  for (const e of solarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, from ${clock(e.begin)} to ${clock(e.end)}. At ${clock(e.peak)} the Moon covers ${Math.round(e.covered * 100)}% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.`, always: e.covered >= SMALL_ECLIPSE, eclipse: true })
+  for (const e of lunarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Moon: ${onDay(ukDate(e.peak), date)}. At ${clock(e.peak)} the Earth’s shadow covers ${e.kind === 'total' ? 'all' : `${Math.round(e.covered * 100)}%`} of the Moon, which is ${Math.round(e.altitude)}° up.`, always: e.kind === 'total' || e.covered >= SMALL_ECLIPSE, eclipse: true })
   for (const o of oppositions(from)) if (o.at < until) out.push({ at: o.at, line: `${o.name} at its best: ${onDay(ukDate(o.at), date)}, when it is opposite the Sun, at its brightest and up all night.` })
   const firstOf = new Set<string>()
   for (const e of elongations(from, until)) if (!firstOf.has(e.name)) { firstOf.add(e.name); out.push({ at: e.at, line: `Best ${e.sky}s for ${e.name}: ${ukDate(e.at) === date ? `around now (${dayIn(date, date)})` : `around ${dayIn(ukDate(e.at), date)}`}, when it is furthest from the Sun.` }) }
@@ -154,7 +154,7 @@ export function aheadLines(place: Place, date: string): { soon: string[]; later:
   for (const m of showers) out.push({ at: m.peak, days: m.perHour >= BIG_SHOWER_PER_HOUR ? BIG_SHOWER_DAYS : SOON_DAYS, line: `${m.name} meteor shower: ${m.night.date === date ? 'best tonight' : `best on the night of ${dayIn(m.night.date, date)}`}. ${up(showerVerdict(m.night))}.` })
   out.sort((a, b) => a.at.getTime() - b.at.getTime())
   const soon = (o: (typeof out)[number]) => o.always || o.at.getTime() - from.getTime() <= (o.days ?? SOON_DAYS) * 86_400_000
-  return { soon: out.filter(soon).map((o) => o.line), later: out.filter((o) => !soon(o) && o.at < until).map((o) => o.line) }
+  return { soon: out.filter(soon).map((o) => o.line), later: out.filter((o) => !soon(o) && (o.eclipse || o.at < until)).map((o) => o.line) }
 }
 
 /** Every group for a place and the night that starts on `date`. */

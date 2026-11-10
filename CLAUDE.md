@@ -54,7 +54,16 @@ Key points:
 J read "No Moon-free night / The Moon is up throughout / (True night is not reached tonight
 either.)". The Moon phase sentences are being worked through in the thread (he wants the
 explanations kept, without the words on how much is lit); nothing built for those yet.
-`SMALL_ECLIPSE` in `sentences.ts`. **Verified:** `npm run check` (19), `npm run typecheck`.
+`SMALL_ECLIPSE` in `sentences.ts`.
+
+**Mistake, logged openly (the second time):** I committed and pushed this (`a5b1012`) while one
+check was failing; the commit step didn't wait on the check's result. The failing check was
+right: a small eclipse more than a year off (the Moon's, January 12th 2028) had dropped out of
+the list altogether instead of going under the fold. Fixed in the next commit; the next
+eclipse of each kind is now always listed, above or below the fold. From now on the commit
+runs only if the check's exit code is 0.
+
+**Verified:** `npm run check` (19, exit code read), `npm run typecheck`.
 
 ### 2026-11-10 — "Looking ahead" trimmed
 

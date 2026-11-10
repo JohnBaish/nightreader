@@ -44,6 +44,7 @@ True night runs from 18:17 to 05:19, 11h 2m in all. The Moon stays down through
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
 
 ## B. Reading (RG1)
 
@@ -88,6 +89,7 @@ True night runs from 18:10 to 05:29, 11h 19m in all. The Moon sets at 23:33; th
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
 
 ## C. Reading (RG1)
 
@@ -132,6 +134,7 @@ True night runs from 18:04 to 05:38, 11h 35m in all. The Moon is up throughout.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
 - Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 43m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
 
 ## D. Reading (RG1)
 
@@ -176,6 +179,7 @@ True night runs from 18:00 to 05:48, 11h 48m in all. The Moon rises at 01:44; t
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
 - Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 43m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
 
 ## E. Reading (RG1)
 
@@ -306,6 +310,7 @@ True night runs from 18:24 to 05:31, 11h 7m in all. The Moon stays down through
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 1h 33m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 1h 40m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 36° up.
 
 ## H. Edinburgh (EH1)
 
@@ -393,6 +398,7 @@ True night runs from 18:13 to 05:25, 11h 12m in all. The Moon stays down throug
 - Perseids meteor shower: best on the night of August 12th. A good year for this annual event: 3h 13m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 53m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 34° up.
 
 ## J. Sandwick (ZE2)
 
@@ -478,6 +484,7 @@ True night runs from 18:31 to 06:22, 11h 51m in all. The Moon rises at 05:57; t
 - Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 50m of the night is Moon-free.
 - Geminids meteor shower: best on the night of December 14th 2027. A poor year for this annual event: the Moon is up all night.
 - Ursids meteor shower: best on the night of December 22nd 2027. A good year for this annual event: 9h 37m of the night is Moon-free.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 38° up.
 
 ## L. Caerdydd (CF10)
 
