@@ -11,7 +11,8 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build. Work one stage at a time.
 3. The mock-ups John agreed: https://claude.ai/artifact/UDWU52EtUoMi9d7JYEMB57 (source in
    `design/mockups/`; rebuild with `node design/mockups/data.mjs` then `build.mjs`).
-4. `HOUSE-STYLE.md` in `JohnBaish/clockwheel` (the master copy; not yet copied here). Nightreader may depart from
+4. `HOUSE-STYLE.md` (copied from clockwheel `49cbf9e` on November 10th 2026, with
+   `.claude/skills/fresh-look/`; clockwheel holds the master copies). Nightreader may depart from
    it for beauty's sake (SPEC §2): dark for everyone, its own colours.
 
 Key points:
@@ -50,6 +51,13 @@ Key points:
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — fresh look made ready (notes only, straight to `main`)
+
+**John:** write the prompt for the first fresh-look review, to run in another session.
+`design/prompt-fresh-look-2026-11-10.md`. So `/fresh-look` works here, `HOUSE-STYLE.md` and
+`.claude/skills/fresh-look/` copied from clockwheel (commit `49cbf9e`), unchanged; clockwheel
+holds the master copies.
 
 ### 2026-11-10 — open to search engines; the first-visit paragraph (merged to `main`)
 
