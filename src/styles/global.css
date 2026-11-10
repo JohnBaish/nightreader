@@ -42,6 +42,7 @@ button, input { font: inherit; color: inherit; }
 .welcome { padding: 56px 0 8px; max-width: 640px; }
 .welcome h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; }
 .welcome .lede { margin: 14px 0 28px; }
+.welcome-about { margin-top: 28px; color: var(--ink2); font-size: 14px; line-height: 1.55; }
 .postcode-box label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
 .choose-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .input { flex: 1 1 200px; min-width: 0; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--hair); background: var(--raise); font-size: 16px; }

@@ -51,6 +51,20 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — open to search engines; the first-visit paragraph (merged to `main`)
+
+**John:** nightreader.baish.net is live on Vercel (it answers 200 from here); remove the bar on
+search engines; use the drafted paragraph. **What:** `noindex` removed; canonical
+`https://nightreader.baish.net/`; `public/robots.txt` and `public/sitemap.xml`; under the
+postcode box on a first visit (`.welcome-about`): "Nightreader works out, for any postcode in
+Great Britain, when the sky is truly dark tonight, when the Moon is out of the way, which planets
+are in view and where to look for them, and how the darkness changes through the year. Free to
+use." **Verified:** checks, typecheck, lint, build; Chromium at 1200px, 390px and 844 by 390 with
+touch: the paragraph shows, no robots tag, no errors, no sideways scrolling.
+**Still to do:** Search Console (John: sitemap, Request indexing); Web Analytics on in Vercel;
+`/fresh-look`; the hub card and overview in clockwheel; the real "Delete merged branches" run;
+the star data's terms (CDS).
+
 ### 2026-11-10 — search title and description (merged to `main`)
 
 **John:** title "Nightreader – planets in the night sky from your postcode" (57 characters);

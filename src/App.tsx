@@ -191,6 +191,13 @@ export default function App() {
             {!d && <h1>The night sky from your postcode</h1>}
             {!d && <p className="lede">Proper darkness tonight, with the Moon out of the way, and the visible planets, anywhere in Great Britain.</p>}
             <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
+            {!d && (
+              <p className="welcome-about">
+                Nightreader works out, for any postcode in Great Britain, when the sky is truly dark tonight, when the Moon is
+                out of the way, which planets are in view and where to look for them, and how the darkness changes through the
+                year. Free to use.
+              </p>
+            )}
           </div>
         )}
         {d && <SafetyNet key={d.code}><Place d={d} now={now} /></SafetyNet>}
