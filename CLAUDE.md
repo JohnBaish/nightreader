@@ -42,14 +42,45 @@ Key points:
   within 25) and `src/data/towns.json` (`npm run towns <Refueller's data/places.json>`).
 - `src/lib/sentences.ts`: every sentence the page says (wording agreed with John, November 10th 2026).
   `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
-- **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `WhereToLook`, `PostcodeBox`),
-  `src/lib/tonight.ts` with its worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
+- **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `WhereToLook`, `YearInDarkness`, `PostcodeBox`),
+  `src/lib/tonight.ts` and `yearView.ts` with their worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
   `src/styles/global.css`. `src/data/stars.json` (`npm run stars`). `npm run dev`, `npm run build`, `npm run lint`.
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — stage 5: "The year in darkness" (branch `claude/adoring-davinci-drczxf`, not merged)
+
+**John:** go ahead with stage 5.
+
+**What:**
+- `src/lib/yearView.ts`: for 365 nights from tonight, the Sun's height and the moonlight
+  every ten minutes of UK clock time from 15:00 to 09:00 (one byte each), each night's
+  darkest stretch and Moon-free time (from `nights()`), the new and full Moons, and the runs
+  of nights without true night and without "very dark". About a second in Node; the worker
+  sends tonight first, then the year, so the page isn't held up.
+- `src/components/YearInDarkness.tsx`, from the agreed mock-up: the picture on a canvas,
+  hours and months, a disc for each full Moon and a ring for each new one, an accent line on
+  the chosen night (tonight until a night is pointed at or tapped; a tap away goes back), the
+  line of figures above, the two keys (the sky; moonlight by phase), and notes beneath.
+- **Draft wording for John:** the line of figures ("True night 18:17 to 05:19 · 11h 2m of it
+  Moon-free · Moon 3% lit"; "No true night: “very dark” 23:25 to 02:45 · none of it Moon-free
+  · …"; "No true night: only “dark” …"; "Half-light all night"); the notes ("From May 23rd to
+  July 19th the sky over Reading never reaches true night, so those weeks are measured by
+  “very dark” instead."; for the north, "From May 11th to August 1st it doesn’t reach “very
+  dark” either, only “dark”."); "Working out the year…".
+
+**Verified:** `npm run check` (23, exit code read; the commit waits on it), typecheck, lint,
+build. In Chromium at 1200px, 390px with touch and 844 by 390 with touch, Reading and
+Lerwick: no errors, no sideways scrolling; the year appears about a second and a half after
+the page opens; the picture 500px tall on a computer, 360px on a phone, 320px on a
+390px-tall screen; pointing (computer) and tapping (phone) change the line of figures.
+Pictures in `design/previews/stage5/`.
+**Couldn't be checked:** a real phone (the time the year takes there; dragging a finger
+along the picture); Safari. **Noticed:** from Lerwick in midwinter the Sun sets about 15:00
+and rises about 09:00, the very edges of the picture.
 
 ### 2026-11-10 — compass readings (choice C), a note on true north, credits off the first screen (merged to `main`)
 

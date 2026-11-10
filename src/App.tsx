@@ -8,6 +8,7 @@ import { MoonFace } from './components/MoonFace.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
 import { SkyTonight } from './components/SkyTonight.tsx'
 import { WhereToLook } from './components/WhereToLook.tsx'
+import { YearInDarkness } from './components/YearInDarkness.tsx'
 import { lineColour } from './lib/lineColour.ts'
 import { clock } from './lib/format.ts'
 import { district, outwardCode, POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
@@ -62,7 +63,7 @@ function Lines({ lines, marks }: { lines: string[]; marks?: boolean }) {
 
 function Place({ d, now }: { d: District; now: Date }) {
   const date = tonightDate(d, now)
-  const v = useTonight(d, date)
+  const { view: v, year } = useTonight(d, date)
   if (!v) return <p className="working" role="status">Working out tonight’s sky…</p>
   const [moon, planets, ahead, more] = v.groups
   // where no town lies to the south (Shetland, say), the line about towns is left out (John, November 10th)
@@ -100,6 +101,14 @@ function Place({ d, now }: { d: District; now: Date }) {
           <WhereToLook key={v.date} v={v} d={d} now={now} />
         </section>
       )}
+
+      <section>
+        <div className="sec-head">
+          <h2>The year in darkness</h2>
+          <p className="sub">Every night from tonight for a year, dusk at the top and dawn at the bottom. The pale slanting bands are moonlight.</p>
+        </div>
+        {year ? <YearInDarkness key={year.from + d.code} y={year} name={d.name} /> : <p className="working" role="status">Working out the year…</p>}
+      </section>
 
       <section>
         <div className="sec-head"><h2>Looking ahead</h2></div>

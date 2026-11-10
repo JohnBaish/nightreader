@@ -16,6 +16,7 @@ import { district } from '../src/lib/postcode.ts'
 import { skyAt } from '../src/lib/skyColour.ts'
 import { series, tonight, tonightDate } from '../src/lib/tonight.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
+import { ROWS, YEAR_NIGHTS, yearView } from '../src/lib/yearView.ts'
 
 let passed = 0
 function check(name: string, fn: () => void) { fn(); passed++; console.log(`ok  ${name}`) }
@@ -242,6 +243,28 @@ check('Where to look: directions through the night, the towns on the horizon, th
   assert.ok(stars.stars.length > 800 && stars.stars.every((x, k) => k === 0 || (x[2] as number) >= (stars.stars[k - 1][2] as number)))
   // Polaris is within a degree of the pole
   assert.ok(stars.stars.some((x) => (x[1] as number) > 89))
+})
+
+check('The year in darkness: a year of nights for Reading and Lerwick', () => {
+  const y = yearView(RG1, '2026-11-10')
+  assert.equal(y.sun.length, YEAR_NIGHTS * ROWS)
+  assert.equal(y.nights.length, 365)
+  // tonight: 15:00 is still daylight, midnight is true night (the Sun 18 degrees or more down), no Moon
+  assert.ok(y.sun[0] < 40 && y.sun[54] === 64 && y.moon[54] === 0)
+  // the first night's figures are the opening's: 11h 2m, all of it Moon-free
+  assert.equal(duration(y.nights[0].freeMs), '11h\u00a02m')
+  assert.equal(y.nights[0].kind, 'true night')
+  // no true night from May 23rd to July 19th, as Lightreader; "very dark" is always reached
+  assert.deepEqual(y.noTrueNight, [['2027-05-23', '2027-07-19']])
+  assert.deepEqual(y.noVeryDark, [])
+  // a new or full Moon about every fortnight; the first full Moon is November 24th, 14 nights on
+  assert.ok(y.phases.length >= 24 && y.phases.length <= 26)
+  const full = y.phases.find((p) => p.full)!
+  assert.ok(full.x > 13.5 && full.x < 15)
+  // on that night the Moon is up at midnight
+  assert.ok(y.moon[14 * ROWS + 54] > 30)
+  const z = yearView(ZE1, '2026-11-10')
+  assert.deepEqual([z.noTrueNight, z.noVeryDark], [[['2027-04-21', '2027-08-21']], [['2027-05-11', '2027-08-01']]])
 })
 
 console.log(`\n${passed} checks passed`)

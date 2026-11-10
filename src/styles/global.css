@@ -108,6 +108,25 @@ h2 { font-size: clamp(26px, 3.4vw, 36px); }
 @media (max-width: 720px) { .when { grid-template-columns: 1fr; } .when .slide { grid-row: auto; grid-column: 1; } .when .clock { font-size: 34px; }
   .look li { grid-template-columns: 22px 1fr auto; } .look .where { grid-column: 2 / -1; } }
 
+/* The year in darkness */
+.frame.year canvas { display: block; width: 100%; }
+.frame.year svg { position: absolute; inset: 0; height: 100%; touch-action: pan-y; cursor: crosshair; }
+.readout { font-size: 16px; min-height: 3em; font-variant-numeric: tabular-nums; margin-bottom: 12px; }
+.readout b { font-weight: 600; }
+.readout span { color: var(--ink2); }
+.key { display: grid; grid-template-columns: minmax(0, 420px) 1fr; gap: 14px 40px; margin-top: 18px; align-items: start; font-size: 13.5px; color: var(--ink2); }
+.keyhead { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; font-weight: 600; }
+.keybar { height: 12px; border-radius: 6px; box-shadow: 0 0 0 1px var(--hair); }
+.keywords { display: flex; justify-content: space-between; margin-top: 6px; gap: 6px; }
+.moonkey { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; max-width: 420px; }
+.moonkey div { text-align: center; font-size: 11.5px; line-height: 1.25; }
+.moonkey svg { width: 22px; height: 22px; display: block; margin: 0 auto 5px; }
+.moonkey i { display: block; height: 12px; border-radius: 3px; box-shadow: 0 0 0 1px var(--hair); margin-bottom: 5px; }
+.notes { margin-top: 18px; color: var(--ink2); font-size: 15px; max-width: 70ch; }
+.notes p + p { margin-top: 8px; }
+section .working { padding: 40px 0; }
+@media (max-width: 720px) { .key { grid-template-columns: 1fr; } }
+
 .lines { list-style: none; margin: 0; padding: 0; font-size: 16px; max-width: 78ch; }
 .lines li { padding: 12px 0; border-top: 1px solid var(--hair); font-variant-numeric: tabular-nums; }
 .lines li:last-child { border-bottom: 1px solid var(--hair); }

@@ -54,9 +54,14 @@ The view south with its slider, towns, stars and fists.
 
 The year picture with its keys and the chosen night's figures.
 
+**Built November 10th 2026** on branch `claude/adoring-davinci-drczxf` (pictures in
+`design/previews/stage5/`). Not merged.
+
 ## Stage 6: "Looking ahead"
 
 The list, with meteor showers.
+
+**Done** with stage 3 (November 10th 2026): the trimmed list with "See more".
 
 ## Stage 7: finishing and launch
 
