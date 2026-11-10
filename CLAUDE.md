@@ -40,11 +40,40 @@ Key points:
   (`data/outcodes.json`, made October 30th 2026).
 - `src/lib/towns.ts` (Lightreader's, with the reach growing to 60 miles where nothing lies
   within 25) and `src/data/towns.json` (`npm run towns <Refueller's data/places.json>`).
+- `src/lib/sentences.ts`: every sentence the page says (draft wording).
+  `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — stage 2 started: the sentences, and a sheet for John
+
+**John:** islands with no towns in reach get the compass point alone; the "Looking ahead" list
+is "spot on"; start stage 2, with the sheet as a PDF.
+
+**What:** `src/lib/sentences.ts` (the opening, the Moon, each planet, "Looking ahead"; dates by
+Lightreader's rule) and `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`):
+`design/sentence-sheet-2026-11-10.md` and `.pdf` (A5, 23 pages, made with the fresh-look
+`make-pdf.mjs` and Lightreader's fonts), 12 places and nights, 16 numbered points. All wording
+is draft. SPEC §7 and §12 and PLAN updated.
+
+**A real fault found by reading the sheet, and fixed:** a meteor shower peaking tonight was
+missing from "Looking ahead" (the Quadrantids on January 3rd, the Perseids on August 12th).
+Astronomy Engine's search, asked to look 370 days ahead, skipped a crossing only hours away
+and gave next year's. `sunReaches()` now works from the Sun's own position (equinox of 2000)
+and doesn't use that search. Every peak time in the figures sheet is unchanged (it was made
+from dates well before each peak).
+
+**Changed on reading it through:** "At its highest during the night" (was "after dark", wrong
+for a Moon highest at dawn); the summer fallback as one sentence; "today (November 24th)",
+"best tonight" and "around now" for things happening on the night itself.
+
+**Verified:** `npm run check` (17, exit code read; new: a peak tonight is found, and the
+sentences for four real nights), `npm run typecheck`; every PDF font loaded; pages 1 to 3, 11,
+12, 18, 19, 22 and 23 looked at. **Couldn't be checked:** as before (eclipse and planet dates
+against a published source; the stars' terms).
 
 ### 2026-11-10 — moved to its own repo; meteor dates corrected; directions reach 60 miles
 

@@ -4,7 +4,7 @@
 import {
   Body, Illumination, NextLocalSolarEclipse, NextLunarEclipse, NextMoonQuarter, Observer, SearchLocalSolarEclipse,
   GeoVector, RotateVector, Rotation_EQJ_ECL, SearchLunarEclipse, SearchMaxElongation, SearchMoonQuarter, SearchRelativeLongitude,
-  SearchSunLongitude, SphereFromVector,
+  SphereFromVector,
 } from 'astronomy-engine'
 import { night, position, type Night } from './night.ts'
 import type { Place } from './sun.ts'
@@ -83,16 +83,17 @@ function sunLongitude2000(at: Date): number {
   return SphereFromVector(RotateVector(Rotation_EQJ_ECL(), GeoVector(Body.Sun, at, true))).lon
 }
 
-/** The next time after `from` the Sun reaches `longitude` (equinox of 2000). Astronomy Engine's
- *  own search measures from the equinox of the date, which has drifted about 0.4° since 2000
- *  (nine hours of the Sun's travel), so its answer is only the starting point. */
+/** The next time after `from` the Sun reaches `longitude` (equinox of 2000). Worked out from
+ *  the Sun's own position rather than Astronomy Engine's search, which measures from the
+ *  equinox of the date (about 0.4°, ten hours of the Sun's travel, on from 2000) and, asked to
+ *  look a whole year ahead, can skip a crossing only hours away. */
 export function sunReaches(longitude: number, from: Date): Date {
-  let at = SearchSunLongitude(longitude, from, 370)!.date
-  for (let i = 0; i < 6; i++) {
+  const ahead = (((longitude - sunLongitude2000(from)) % 360) + 360) % 360
+  let at = new Date(from.getTime() + (ahead / 0.98565) * 86_400_000)
+  for (let i = 0; i < 8; i++) {
     const off = ((longitude - sunLongitude2000(at) + 540) % 360) - 180
     at = new Date(at.getTime() + (off / 0.98565) * 86_400_000)
   }
-  if (at < from) return sunReaches(longitude, new Date(at.getTime() + 86_400_000))
   return at
 }
 

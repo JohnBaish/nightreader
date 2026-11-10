@@ -8,7 +8,8 @@ import { readFileSync } from 'node:fs'
 import { SHOWERS, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, sunReaches } from '../src/lib/ahead.ts'
 import { clock, duration } from '../src/lib/format.ts'
 import { LOW, WELL, fists, moonLook, moonUp, night, nights, sky, sunDepthNeeded } from '../src/lib/night.ts'
-import type { Place } from '../src/lib/sun.ts'
+import { opening, sentences } from '../src/lib/sentences.ts'
+import { dayFigures, type Place } from '../src/lib/sun.ts'
 import { describeToward } from '../src/lib/towns.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
 
@@ -140,6 +141,26 @@ check('directions name real places across Great Britain, never your own place', 
   assert.equal(describeToward(ZE1, 90, 'Lerwick'), '') // east of Lerwick is the sea
   // where nothing lies within 25 miles the reach grows to 60: east of Inverness
   assert.equal(describeToward(place('IV1'), 90, 'Inverness'), ', between Elgin and Charlestown of Aberlour')
+})
+
+check('a shower peaking tonight is found, not skipped to next year', () => {
+  // from midday on August 12th 2027 the Perseids' peak is 20 hours away (08:19 UTC on the 13th)
+  assert.equal(sunReaches(140.0, new Date('2027-08-12T12:27:00Z')).toISOString().slice(0, 16), '2027-08-13T08:19')
+  assert.equal(sunReaches(140.0, new Date('2027-08-13T08:30:00Z')).getUTCFullYear(), 2028)
+  const from = dayFigures(place('CF10'), '2027-08-12').noon
+  assert.equal(meteorShowers(place('CF10'), from)[0].name, 'Perseids')
+})
+
+check('the sentences: Reading on November 10th, a full Moon, midsummer, and a shower tonight', () => {
+  const a = sentences(RG1, 'Reading', '2026-11-10')
+  assert.deepEqual(a.opening, { figure: '11h\u00a02m', under: 'of Moon-free true night', line: 'True night runs from 18:17 to 05:19, 11h\u00a02m in all. The Moon stays down throughout.' })
+  assert.deepEqual(a.groups[0].lines, ['New Moon, 3% lit.', 'It stays below the horizon all night.'])
+  assert.equal(a.groups[1].lines[4], 'Mercury: not in view tonight, too close to the Sun.')
+  assert.equal(opening(night(RG1, '2026-11-24')).figure, 'No Moon-free night')
+  assert.match(opening(night(RG1, '2027-06-21')).line, /^There\u2019s no true night tonight: the darkest the sky gets is \u201cvery dark\u201d, from 23:26 to 02:45/)
+  assert.ok(sentences(RG1, 'Reading', '2026-11-24').groups[2].lines.includes('Full Moon: today (November 24th).'))
+  assert.ok(sentences(place('CF10'), 'Cardiff', '2027-08-12').groups[2].lines.some((l) => l.startsWith('Perseids: best tonight.')))
+  for (const g of a.groups) for (const l of g.lines) assert.ok(!/undefined|NaN|null/.test(l), l)
 })
 
 console.log(`\n${passed} checks passed`)

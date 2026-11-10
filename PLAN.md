@@ -29,6 +29,10 @@ Mock-ups agreed (`design/mockups/`, https://claude.ai/artifact/UDWU52EtUoMi9d7JY
 Every sentence the page says, as plain functions with checks, and a sentence sheet for John:
 the opening, the Moon, each planet's line with its place and fists, "Looking ahead".
 
+**Started November 10th 2026:** `src/lib/sentences.ts`, and the sentence sheet
+(`npm run sentence-sheet [<html>]`; `design/sentence-sheet-2026-11-10.md` and `.pdf`) is with
+John, with 16 numbered points. Next: his wording, then stage 3.
+
 ## Stage 3: the page, with "The sky tonight"
 
 The app (Vite, React and TypeScript, as Lightreader), the postcode box, the Ember look, the

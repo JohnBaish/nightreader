@@ -84,7 +84,7 @@ full it is; it isn't a measurement of brightness, and the page says so.
 
 The opening is the Moon beside one figure (Moon-free true night), smaller than first drawn.
 
-## 7. Looking ahead (the list Proposed; leaving out faint eclipses Agreed)
+## 7. Looking ahead (Agreed)
 
 A short list in date order, each line worked out for the place:
 
@@ -132,6 +132,8 @@ place, as Lightreader does; a full-circle view; star names on tapping.
 Answered on November 9th 2026: the far-north fallback (yes); the four Sun-depth numbers (yes);
 faint eclipses of the Moon left out ("I think so"); phase names fine as they are.
 
-1. §7: is "Looking ahead" otherwise the right list?
-2. In Shetland, Orkney and the Western Isles, should villages be named where there are no
-   towns, or is the compass point alone right?
+Answered on November 10th 2026: "Looking ahead" is the right list ("spot on"); where there are
+no towns in reach (Shetland, Scilly), the compass point alone.
+
+Open now: the 16 numbered points at the end of the sentence sheet
+(`design/sentence-sheet-2026-11-10.pdf`).
