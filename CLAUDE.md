@@ -51,6 +51,17 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — stages 3 and 4 merged to `main`
+
+**John:** "Very low in the west, …" is right for now; drop the line about towns where there
+are none (done: Lerwick's reads "Facing south, with east on the left and west on the right.
+Slide through the night."); merge to `main`; hold before stage 5 so he can look.
+`claude/adoring-davinci-drczxf` fast-forwarded into `main`, so Vercel's main build now has a
+page (on its Vercel address; search engines asked to stay away). The branch is left in place
+as this session's working branch. **Verified:** `npm run check` (22, exit code read),
+typecheck, lint, build; Lerwick and Reading at 1200px and 390px with touch: the line as above,
+no errors, no sideways scrolling.
+
 ### 2026-11-10 — stage 4: "Where to look" (same branch, not merged)
 
 **John:** stage 3 approved ("Nothing to change"), so on to stage 4.

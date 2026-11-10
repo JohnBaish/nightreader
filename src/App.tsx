@@ -12,6 +12,7 @@ import { lineColour } from './lib/lineColour.ts'
 import { clock } from './lib/format.ts'
 import { district, outwardCode, POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
 import { tonightDate } from './lib/tonight.ts'
+import { townsRound } from './lib/towns.ts'
 import { useTonight } from './lib/useTonight.ts'
 
 function Logo() {
@@ -64,6 +65,8 @@ function Place({ d, now }: { d: District; now: Date }) {
   const v = useTonight(d, date)
   if (!v) return <p className="working" role="status">Working out tonight’s sky…</p>
   const [moon, planets, ahead, more] = v.groups
+  // where no town lies to the south (Shetland, say), the line about towns is left out (John, November 10th)
+  const hasTowns = townsRound(d, d.own).some((t) => t.bearing > 47 && t.bearing < 313)
   return (
     <>
       <div className="hero">
@@ -92,7 +95,7 @@ function Place({ d, now }: { d: District; now: Date }) {
         <section>
           <div className="sec-head">
             <h2>Where to look</h2>
-            <p className="sub">Facing south, with east on the left and west on the right. The towns along the horizon are where they really lie from here. Slide through the night.</p>
+            <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.</p>
           </div>
           <WhereToLook key={v.date} v={v} d={d} now={now} />
         </section>
