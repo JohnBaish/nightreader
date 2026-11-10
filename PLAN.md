@@ -68,6 +68,12 @@ The list, with meteor showers.
 "About these figures", credits, favicon, link preview, search, the domain, Web Analytics,
 `/fresh-look`, the hub card and the overview. A testing stage only if John asks for one.
 
+Also (John, November 10th 2026): add the "Delete merged branches" workflow
+(`.github/workflows/tidy-branches.yml`, copied from clockwheel, as the other tools have it),
+then run it (a trial, then the real run) to delete the two merged branches still on GitHub,
+`claude/adoring-davinci-drczxf` and `claude/gracious-wright-pc7vy5`, and check with
+`git ls-remote --heads origin`.
+
 ## Dates to remember
 
 None yet.

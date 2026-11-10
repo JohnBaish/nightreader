@@ -51,6 +51,12 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — a note for stage 7 (notes only)
+
+**John:** note the "Delete merged branches" task for stage 7. Added to PLAN.md's stage 7: copy
+the workflow from clockwheel, then use it to delete `claude/adoring-davinci-drczxf` and
+`claude/gracious-wright-pc7vy5` (both fully merged).
+
 ### 2026-11-10 — option C for "Copy"; everything since stage 5 merged to `main`
 
 **John:** C ("You've solved it"), and "Share" on a phone. **What:** the buttons sit in rows
