@@ -51,6 +51,12 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — stage 7 started; "Delete merged branches" workflow added
+
+**John:** move to testing in the tracker (done) and go on to stage 7. First, the task noted for
+it: `.github/workflows/tidy-branches.yml` copied unchanged from clockwheel (Run workflow only,
+nothing scheduled; deletes only branches already wholly on `main`).
+
 ### 2026-11-10 — the opening no longer repeats the night's length (merged to `main`)
 
 **John:** "True night runs from 18:11 to 05:14, 11h 3m in all. The Moon stays down
