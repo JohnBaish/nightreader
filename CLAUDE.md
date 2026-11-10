@@ -51,6 +51,15 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — favicon options (design only)
+
+Three options in `design/favicon-options/`, drawn to the house recipe (48 by 48, circle r=21):
+A, an ink crescent and a terracotta star on cream with a terracotta ring (as the family);
+B, a cream crescent and star on Nightreader's own indigo, terracotta ring; C, a cream crescent on
+solid terracotta (like Backtimer). `design/favicon-options.html` shows them at 16, 32, 48 and
+96px beside the eight other baish.net icons, in light and dark browser tabs; pictures
+`design/previews/favicon-options.png` and `-1x.png`. Nothing wired in.
+
 ### 2026-11-10 — "About these figures", credits, visit statistics (branch `claude/gracious-wright-pc7vy5`, not merged)
 
 **John's wording:** "Moon-free" just "means the Moon is below the horizon"; the directions
