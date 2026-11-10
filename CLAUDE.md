@@ -42,11 +42,50 @@ Key points:
   within 25) and `src/data/towns.json` (`npm run towns <Refueller's data/places.json>`).
 - `src/lib/sentences.ts`: every sentence the page says (wording agreed with John, November 10th 2026).
   `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
+- **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `PostcodeBox`),
+  `src/lib/tonight.ts` with its worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
+  `src/styles/global.css`. `npm run dev`, `npm run build`, `npm run lint`.
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — stage 3: the page, with "The sky tonight" (branch `claude/adoring-davinci-drczxf`, not merged)
+
+**John:** agreed the "poor year" rule; go ahead with stage 3.
+
+**What:** the app, set up as Lightreader's (Vite, React, TypeScript, oxlint; fonts self-hosted).
+- `src/App.tsx`: the header with the postcode pill and Change; a first visit's heading, line and
+  postcode box; the opening (the Moon drawn at its true phase and tilt beside the one figure);
+  the Moon's sentences; "The sky tonight" with the planets' sentences, each marked in its
+  arc's colour; "Looking ahead" with "See more"; the footer. The postcode is kept after "#"
+  and on the device (`nightreader.postcode`).
+- `src/components/SkyTonight.tsx`: the picture from the agreed mock-up, now from the real
+  code: solid where a body is in view by the agreed rule (so short spells don't show), a
+  "Now" line, the bracket named for the darkest the sky gets ("VERY DARK" in summer), and
+  the time and heights under a finger or the mouse. Never taller than a sideways phone.
+- `src/lib/tonight.ts` (which night is "tonight": last night's until sunrise; the heights every
+  five minutes), worked out in a worker (about a quarter of a second in Node);
+  `skyColour.ts` (the Ember ramp); `postcode.ts` (Great Britain; Northern Ireland explained).
+- **Draft wording for John:** the first visit's heading and line; the postcode messages; the
+  line under "The sky tonight"; "Working out tonight’s sky…"; the footer (no visit
+  statistics are mentioned, as there are none yet).
+- Not yet: favicon, search and link-preview tags (stage 7; the page asks search engines to
+  stay away for now); no Vercel project, so no preview link.
+
+**Verified:** `npm run check` (21, exit code read), `npm run typecheck`, lint clean, build.
+In Chromium at 1200px, 390px with touch and 844 by 390 with touch: the first visit, Reading
+tonight, Reading at midsummer, Edinburgh by day, Caerdydd on the Perseids' night, Sandwick at
+midsummer: no errors, no sideways scrolling, all four font styles loaded, the picture 330px
+tall on a 390px-tall screen. Typing: nothing, a word, BT1 1AA, ZZ99, "cf10 1ab"; reload;
+Change and Cancel; See more; a new "#EH1": all as expected, the box 16px and the button 44px,
+no request to anywhere but the page's own files. Pictures in `design/previews/stage3/`.
+**On the way:** one new check held a wrong guess of mine (that the new Moon is below the
+horizon for the whole picture; it is up in the 40 minutes shown before sunset); the commit
+step stopped, as it now should, and the check was corrected to the real figures.
+**Couldn't be checked:** a real phone; Safari; speed on a phone. **Noticed:** the main script
+is 174 KB compressed (the postcode and town lists and Astronomy Engine); could be slimmed.
 
 ### 2026-11-10 — the sentences settled
 

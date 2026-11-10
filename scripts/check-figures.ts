@@ -12,6 +12,9 @@ import { placeNames } from '../src/lib/places.ts'
 import { opening, phaseLine, sentences } from '../src/lib/sentences.ts'
 import { dayFigures, type Place } from '../src/lib/sun.ts'
 import { describeToward } from '../src/lib/towns.ts'
+import { district } from '../src/lib/postcode.ts'
+import { skyAt } from '../src/lib/skyColour.ts'
+import { series, tonight, tonightDate } from '../src/lib/tonight.ts'
 import { ukParts } from '../src/lib/ukTime.ts'
 
 let passed = 0
@@ -199,6 +202,27 @@ check('a small meteor shower in a poor year goes under See more, even when near'
   assert.ok(g[3].lines.includes('Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.'))
   // a big shower in a poor year still shows: the Geminids from Cardiff on October 1st 2027
   assert.ok(sentences(place('CF10'), 'Cardiff', '2027-10-01').groups[2].lines.some((l) => l.startsWith('Geminids meteor shower')))
+})
+
+check('the page: which night is "tonight", the heights for the picture, the postcode list', () => {
+  // before sunrise it's still last night's night; after it, the coming one
+  assert.equal(tonightDate(RG1, new Date('2026-11-11T03:00:00Z')), '2026-11-10')
+  assert.equal(tonightDate(RG1, new Date('2026-11-11T12:00:00Z')), '2026-11-11')
+  assert.equal(tonightDate(RG1, new Date('2026-11-10T19:30:00Z')), '2026-11-10')
+  const n = night(RG1, '2026-11-10'), s = series(RG1, n)
+  assert.equal(s.step, 300_000)
+  assert.ok(s.from <= n.sunset!.getTime() - 40 * 60_000 && s.from + (s.sun.length - 1) * s.step >= n.sunrise!.getTime() + 40 * 60_000)
+  assert.ok(s.sun.length === s.moon.length && s.sun.length === s.planets.Saturn.length)
+  // Saturn's highest in the picture is its highest in the sentences (40 degrees)
+  assert.equal(Math.round(Math.max(...s.planets.Saturn)), 40)
+  // new Moon: below the horizon from sunset to sunrise (it's up in the margins either side)
+  assert.ok(s.moon.every((alt, i) => { const t = s.from + i * s.step; return t < n.sunset!.getTime() || t > n.sunrise!.getTime() || alt < 0 }))
+  const v = tonight(RG1, 'Reading', '2026-11-10')
+  assert.equal(v.groups.length, 4)
+  assert.equal(v.moon.up, false)
+  assert.deepEqual(skyAt(-30), [13, 18, 51]) // true night is the page's own colour, #0d1233
+  assert.deepEqual([district('CF10')!.name, district('CF10')!.own], ['Caerdydd', 'Cardiff'])
+  assert.equal(district('BT1'), null)
 })
 
 console.log(`\n${passed} checks passed`)

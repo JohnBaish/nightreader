@@ -40,6 +40,9 @@ John, with 16 numbered points. Next: his wording, then stage 3.
 The app (Vite, React and TypeScript, as Lightreader), the postcode box, the Ember look, the
 opening and the first picture. Checked at 1200px, 390px and 844 by 390 with touch.
 
+**Built November 10th 2026** on branch `claude/adoring-davinci-drczxf`, for John to look at
+(pictures in `design/previews/stage3/`). Not merged.
+
 ## Stage 4: "Where to look"
 
 The view south with its slider, towns, stars and fists.

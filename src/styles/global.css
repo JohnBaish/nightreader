@@ -1,0 +1,108 @@
+/* Nightreader: one quiet column on a night-coloured page. Dark for everyone, in the "Ember"
+   colours (John, November 9th 2026): it carries the family's look lightly (Caprasimo,
+   Figtree, the cream) but has its own character (SPEC §2). From the agreed mock-up. */
+:root {
+  color-scheme: dark;
+  --night: #0d1233;        /* the page: the colour of true night */
+  --raise: #161c45;        /* controls and quiet panels */
+  --ink: #f4ead6;          /* the family cream, as text and moonlight */
+  --ink2: #b9b4c9;         /* secondary text */
+  --hair: rgba(244, 234, 214, .16);
+  --accent: #eba274;       /* "now", and the main button */
+  --moon: #f6ecd2;
+  --land: #080b22;
+  --display: 'Caprasimo', Georgia, 'Times New Roman', serif;
+  --body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mars: #e07a52; --jupiter: #f0dcc0; --saturn: #e0b860; --venus: #dfeaf5; --mercury: #a79fc0;
+}
+* { box-sizing: border-box; }
+html { background: var(--night); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 0 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--ink); text-underline-offset: 2px; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; padding: 26px 0 0; }
+.brand { font-family: var(--display); font-size: 26px; letter-spacing: .01em; display: flex; align-items: center; gap: 10px; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.pill { font-size: 14px; border: 1px solid var(--hair); border-radius: 999px; padding: 4px 4px 4px 14px; color: var(--ink2); display: flex; align-items: center; gap: 10px; min-width: 0; }
+.pill strong { color: var(--ink); font-weight: 600; }
+
+.btn { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--hair); background: transparent; cursor: pointer; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.btn:hover { border-color: var(--ink2); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #1c1230; }
+.btn-primary:hover { background: #f2b48c; border-color: #f2b48c; }
+.btn-small { min-height: 36px; padding: 0 14px; font-size: 13.5px; }
+
+.welcome { padding: 56px 0 8px; max-width: 640px; }
+.welcome h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; }
+.welcome .lede { margin: 14px 0 28px; }
+.postcode-box label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.choose-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.input { flex: 1 1 200px; min-width: 0; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--hair); background: var(--raise); font-size: 16px; }
+.input::placeholder { color: var(--ink2); opacity: .75; }
+.choose-error { margin-top: 10px; color: var(--accent); font-size: 15px; }
+.note { margin-top: 10px; color: var(--ink2); font-size: 13.5px; }
+.working { padding: 80px 0; color: var(--ink2); }
+
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; padding: 52px 0 36px; }
+.moonbox { width: 190px; text-align: center; margin: 0; }
+.moon { width: 190px; height: 190px; display: block; }
+.moonbox figcaption { font-size: 13px; color: var(--ink2); margin-top: 10px; }
+.kicker { font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.big { font-size: clamp(44px, 7vw, 76px); line-height: .95; margin: 10px 0 6px; font-variant-numeric: tabular-nums; }
+.big small { font-family: var(--body); font-size: clamp(17px, 2.2vw, 24px); font-weight: 500; display: block; margin-top: 12px; line-height: 1.25; }
+.big em { font-family: var(--body); font-style: normal; font-size: 15px; font-weight: 400; display: block; margin-top: 6px; line-height: 1.35; color: var(--ink2); }
+.lede { color: var(--ink2); max-width: 56ch; margin-top: 14px; font-size: 17px; }
+
+section { padding: 44px 0 0; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 18px; }
+h2 { font-size: clamp(26px, 3.4vw, 36px); }
+.sub { color: var(--ink2); font-size: 15px; max-width: 62ch; }
+
+.frame { position: relative; border-radius: 14px; overflow: hidden; background: var(--land); box-shadow: 0 0 0 1px var(--hair); touch-action: pan-y; }
+.frame svg { display: block; width: 100%; -webkit-user-select: none; user-select: none; }
+.frame text { font-family: var(--body); fill: var(--ink); }
+.tip { position: absolute; pointer-events: none; background: color-mix(in srgb, var(--night) 92%, transparent); border: 1px solid var(--hair); border-radius: 10px; padding: 8px 11px; font-size: 13px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tip b { font-weight: 600; }
+.tip i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-right: 7px; vertical-align: middle; }
+
+.lines { list-style: none; margin: 0; padding: 0; font-size: 16px; max-width: 78ch; }
+.lines li { padding: 12px 0; border-top: 1px solid var(--hair); font-variant-numeric: tabular-nums; }
+.lines li:last-child { border-bottom: 1px solid var(--hair); }
+.lines.marked { margin-top: 18px; }
+.lines.marked li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; }
+.lines .sw { width: 18px; height: 3px; border-radius: 2px; margin-top: 11px; }
+
+.more { margin-top: 4px; max-width: 78ch; }
+.more summary { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; color: var(--accent); list-style: none; }
+.more summary::-webkit-details-marker { display: none; }
+.more summary::after { content: '▾'; font-size: 13px; }
+.more[open] summary::after { content: '▴'; }
+.more .lines li:first-child { border-top: 1px solid var(--hair); }
+
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--hair); color: var(--ink2); font-size: 13.5px; max-width: 78ch; }
+footer p + p { margin-top: 6px; }
+footer a { color: var(--ink2); }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; gap: 22px; padding: 34px 0 28px; }
+  .moonbox { width: 124px; text-align: left; }
+  .moon { width: 124px; height: 124px; }
+  .brand { font-size: 23px; }
+  section { padding-top: 34px; }
+  .welcome { padding-top: 36px; }
+}
+/* a phone held sideways (HOUSE-STYLE §6): keep the top small */
+@media (max-height: 500px) and (orientation: landscape) {
+  .top { padding-top: 14px; }
+  .hero { padding: 22px 0 22px; grid-template-columns: auto 1fr; gap: 24px; }
+  .moonbox, .moon { width: 110px; height: auto; }
+  .big { font-size: 40px; }
+}
+@media (pointer: coarse) { .btn-small { min-height: 44px; } }
