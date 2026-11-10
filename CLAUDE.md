@@ -51,6 +51,19 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — the opening no longer repeats the night's length (merged to `main`)
+
+**John:** "True night runs from 18:11 to 05:14, 11h 3m in all. The Moon stays down
+throughout." needn't say the length, as the big figure above says it; check the other phases.
+**What:** `opening()` leaves out ", … in all" only when the Moon is down throughout (then the
+big figure is the same length). When the Moon is up for part of the dark (the big figure is
+the Moon-free part) or all of it ("No Moon-free night"), the total is new, so it stays.
+Checked by walking every night from November 10th to December 9th 2026 and June 8th to July
+7th 2027 at Reading, midsummer at Edinburgh and Shetland: nothing else changes and no
+sentence reads oddly. **Verified:** `npm run check` (23, exit code read; the old line updated,
+a part-Moon night added), typecheck, lint, build; Chromium at the three sizes, Reading and
+Lerwick: no errors, no sideways scrolling.
+
 ### 2026-11-10 — a note for stage 7 (notes only)
 
 **John:** note the "Delete merged branches" task for stage 7. Added to PLAN.md's stage 7: copy

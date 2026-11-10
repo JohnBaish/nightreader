@@ -158,7 +158,9 @@ check('a shower peaking tonight is found, not skipped to next year', () => {
 
 check('the sentences: Reading on November 10th, a full Moon, midsummer, and a shower tonight', () => {
   const a = sentences(RG1, 'Reading', '2026-11-10')
-  assert.deepEqual(a.opening, { figure: '11h\u00a02m', under: 'of Moon-free true night', note: '', line: 'True night runs from 18:17 to 05:19, 11h\u00a02m in all. The Moon stays down throughout.' })
+  assert.deepEqual(a.opening, { figure: '11h\u00a02m', under: 'of Moon-free true night', note: '', line: 'True night runs from 18:17 to 05:19. The Moon stays down throughout.' })
+  // the length is said only when the big figure doesn't already give it: the Moon up for part, or all, of it
+  assert.equal(opening(night(RG1, '2026-11-17')).line, 'True night runs from 18:10 to 05:29, 11h\u00a019m in all. The Moon sets at 23:33; the sky is at its darkest after that.')
   assert.deepEqual(a.groups[0].lines, ['New Moon, 3% lit. The Moon lies between us and the Sun, so its lit side faces away from us.', 'It stays below the horizon all night.'])
   assert.equal(phaseLine('Waxing gibbous', 0.84, 0.37), 'A growing Moon, bulging in its phase between half and full (waxing gibbous), 84% lit.')
   assert.equal(phaseLine('First quarter', 0.5, 0.25), 'A growing (waxing) Moon, first quarter, 50% lit. The Moon is 25% of the way around its monthly circuit.')

@@ -43,9 +43,12 @@ const up = (s: string) => s[0].toUpperCase() + s.slice(1)
 export function opening(n: Night): { figure: string; under: string; note: string; line: string } {
   if (!n.darkest) return { figure: 'No darkness tonight', under: 'Half-light all night', note: '', line: 'The Sun stays close below the horizon, so the sky never gets dark.' }
   const kind = WORD[n.darkest.kind], none = n.moonFreeMs < 30_000, all = n.darkMs - n.moonFreeMs < 30_000
+  // the length is left out when the big figure above already gives it, the Moon being down
+  // throughout (John, November 10th 2026); when the Moon is up for some or all of it, it's new
+  const total = all && !none ? '' : `, ${duration(n.darkMs)} in all`
   const runs = n.darkest.kind === 'true night'
-    ? `True night runs from ${clock(n.darkest.from)} to ${clock(n.darkest.to)}, ${duration(n.darkMs)} in all.`
-    : `The sky is ${kind} from ${clock(n.darkest.from)} to ${clock(n.darkest.to)}, ${duration(n.darkMs)} in all.`
+    ? `True night runs from ${clock(n.darkest.from)} to ${clock(n.darkest.to)}${total}.`
+    : `The sky is ${kind} from ${clock(n.darkest.from)} to ${clock(n.darkest.to)}${total}.`
   // In summer the darker kinds of night aren't reached, and the opening says so (John, November 10th 2026).
   const missed = n.darkest.kind === 'true night' ? '' : n.darkest.kind === 'very dark' ? 'True night is not reached tonight' : '“Very dark” and true night are not reached tonight'
   const inDark = n.moonUp.filter((s) => s.to > n.darkest!.from && s.from < n.darkest!.to)
