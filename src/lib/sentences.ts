@@ -62,23 +62,28 @@ export function opening(n: Night): { figure: string; under: string; note: string
 
 const where = (place: Place, own: string, azimuth: number) => `in the ${compassPoint(azimuth)}${describeToward(place, azimuth, own)}`
 
-/** What each phase's name means, for people who have heard the words but not had them
- *  explained (John, November 10th 2026). Draft wording. */
-export const PHASE_MEANS: Record<string, string> = {
-  'New Moon': 'At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.',
-  'Waxing crescent': 'A crescent is less than half lit; “waxing” means growing, night by night, towards full.',
-  'First quarter': 'About half lit, and growing: the Moon is a quarter of the way round its monthly circuit.',
-  'Waxing gibbous': '“Gibbous” means more than half lit; “waxing” means growing, night by night, towards full.',
-  'Full Moon': 'The whole face is lit: the Moon is opposite the Sun, so it rises around sunset and sets around sunrise.',
-  'Waning gibbous': '“Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.',
-  'Last quarter': 'About half lit, and shrinking: the Moon is three-quarters of the way round its monthly circuit.',
-  'Waning crescent': 'A crescent is less than half lit; “waning” means shrinking, night by night, towards new.',
+/** The Moon's phase in plain words, with the proper name beside them (John's wording,
+ *  November 10th 2026). `lit` is the share of the face that is lit; `round` is how far the
+ *  Moon is round its monthly circuit from one new Moon to the next, which is a different
+ *  thing: at first quarter it is a quarter of the way round, and half lit. */
+export function phaseLine(phase: string, lit: number, round: number): string {
+  const pc = `${Math.round(lit * 100)}% lit`, way = `The Moon is ${Math.round(round * 100)}% of the way around its monthly circuit.`
+  switch (phase) {
+    case 'New Moon': return `New Moon, ${pc}. The Moon lies between us and the Sun, so its lit side faces away from us.`
+    case 'Waxing crescent': return `A growing crescent Moon (waxing crescent), ${pc}.`
+    case 'First quarter': return `A growing (waxing) Moon, first quarter, ${pc}. ${way}`
+    case 'Waxing gibbous': return `A growing Moon, bulging in its phase between half and full (waxing gibbous), ${pc}.`
+    case 'Full Moon': return `Full Moon, ${pc}. The Moon is opposite the Sun, so it rises around sunset and sets around sunrise.`
+    case 'Waning gibbous': return `A shrinking Moon, bulging in its phase between full and half (waning gibbous), ${pc}.`
+    case 'Last quarter': return `A shrinking (waning) Moon, last quarter, ${pc}. ${way}`
+    default: return `A shrinking crescent Moon (waning crescent), ${pc}.`
+  }
 }
 
 /** The Moon tonight: its phase, its rising and setting, and its highest point after dark. */
 export function moonLines(place: Place, own: string, n: Night, moon: InView): string[] {
   const look = moonLook(place, n.darkest ? new Date((n.darkest.from.getTime() + n.darkest.to.getTime()) / 2) : n.sunset!)
-  const lines = [`${look.phase}, ${Math.round(n.moonLit * 100)}% lit. ${PHASE_MEANS[look.phase]}`]
+  const lines = [phaseLine(look.phase, n.moonLit, look.round)]
   const from = n.sunset!, to = n.sunrise!
   if (!n.moonUp.length) lines.push('It stays below the horizon all night.')
   for (const s of n.moonUp) {

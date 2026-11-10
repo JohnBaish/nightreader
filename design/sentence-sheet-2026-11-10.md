@@ -12,7 +12,7 @@ True night runs from 18:17 to 05:19, 11h 2m in all. The Moon stays down through
 
 **The Moon**
 
-- New Moon, 3% lit. At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.
+- New Moon, 3% lit. The Moon lies between us and the Sun, so its lit side faces away from us.
 - It stays below the horizon all night.
 
 **The planets**
@@ -56,7 +56,7 @@ True night runs from 18:10 to 05:29, 11h 19m in all. The Moon sets at 23:33; th
 
 **The Moon**
 
-- First quarter, 55% lit. About half lit, and growing: the Moon is a quarter of the way round its monthly circuit.
+- A growing (waxing) Moon, first quarter, 55% lit. The Moon is 27% of the way around its monthly circuit.
 - It is already up at sunset, and sets at 23:33 in the west-south-west, roughly over Thatcham.
 - At its highest during the night, at 18:24, it stands 26° up (two and a half fists) in the south, roughly over Alton.
 
@@ -101,7 +101,7 @@ True night runs from 18:04 to 05:38, 11h 35m in all. The Moon is up throughout.
 
 **The Moon**
 
-- Full Moon, 100% lit. The whole face is lit: the Moon is opposite the Sun, so it rises around sunset and sets around sunrise.
+- Full Moon, 100% lit. The Moon is opposite the Sun, so it rises around sunset and sets around sunrise.
 - It is up all night.
 - At its highest during the night, at 00:11, it stands 65° up (six and a half fists) in the south, between Bordon and Alton (near Hook).
 
@@ -146,7 +146,7 @@ True night runs from 18:00 to 05:48, 11h 48m in all. The Moon rises at 01:44; t
 
 **The Moon**
 
-- Last quarter, 32% lit. About half lit, and shrinking: the Moon is three-quarters of the way round its monthly circuit.
+- A shrinking (waning) Moon, last quarter, 32% lit. The Moon is 81% of the way around its monthly circuit.
 - It rises at 01:44 in the east, between Windsor and Wokingham (near North Ascot), and is still up at sunrise.
 - At its highest during the night, at 07:27, it stands 32° up (three fists) in the south, between Bordon and Alton (near Hook).
 
@@ -191,7 +191,7 @@ True night runs from 19:09 to 05:26, 10h 17m in all. The Moon sets at 03:12; th
 
 **The Moon**
 
-- First quarter, 58% lit. About half lit, and growing: the Moon is a quarter of the way round its monthly circuit.
+- A growing (waxing) Moon, first quarter, 58% lit. The Moon is 27% of the way around its monthly circuit.
 - It is already up at sunset, and sets at 03:12 in the north-west, between Didcot and Wallingford.
 - At its highest during the night, at 18:19, it stands 64° up (six and a half fists) in the south, between Bordon and Alton (near Hook).
 
@@ -234,7 +234,7 @@ The sky is “very dark” from 23:26 to 02:45, 3h 19m in all. The Moon is up t
 
 **The Moon**
 
-- Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.
+- A shrinking Moon, bulging in its phase between full and half (waning gibbous), 92% lit.
 - It rises at 23:16 in the south-east, between Wokingham and Crowthorne (near Bagshot), and is still up at sunrise.
 - At its highest during the night, at 03:35, it stands 18° up (two fists) in the south, roughly over Alton.
 
@@ -278,7 +278,7 @@ True night runs from 18:24 to 05:31, 11h 7m in all. The Moon stays down through
 
 **The Moon**
 
-- New Moon, 3% lit. At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.
+- New Moon, 3% lit. The Moon lies between us and the Sun, so its lit side faces away from us.
 - It stays below the horizon all night.
 
 **The planets**
@@ -322,7 +322,7 @@ The sky is “dark” from 23:05 to 03:24, 4h 19m in all. The Moon rises at 23:
 
 **The Moon**
 
-- Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.
+- A shrinking Moon, bulging in its phase between full and half (waning gibbous), 92% lit.
 - It rises at 23:47 in the south-east, roughly over Dalkeith, and is still up at sunrise.
 - At its highest during the night, at 03:44, it stands 13° up (one and a half fists) in the south, between Loanhead and Penicuik.
 
@@ -366,7 +366,7 @@ True night runs from 18:13 to 05:25, 11h 12m in all. The Moon stays down throug
 
 **The Moon**
 
-- New Moon, 3% lit. At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.
+- New Moon, 3% lit. The Moon lies between us and the Sun, so its lit side faces away from us.
 - It stays below the horizon all night.
 
 **The planets**
@@ -410,7 +410,7 @@ The sky is “dark” from 00:35 to 01:39, 1h 4m in all. The Moon is up through
 
 **The Moon**
 
-- Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.
+- A shrinking Moon, bulging in its phase between full and half (waning gibbous), 92% lit.
 - It rises at 00:09 in the south-east, and is still up at sunrise.
 
 **The planets**
@@ -451,7 +451,7 @@ True night runs from 18:31 to 06:22, 11h 51m in all. The Moon rises at 05:57; t
 
 **The Moon**
 
-- Waning crescent, 13% lit. A crescent is less than half lit; “waning” means shrinking, night by night, towards new.
+- A shrinking crescent Moon (waning crescent), 13% lit.
 - It rises at 05:57 in the south-east, and is still up at sunrise.
 - At its highest during the night, at 08:20, it stands 11° up (one fist) in the south-south-east.
 
@@ -496,7 +496,7 @@ True night runs from 23:09 to 03:27, 4h 19m in all. The Moon sets at 01:26; the
 
 **The Moon**
 
-- Waxing gibbous, 84% lit. “Gibbous” means more than half lit; “waxing” means growing, night by night, towards full.
+- A growing Moon, bulging in its phase between half and full (waxing gibbous), 84% lit.
 - It is already up at sunset, and sets at 01:26 in the south-west, roughly over Barry.
 - At its highest during the night, at 21:57, it stands 11° up (one fist) in the south, between Bridgwater and Watchet.
 
@@ -538,7 +538,7 @@ The sky is “very dark” from 23:20 to 02:57, 3h 37m in all. The Moon stays d
 
 **The Moon**
 
-- New Moon, 1% lit. At new Moon the Moon lies between us and the Sun, so its lit side faces away from us.
+- New Moon, 1% lit. The Moon lies between us and the Sun, so its lit side faces away from us.
 - It is already up at sunset, and sets at 22:03 in the north-west, between Wantage and Wallingford (near Goring).
 
 **The planets**
@@ -574,7 +574,7 @@ The sky is “very dark” from 23:20 to 02:57, 3h 37m in all. The Moon stays d
 ## Points for John
 
 1. The opening in summer. Where the Moon is up throughout (F, J): “No Moon-free night / The Moon is up throughout / (True night is not reached tonight either.)” (agreed, November 10th). Where some of it is Moon-free (H, M): “42m / of Moon-free “dark” night / (“Very dark” and true night are not reached tonight.)”.
-2. What each Moon phase means, after its name: for example “Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.” All eight are drafts; seven show in these examples. The eighth: “Waxing crescent. A crescent is less than half lit; “waxing” means growing, night by night, towards full.”
+2. The Moon’s phase, in your wording of November 10th: plain words with the proper name beside them, and for the two quarters how far the Moon is round its monthly circuit (B, D, E).
 3. A well-placed planet, as you suggested: “Saturn is well placed from 17:28 to 01:12, and in view for 29m before and 1h 8m after that window.” Lengths are written the site’s way (“29m”, “1h 8m”) rather than “33 minutes”: is that all right?
 4. A direction already given isn’t repeated: “Mars … stands 54° up (five and a half fists) in the same direction as Saturn.” Does that read naturally?
 5. Planets not in view for the same reason are listed together: “Mercury, Venus and Jupiter: not in view tonight, too close to the Sun.” (L)

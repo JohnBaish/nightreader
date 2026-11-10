@@ -146,4 +146,4 @@ next eclipse of each kind always (unless it covers less than 15%), with the rest
 under "See more" (John, November 10th).
 No Gaelic names.
 
-Open now: the Moon phase wording.
+The Moon's phase is worded John's way (`phaseLine()`, November 10th). No open questions.

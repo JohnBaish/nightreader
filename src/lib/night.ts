@@ -77,7 +77,7 @@ const PHASES = ['New Moon', 'Waxing crescent', 'First quarter', 'Waxing gibbous'
 
 /** The Moon as it looks from `place` at `at`: how much is lit, the phase's name, and which way
  *  its bright edge points (degrees from straight up, positive towards the left, as on the sky). */
-export function moonLook(place: Place, at: Date): { lit: number; phase: string; tilt: number; altitude: number; azimuth: number } {
+export function moonLook(place: Place, at: Date): { lit: number; phase: string; round: number; tilt: number; altitude: number; azimuth: number } {
   const moon = position(place, Body.Moon, at)
   const sun = position(place, Body.Sun, at)
   const am = moon.ra * 15 * RAD, dm = moon.dec * RAD, as = sun.ra * 15 * RAD, ds = sun.dec * RAD
@@ -87,6 +87,7 @@ export function moonLook(place: Place, at: Date): { lit: number; phase: string; 
   return {
     lit: Illumination(Body.Moon, at).phase_fraction,
     phase: PHASES[Math.floor(((MoonPhase(at) + 22.5) % 360) / 45)],
+    round: MoonPhase(at) / 360,
     tilt: (((brightLimb - parallactic) / RAD + 540) % 360) - 180,
     altitude: moon.altitude,
     azimuth: moon.azimuth,

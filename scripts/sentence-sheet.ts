@@ -26,7 +26,7 @@ const CASES: [code: string, date: string, why: string][] = [
 ]
 const POINTS = [
   'The opening in summer. Where the Moon is up throughout (F, J): “No Moon-free night / The Moon is up throughout / (True night is not reached tonight either.)” (agreed, November 10th). Where some of it is Moon-free (H, M): “42m / of Moon-free “dark” night / (“Very dark” and true night are not reached tonight.)”.',
-  'What each Moon phase means, after its name: for example “Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.” All eight are drafts; seven show in these examples. The eighth: “Waxing crescent. A crescent is less than half lit; “waxing” means growing, night by night, towards full.”',
+  'The Moon’s phase, in your wording of November 10th: plain words with the proper name beside them, and for the two quarters how far the Moon is round its monthly circuit (B, D, E).',
   'A well-placed planet, as you suggested: “Saturn is well placed from 17:28 to 01:12, and in view for 29m before and 1h 8m after that window.” Lengths are written the site’s way (“29m”, “1h 8m”) rather than “33 minutes”: is that all right?',
   'A direction already given isn’t repeated: “Mars … stands 54° up (five and a half fists) in the same direction as Saturn.” Does that read naturally?',
   'Planets not in view for the same reason are listed together: “Mercury, Venus and Jupiter: not in view tonight, too close to the Sun.” (L)',

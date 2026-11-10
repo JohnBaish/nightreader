@@ -48,6 +48,14 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — the Moon's phase in John's wording
+
+**John:** plain words with the proper name beside them ("A growing Moon, bulging in its phase
+between half and full (waxing gibbous), 84% lit."); the two quarters also say how far the Moon
+is round its monthly circuit. `phaseLine()` in `sentences.ts` replaces `PHASE_MEANS`;
+`moonLook()` gains `round`. New Moon and full Moon keep the shorter sentences (Claude's reading
+of "as is", told to John). **Verified:** `npm run check` (19, exit code read), typecheck.
+
 ### 2026-11-10 — small eclipses folded; "See more"; the summer opening agreed
 
 **John:** an eclipse covering less than 15% goes under the fold; the fold is "See more"; F and
