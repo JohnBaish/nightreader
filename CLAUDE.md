@@ -51,6 +51,14 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — link-preview picture: two drafts (design only)
+
+`design/og-nightreader-a.html` and `-b.html`, from Lightreader's (same layout, sizes and fonts
+loaded by path, both confirmed loaded): favicon B drawn large, "Nightreader", and a draft
+tagline "The night sky from your postcode, tonight and through the year." A on the family's
+cream, B on Nightreader's indigo. Pictures `design/previews/og-nightreader-a.png`, `-b.png` and
+both together in `og-nightreader-options.png`. Nothing wired in.
+
 ### 2026-11-10 — favicon B; "About" in a shaded box; a clearer line before the footer (merged to `main`)
 
 **John:** favicon B; "About these figures" in a shaded box like Hindcaster's; a horizontal line

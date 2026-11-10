@@ -1,0 +1,50 @@
+<!doctype html>
+<!--
+  Link-preview ("og:image") image for nightreader.baish.net (public/og-nightreader.png), made
+  from Lightreader's design/og-lightreader.html (same layout, sizes and fonts, loaded by path).
+  The illustration is the favicon (option B, John, November 10th 2026), drawn large.
+  Option B: Nightreader's own night-sky indigo.
+  Screenshot at exactly 1200 by 630, and check the title really is Caprasimo.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: 'Caprasimo';
+    src: url('../node_modules/@fontsource/caprasimo/files/caprasimo-latin-400-normal.woff2') format('woff2');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Figtree';
+    src: url('../node_modules/@fontsource/figtree/files/figtree-latin-600-normal.woff2') format('woff2');
+    font-weight: 600;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; background: #0d1233; font-family: -apple-system, sans-serif; position: relative; overflow: hidden; }
+
+  /* The favicon (option B), drawn large. */
+  .art { position: absolute; left: 96px; top: 95px; width: 440px; height: 440px; }
+  .art svg { width: 100%; height: 100%; display: block; }
+
+  /* Text block: same position and sizes on every tool's image. */
+  .text { position: absolute; left: 592px; top: 225px; width: 560px; }
+  h1 { font-family: 'Caprasimo', serif; font-weight: 400; font-size: 72px; color: #f4ead6; line-height: 1; margin-bottom: 18px; }
+  p { font-family: 'Figtree', sans-serif; font-size: 27px; font-weight: 600; color: #b9b4c9; line-height: 1.35; }
+</style>
+</head>
+<body>
+  <div class="art">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <defs><mask id="m"><rect width="48" height="48" fill="#fff"/><circle cx="29.5" cy="19.5" r="10" fill="#000"/></mask></defs>
+      <circle cx="24" cy="24" r="22.8" fill="#0d1233" stroke="#c67139" stroke-width="1.2"/>
+      <circle cx="23" cy="25" r="12" fill="#f4ead6" mask="url(#m)"/>
+      <circle cx="31.5" cy="16" r="2.3" fill="#eba274"/>
+    </svg>
+  </div>
+  <div class="text">
+    <h1>Nightreader</h1>
+    <p>The night sky from your postcode,<br>tonight and through the year.</p>
+  </div>
+</body>
+</html>
