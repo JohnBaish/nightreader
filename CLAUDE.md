@@ -51,6 +51,12 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — a prompt for the next session (notes only, on the branch)
+
+John is moving to a new session. `design/prompt-continue-2026-11-10.md` is what he pastes in:
+where things stand (stage 5 on the branch, not merged and not yet seen by him on the
+preview), what's still open, and how he likes to work.
+
 ### 2026-11-10 — stage 5: "The year in darkness" (branch `claude/adoring-davinci-drczxf`, not merged)
 
 **John:** go ahead with stage 5.
