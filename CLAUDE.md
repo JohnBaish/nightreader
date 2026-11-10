@@ -51,6 +51,20 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — compass readings (choice C), a note on true north, credits off the first screen (merged to `main`)
+
+**John:** C (a small dial with the reading); no reading in the sentences under "The sky
+tonight"; a line in the notes about which north; the credits not shown until a postcode is
+chosen, as Lightreader. **What:** each line of "Where to look" ends with one small label
+holding the dial and the reading ("116° SE"); Claude put the two together in one label, where
+the mock-up had the dial before the words. The mock-up switch, and options A and B, are gone.
+Under the fists note (draft, for John): "Compass readings are from true north. A phone’s
+compass shows magnetic north unless it is set to true north; in Britain the two differ only
+slightly at present." (the size of the difference not checked against a source, so no figure
+is given). **Verified:** `npm run check` (22, exit code read), typecheck, lint, build; the
+first visit and Reading at 1200px, 390px with touch and 844 by 390 with touch: no errors, no
+sideways scrolling; the first visit shows only the project paragraph.
+
 ### 2026-11-10 — compass readings: three mock-ups (branch only, not merged)
 
 For John's request. In the real page behind `?compass=a`, `b` or `c` (`COMPASS_MOCK` in

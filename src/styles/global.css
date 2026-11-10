@@ -73,9 +73,10 @@ h2 { font-size: clamp(26px, 3.4vw, 36px); }
 .tip i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-right: 7px; vertical-align: middle; }
 
 /* Where to look */
-/* MOCK-UPS (compass readings): to remove once John chooses */
-.reading { display: inline-block; margin-left: 10px; padding: 1px 9px; border: 1px solid var(--hair); border-radius: 999px; color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.dial { width: 26px; height: 26px; vertical-align: -8px; margin-right: 8px; }
+.reading { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; padding: 1px 10px 1px 3px; border: 1px solid var(--hair); border-radius: 999px; color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; vertical-align: middle; }
+.look li.off .reading { color: var(--ink2); }
+.dial { width: 22px; height: 22px; flex: none; }
+.northnote { margin-top: 8px; color: var(--ink2); font-size: 13.5px; max-width: 64ch; }
 .pano-scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
 .pano-inner { position: relative; }
 .pano-inner canvas, .pano-inner svg { display: block; }

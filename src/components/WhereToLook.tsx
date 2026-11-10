@@ -18,10 +18,8 @@ const COMPASS: [number, string][] = [[90, 'EAST'], [135, 'SOUTH-EAST'], [180, 'S
 const smooth = (x: number, a: number, b: number) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
 const bandWord = (sun: number) => (sun > 0 ? 'Daylight' : sun > -6 ? 'Half-light' : sun > -12 ? 'Dark' : sun > -18 ? 'Very dark' : 'True night')
 
-// MOCK-UPS for John (November 10th 2026): three ways to show a compass reading, as a phone's
-// compass gives it ("96° E"), chosen with ?compass=a, b or c. Without it the page is as live.
-// To remove once he chooses.
-const COMPASS_MOCK = typeof location === 'undefined' ? null : new URLSearchParams(location.search).get('compass')
+// The compass reading for a direction, as a phone's compass gives it ("96° E"), with a small
+// dial (John's choice C, November 10th 2026). From true north; nothing reads the device's compass.
 const EIGHT = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 const reading = (az: number) => { const deg = Math.round(az) % 360; return `${deg}° ${EIGHT[Math.round(deg / 45) % 8]}` }
 function Dial({ az }: { az: number }) {
@@ -201,12 +199,6 @@ export function WhereToLook({ v, d, now }: { v: Tonight; d: District; now: Date 
                     <text x={t.x} y={skyH + 22 + t.row * 17} fontSize="12" textAnchor="middle" fillOpacity={t.row ? 0.62 : 0.88}>{t.name}</text>
                   </g>
                 ))}
-                {COMPASS_MOCK === 'b' && Array.from({ length: 27 }, (_, k) => 50 + k * 10).map((az) => (
-                  <g key={az}>
-                    <line x1={X(az)} x2={X(az)} y1={skyH - (az % 30 ? 4 : 8)} y2={skyH} stroke="var(--ink)" strokeOpacity={az % 30 ? 0.35 : 0.7} />
-                    {az % 30 === 0 && <text x={X(az)} y={skyH - 12} fontSize="10.5" textAnchor="middle" fillOpacity=".7" className="num">{az}°</text>}
-                  </g>
-                ))}
                 {COMPASS.map(([az, word]) => <text key={word} x={X(az)} y={H - 10} fontSize="11" textAnchor="middle" letterSpacing=".16em" style={{ fill: 'var(--accent)' }}>{word}</text>)}
                 {bodies.map((b) => {
                   let path = '', pen = false
@@ -259,13 +251,14 @@ export function WhereToLook({ v, d, now }: { v: Tonight; d: District; now: Date 
             <li key={b.name} className={b.shown && !b.low ? '' : 'off'}>
               <span className="sw" style={{ background: b.colour, opacity: b.shown && !b.low ? 1 : 0.4 }} />
               <span className="nm">{b.name}</span>
-              <span className="where">{!b.up ? 'Below the horizon' : b.washed ? 'Up, but lost in the bright sky' : <>{COMPASS_MOCK === 'c' && <Dial az={b.az} />}{b.low ? 'Very low in the ' : 'In the '}<b>{compassPoint(b.az)}</b>{toward}{COMPASS_MOCK && <span className="reading">{reading(b.az)}</span>}</>}</span>
+              <span className="where">{!b.up ? 'Below the horizon' : b.washed ? 'Up, but lost in the bright sky' : <>{b.low ? 'Very low in the ' : 'In the '}<b>{compassPoint(b.az)}</b>{toward} <span className="reading"><Dial az={b.az} />{reading(b.az)}</span></>}</span>
               {b.shown ? <Fists altitude={b.alt} /> : <span />}
             </li>
           )
         })}
       </ul>
       <p className="fistnote"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#fist" /></svg><span>Hold a fist out at arm’s length: it covers about 10° of sky. Stack fists up from the horizon to find the height.</span></p>
+      <p className="northnote">Compass readings are from true north. A phone’s compass shows magnetic north unless it is set to true north; in Britain the two differ only slightly at present.</p>
     </>
   )
 }
