@@ -145,7 +145,7 @@ export function YearInDarkness({ y, name }: { y: YearView; name: string }) {
         <div><p className="keyhead">Moonlight in the night</p><MoonKey /></div>
       </div>
       <div className="notes">
-        <p>Small discs along the top mark each full Moon, and rings each new Moon. The steps in March and October are the clocks changing.</p>
+        <p>Small discs along the top mark each full Moon, and rings each new Moon.</p>
         {y.noTrueNight.map((r) => <p key={r[0]}>{span(r)} the sky over {name} never reaches true night, so those weeks are measured by “very dark” instead.</p>)}
         {y.noVeryDark.map((r) => <p key={r[0]}>{span(r)} it doesn’t reach “very dark” either, only “dark”.</p>)}
       </div>

@@ -51,6 +51,13 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — stage 5's wording agreed; merged to `main`
+
+**John:** the stage 5 wording is agreed, except that "The steps in March and October are the
+clocks changing." goes; "Working out the year…" stays. Sentence removed from
+`YearInDarkness.tsx`; `claude/adoring-davinci-drczxf` merged into `main` (fast-forward).
+**Verified:** `npm run check` (23, exit code read), typecheck, lint, build.
+
 ### 2026-11-10 — a prompt for the next session (notes only, on the branch)
 
 John is moving to a new session. `design/prompt-continue-2026-11-10.md` is what he pastes in:
