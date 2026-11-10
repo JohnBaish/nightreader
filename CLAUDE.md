@@ -51,6 +51,25 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — "About these figures", credits, visit statistics (branch `claude/gracious-wright-pc7vy5`, not merged)
+
+**John's wording:** "Moon-free" just "means the Moon is below the horizon"; the directions
+paragraph his ("Named towns are included in that direction if they are within 25 miles, or
+within 60 miles when towns are sparse."); the last paragraph opens "We assume a flat, open
+horizon."; the rest as drafted. **What:** `src/components/About.tsx`, after "Looking ahead":
+the five sky words with their technical names and a swatch of each (Lightreader's lines), then
+six short paragraphs. Footer credits: stars "from d3-celestial by Olaf Frohn (BSD licence),
+from XHIP, an extended Hipparcos compilation (Anderson and Francis, 2012)", and "Meteor shower
+peaks from the International Meteor Organization". `@vercel/analytics` 2.0.1 (Hindcaster's),
+with the part after "#" removed from what it sends (`main.tsx`); the footer gains Hindcaster's
+visit statistics sentence. John still has to switch Web Analytics on in Vercel.
+**Star terms:** the XHIP ReadMe (read on CDS's Harvard mirror, John having allowed it) has no
+licence or acknowledgement section; CDS's general rules page still won't load (connection
+reset). **Verified:** `npm run check` (23, exit code read), typecheck, lint, build; Chromium at
+1200px, 390px with touch and 844 by 390 with touch: no errors, no sideways scrolling, nothing
+asked of any host but the page's own. **On the way:** a command to stop the preview server
+matched its own text and stopped itself (no harm). Pictures in `design/previews/about/`.
+
 ### 2026-11-10 — the star data's terms: not yet readable (notes only)
 
 d3-celestial's own licence (BSD, Olaf Frohn 2015) read and fine with a credit; its stars are from

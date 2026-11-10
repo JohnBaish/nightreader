@@ -4,6 +4,7 @@
 // the postcode box; the postcode is kept after "#" and on this device only (SPEC §2).
 
 import { Component, useEffect, useRef, useState, type ReactNode } from 'react'
+import { About } from './components/About.tsx'
 import { MoonFace } from './components/MoonFace.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
 import { ShareButton } from './components/ShareButton.tsx'
@@ -64,7 +65,7 @@ function Lines({ lines, marks }: { lines: string[]; marks?: boolean }) {
 }
 
 const CREDIT = `nightreader.baish.net · Times in UK local time for the middle of the postcode district, calculated with Astronomy Engine (MIT licence). ${POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}`
-const STARS = 'Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue.'
+const STARS = 'Stars and constellation lines from d3-celestial by Olaf Frohn (BSD licence), from XHIP, an extended Hipparcos compilation (Anderson and Francis, 2012).'
 
 /** "Copy" / "Share" for a picture: the drawing found in `section` by `selector`. */
 function Share({ section, selector, heading, sub, credit, file, date, code }: {
@@ -150,6 +151,8 @@ function Place({ d, now }: { d: District; now: Date }) {
           </details>
         )}
       </section>
+
+      <About />
     </>
   )
 }
@@ -197,13 +200,13 @@ export default function App() {
         {d && (
           <p>
             Times are UK local time. {POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}
-            {' '}Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue. Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
+            {' '}Stars and constellation lines from d3-celestial by Olaf Frohn (BSD licence), from XHIP, an extended Hipparcos compilation (Anderson and Francis, 2012). Meteor shower peaks from the International Meteor Organization. Calculated with <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener noreferrer">Astronomy Engine</a> (MIT licence).
           </p>
         )}
         <p>
           Nightreader is a free-to-use personal project by John Baish. More free tools at{' '}
           <a href="https://www.baish.net/" target="_blank" rel="noopener noreferrer">www.baish.net</a>. Contact: workshop@baish.net.
-          {' '}Everything is worked out on your device: nothing you type is sent anywhere. Your device, rather than the website, stores your postcode, so the page opens the same way next time.
+          {' '}Everything is worked out on your device: nothing you type is sent anywhere. Your device, rather than the website, stores your postcode, so the page opens the same way next time. We don’t record anything you do here, apart from anonymous visit statistics (no cookies, no personal data), showing us how the site is used.
         </p>
       </footer>
     </div>
