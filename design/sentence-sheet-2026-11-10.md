@@ -30,14 +30,21 @@ True night runs from 18:17 to 05:19, 11h 2m in all. The Moon stays down through
 - Full Moon: November 24th.
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
+- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
-- Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
 
 ## B. Reading (RG1)
 
@@ -68,14 +75,21 @@ True night runs from 18:10 to 05:29, 11h 19m in all. The Moon sets at 23:33; th
 - Full Moon: November 24th.
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
+- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
-- Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
 
 ## C. Reading (RG1)
 
@@ -105,14 +119,22 @@ True night runs from 18:04 to 05:38, 11h 35m in all. The Moon is up throughout.
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
-- Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
+- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
+- Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Best evenings for Mercury: around February 3rd, when it is furthest from the Sun.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 43m of the night is Moon-free.
 
 ## D. Reading (RG1)
 
@@ -142,14 +164,22 @@ True night runs from 18:00 to 05:48, 11h 48m in all. The Moon rises at 01:44; t
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Full Moon: December 24th.
-- Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
+- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
+- Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Best evenings for Mercury: around February 3rd, when it is furthest from the Sun.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 43m of the night is Moon-free.
 
 ## E. Reading (RG1)
 
@@ -178,12 +208,21 @@ True night runs from 19:09 to 05:26, 10h 17m in all. The Moon sets at 03:12; th
 - Mars at its best: February 19th (Friday), when it is opposite the Sun, at its brightest and up all night.
 - Full Moon: February 20th (Saturday).
 - New Moon: March 8th.
-- Best mornings for Mercury: around March 17th, when it is furthest from the Sun.
-- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
 - Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
 - Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
-- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
+- Best mornings for Mercury: around March 17th, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 22m of the night is Moon-free.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
+- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: only 43m of the night is Moon-free.
+- Geminids meteor shower: best on the night of December 14th 2027. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd 2027. A good year for this annual event: 9h 43m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd 2028. A fair year for this annual event: 6h 36m of the night is Moon-free.
 
 ## F. Reading (RG1)
 
@@ -214,10 +253,20 @@ The sky is “very dark” from 23:26 to 02:45, 3h 19m in all. The Moon is up t
 - Full Moon: July 18th.
 - Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
-- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
+- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: only 43m of the night is Moon-free.
+- Geminids meteor shower: best on the night of December 14th. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd. A good year for this annual event: 9h 43m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A fair year for this annual event: 6h 36m of the night is Moon-free.
 - Jupiter at its best: March 12th, when it is opposite the Sun, at its brightest and up all night.
 - Best evenings for Venus: around March 22nd, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 21st 2028. A very good year for this annual event: no Moon at all.
+- Eta Aquariids meteor shower: best on the night of May 5th 2028. A poor year for this annual event: the Moon is up all night.
 
 ## G. Edinburgh (EH1)
 
@@ -247,14 +296,21 @@ True night runs from 18:24 to 05:31, 11h 7m in all. The Moon stays down through
 - Full Moon: November 24th.
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 9h of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A very good year for this annual event: no Moon at all.
+- Eclipse of the Sun: August 2nd, from 09:11 to 10:52. At 10:00 the Moon covers 27% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 36° up.
+
+**Looking ahead: more, folded away**
+
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
-- Quadrantids meteor shower: best on the night of January 3rd. A very good year for this annual event: no Moon at all.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:11 to 10:52. At 10:00 the Moon covers 27% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 9m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 1h 33m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 36° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 1h 40m of the night is Moon-free.
 
 ## H. Edinburgh (EH1)
 
@@ -285,10 +341,20 @@ The sky is “dark” from 23:05 to 03:24, 4h 19m in all. The Moon rises at 23:
 - Full Moon: July 18th.
 - Eclipse of the Sun: August 2nd, from 09:11 to 10:52. At 10:00 the Moon covers 27% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 1h 33m of the night is Moon-free.
-- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 36° up.
+
+**Looking ahead: more, folded away**
+
+- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 1h 40m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: only 15m of the night is Moon-free.
+- Geminids meteor shower: best on the night of December 14th. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd. A good year for this annual event: 10h 13m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A fair year for this annual event: 6h 39m of the night is Moon-free.
 - Jupiter at its best: March 12th, when it is opposite the Sun, at its brightest and up all night.
 - Best evenings for Venus: around March 22nd, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 21st 2028. A very good year for this annual event: no Moon at all.
+- Eta Aquariids meteor shower: best on the night of May 5th 2028. A poor year for this annual event: the Moon is up all night.
 
 ## I. Lerwick (ZE1)
 
@@ -318,14 +384,21 @@ True night runs from 18:13 to 05:25, 11h 12m in all. The Moon stays down throug
 - Full Moon: November 24th.
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 9h 25m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A very good year for this annual event: no Moon at all.
+- Eclipse of the Sun: August 2nd, from 09:23 to 10:47. At 10:05 the Moon covers 15% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 34° up.
+
+**Looking ahead: more, folded away**
+
 - Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
-- Quadrantids meteor shower: best on the night of January 3rd. A very good year for this annual event: no Moon at all.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 09:23 to 10:47. At 10:05 the Moon covers 15% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 1h 26m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A good year for this annual event: 3h 13m of the night is Moon-free.
 - Saturn at its best: October 18th 2027, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 34° up.
+- Orionids meteor shower: best on the night of October 21st 2027. A poor year for this annual event: only 53m of the night is Moon-free.
 
 ## J. Sandwick (ZE2)
 
@@ -353,10 +426,20 @@ The sky is “dark” from 00:35 to 01:39, 1h 4m in all. The Moon is up through
 - Full Moon: July 18th.
 - Eclipse of the Sun: August 2nd, from 09:24 to 10:47. At 10:05 the Moon covers 15% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 - Perseids meteor shower: best on the night of August 12th. A good year for this annual event: 3h 14m of the night is Moon-free.
-- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 34° up.
+
+**Looking ahead: more, folded away**
+
+- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 51m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: the Moon is up all night.
+- Geminids meteor shower: best on the night of December 14th. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd. A good year for this annual event: 10h 49m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A fair year for this annual event: 6h 43m of the night is Moon-free.
 - Jupiter at its best: March 12th, when it is opposite the Sun, at its brightest and up all night.
 - Best evenings for Venus: around March 22nd, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 21st 2028. A very good year for this annual event: no Moon at all.
+- Eta Aquariids meteor shower: best on the night of May 5th 2028. A poor year for this annual event: the Moon is up all night.
 
 ## K. Penzance (TR18)
 
@@ -386,12 +469,22 @@ True night runs from 18:31 to 06:22, 11h 51m in all. The Moon rises at 05:57; t
 - Quadrantids meteor shower: best tonight. A good year for this annual event: 11h 26m of the night is Moon-free.
 - New Moon: January 7th (Thursday).
 - Full Moon: January 22nd.
+- Eclipse of the Sun: August 2nd, from 08:58 to 10:55. At 09:55 the Moon covers 47% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 38° up.
+
+**Looking ahead: more, folded away**
+
 - Best evenings for Mercury: around February 3rd, when it is furthest from the Sun.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
 - Mars at its best: February 19th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Sun: August 2nd, from 08:58 to 10:55. At 09:55 the Moon covers 47% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Lyrids meteor shower: best on the night of April 22nd. A poor year for this annual event: only 25m of the night is Moon-free.
+- Eta Aquariids meteor shower: best on the night of May 6th. A very good year for this annual event: no Moon at all.
+- Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 5m of the night is Moon-free.
 - Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
-- Eclipse of the Moon: January 12th 2028. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 38° up.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 2h 23m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th 2027. A poor year for this annual event: only 50m of the night is Moon-free.
+- Geminids meteor shower: best on the night of December 14th 2027. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd 2027. A good year for this annual event: 9h 37m of the night is Moon-free.
 
 ## L. Caerdydd (CF10)
 
@@ -418,14 +511,22 @@ True night runs from 23:09 to 03:27, 4h 19m in all. The Moon sets at 01:26; the
 - Perseids meteor shower: best tonight. A fair year for this annual event: 2h 2m of the night is Moon-free.
 - Full Moon: August 17th (Tuesday).
 - New Moon: August 31st.
+- Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 37° up.
+- Eclipse of the Sun: January 26th, from 15:35 to 17:55. At 16:48 the Moon covers 54% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+
+**Looking ahead: more, folded away**
+
 - Best evenings for Mercury: around September 24th, when it is furthest from the Sun.
 - Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 2h 14m of the night is Moon-free.
 - Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: only 43m of the night is Moon-free.
-- Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 37° up.
-- Eclipse of the Sun: January 26th, from 15:35 to 17:55. At 16:48 the Moon covers 54% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
+- Geminids meteor shower: best on the night of December 14th. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd. A good year for this annual event: 9h 44m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A fair year for this annual event: 6h 36m of the night is Moon-free.
 - Jupiter at its best: March 12th, when it is opposite the Sun, at its brightest and up all night.
 - Best evenings for Venus: around March 22nd, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 21st. A very good year for this annual event: no Moon at all.
+- Eta Aquariids meteor shower: best on the night of May 5th. A poor year for this annual event: the Moon is up all night.
 
 ## M. Reading (RG1)
 
@@ -455,10 +556,20 @@ The sky is “very dark” from 23:20 to 02:57, 3h 37m in all. The Moon stays d
 - Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 - New Moon: August 2nd.
 - Perseids meteor shower: best on the night of August 12th. A fair year for this annual event: 2h 2m of the night is Moon-free.
-- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
 - Eclipse of the Moon: January 12th. At 04:13 the Earth’s shadow covers 3% of the Moon, which is 35° up.
+
+**Looking ahead: more, folded away**
+
+- Saturn at its best: October 18th, when it is opposite the Sun, at its brightest and up all night.
+- Orionids meteor shower: best on the night of October 21st. A poor year for this annual event: only 2h 14m of the night is Moon-free.
+- Leonids meteor shower: best on the night of November 17th. A poor year for this annual event: only 43m of the night is Moon-free.
+- Geminids meteor shower: best on the night of December 14th. A poor year for this annual event: the Moon is up all night.
+- Ursids meteor shower: best on the night of December 22nd. A good year for this annual event: 9h 43m of the night is Moon-free.
+- Quadrantids meteor shower: best on the night of January 3rd. A fair year for this annual event: 6h 36m of the night is Moon-free.
 - Jupiter at its best: March 12th, when it is opposite the Sun, at its brightest and up all night.
 - Best evenings for Venus: around March 22nd, when it is furthest from the Sun.
+- Lyrids meteor shower: best on the night of April 21st. A very good year for this annual event: no Moon at all.
+- Eta Aquariids meteor shower: best on the night of May 5th 2028. A poor year for this annual event: the Moon is up all night.
 
 ## Points for John
 
@@ -470,4 +581,4 @@ The sky is “very dark” from 23:20 to 02:57, 3h 37m in all. The Moon stays d
 6. Meteor showers: “Perseids meteor shower: best tonight. A fair year for this annual event: 2h 2m of the night is Moon-free.” I added “meteor shower” after the name, as “Perseids” alone doesn’t say what it is. All eight showers listed come every year.
 7. Short spells no longer count: in view for less than 15 minutes, or well placed for less than three. Mercury on November 17th (three minutes) is now “not in view”.
 8. Welsh names: where a district in Wales has two names the Welsh one is shown (L: Caerdydd). The towns named in directions are still English (“roughly over Barry”), as the town list has only English names. In Scotland, districts with a Gaelic name show the English one for now (Inverness, not Inbhir Nis): would you like Gaelic there too?
-9. Trimming “Looking ahead”: not done yet, as you’d like to work on it together. It runs to 13 lines at its longest (A). My questions are in the message with this sheet.
+9. “Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always; everything else within a year folded away. The fold’s label is still to word.

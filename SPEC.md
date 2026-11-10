@@ -141,6 +141,8 @@ full Moon by date only; each Moon phase's name is followed by what it means; a d
 Wales with two names shows the Welsh one; the eclipse safety sentence is "Looking at the Sun
 without proper protection is dangerous and should be avoided."
 
-Open now: the nine points at the end of the sentence sheet's second version
-(`design/sentence-sheet-2026-11-10.pdf`), and trimming "Looking ahead", to be worked on with
-John.
+"Looking ahead" shows the next 30 days, the four big meteor showers three months ahead and the
+next eclipse of each kind always, with the rest of the year under a fold (John, November 10th).
+No Gaelic names.
+
+Open now: the summer opening when the Moon is up throughout, and the Moon phase wording.

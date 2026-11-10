@@ -48,6 +48,20 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — "Looking ahead" trimmed
+
+**John:** 30 days, with a fold; eclipses always; the four big meteor showers three months
+ahead, the others within 30 days; Mercury and Venus kept, by the same rule. Also: points 3 to
+8 of the second sheet agreed (no Gaelic). Still open, put to him in the thread: the summer
+opening when the Moon is up throughout (F and J imply the wrong cause), and the Moon phase
+wording (plain words first, the proper name in brackets, no explaining the percentage).
+
+**What:** `aheadLines()` returns `soon` and `later` (`SOON_DAYS`, `BIG_SHOWER_DAYS`,
+`BIG_SHOWER_PER_HOUR`); the fold holds everything else within a year, all eight showers
+included. Reading tonight: eight lines shown, nine folded. Sheet and PDF remade.
+
+**Verified:** `npm run check` (19, exit code read), `npm run typecheck`.
+
 ### 2026-11-10 — the sentences, second version: John's changes
 
 **John:** the eclipse safety sentence ("Looking at the Sun without proper protection is

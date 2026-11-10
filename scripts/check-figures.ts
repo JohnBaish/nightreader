@@ -183,4 +183,11 @@ check('place names: Welsh in Wales, one name elsewhere, the English name kept fo
   assert.deepEqual(placeNames('RG1', 'Reading'), { shown: 'Reading', own: 'Reading' })
 })
 
+check('Looking ahead shows 30 days, big showers three months and both eclipses; the rest is folded', () => {
+  const g = sentences(RG1, 'Reading', '2026-11-10').groups
+  assert.deepEqual(g[2].lines.map((l) => l.split(':')[0]), ['Leonids meteor shower', 'Best mornings for Mercury', 'Full Moon', 'New Moon', 'Geminids meteor shower', 'Quadrantids meteor shower', 'Eclipse of the Sun', 'Eclipse of the Moon'])
+  assert.equal(g[3].lines[0].split(':')[0], 'Ursids meteor shower') // a small shower 42 days off
+  assert.equal(g[3].lines.length, 9)
+})
+
 console.log(`\n${passed} checks passed`)
