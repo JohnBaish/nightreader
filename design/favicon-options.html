@@ -17,10 +17,10 @@
   .tab.me { background: #f9f4ed; } .dark .tab.me { background: #4a4b50; }
   .tab img { flex: none; }
 </style></head><body>
-<h1>Nightreader favicon options</h1>
+<h1>Nightreader favicon options, round 2 (indigo kept)</h1>
 <div id="rows"></div>
 <script>
-  const own = [['a-crescent-cream', 'A · ink crescent and a star', 'cream, terracotta ring, as the family'], ['b-crescent-night', 'B · on the night sky', 'Nightreader\'s own indigo, terracotta ring'], ['c-crescent-solid', 'C · solid terracotta', 'like Backtimer']];
+  const own = [['b-crescent-night', 'Now · B', 'crescent and star (chosen November 10th)'], ['d-gibbous', 'D · a fat Moon', 'matches the mark in the page header'], ['e-crescent-only', 'E · crescent alone', 'no star'], ['f-saturn', 'F · Saturn', 'a planet with its rings'], ['g-moonrise', 'G · Moon on the horizon', 'the fat Moon rising, a partner to Lightreader’s Sun'], ['h-plough', 'H · the Plough', 'its seven stars, joined']];
   const family = ['clockmaker', 'backtimer', 'flowcharter', 'hindcaster', 'lightreader', 'refueller', 'riverwatcher', 'baish'];
   const name = (o) => o === 'baish' ? 'baish.net' : o[0].toUpperCase() + o.slice(1)
   const strip = (f, dark) => `<div class="tabs${dark ? ' dark' : ''}">${family.map((o) => `<div class="tab"><img class="s16" src="favicon-options/${o}.svg">${name(o)}</div>`).join('')}<div class="tab me"><img class="s16" src="favicon-options/${f}.svg">Nightreader</div></div>`

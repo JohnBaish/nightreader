@@ -52,6 +52,17 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — favicon options, round 2 (design only, straight to `main`)
+
+**John:** asked how close favicon B is to the Premier Inn logo (written descriptions only: a
+white sleeping crescent with stars on purple). Not a copy (no face, indigo not purple, the
+crescent the other way), but the same family of image, so a handful of alternatives keeping the
+indigo and terracotta ring: D a fat Moon (as the header mark), E the crescent alone, F Saturn,
+G the fat Moon rising over a horizon (a partner to Lightreader's Sun; a plain half disc read as
+a hat, so redrawn), H the Plough. `design/favicon-options/d-…` to `h-…`; the page
+`design/favicon-options.html` now shows these beside B; pictures
+`design/previews/favicon-options-2.png` and `-2-1x.png`. Nothing wired in.
+
 ### 2026-11-10 — fresh look made ready (notes only, straight to `main`)
 
 **John:** write the prompt for the first fresh-look review, to run in another session.
