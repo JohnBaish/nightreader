@@ -51,6 +51,15 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — link-preview picture B, with John's tagline (merged to `main`)
+
+**John:** B, with "The planets from your postcode, tonight and through the year." **What:**
+`design/og-nightreader.html` (was `-b`; A removed), rendered to `public/og-nightreader.png`
+(1200 by 630; Caprasimo 400 and Figtree 600 confirmed loaded). `index.html` gains `og:` and
+`twitter:` tags (title "Nightreader", that line, the picture and the address on
+`https://nightreader.baish.net/`, so previews work once the address is set up). `noindex` stays
+until launch.
+
 ### 2026-11-10 — link-preview picture: two drafts (design only)
 
 `design/og-nightreader-a.html` and `-b.html`, from Lightreader's (same layout, sizes and fonts
