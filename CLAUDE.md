@@ -51,6 +51,15 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — favicon B; "About" in a shaded box; a clearer line before the footer (merged to `main`)
+
+**John:** favicon B; "About these figures" in a shaded box like Hindcaster's; a horizontal line
+before the footer; the rest agreed; merge. **What:** `public/favicon.svg` (option B, copied from
+`design/favicon-options/b-crescent-night.svg`), linked from `index.html`. `.about` is now a box in
+`--raise` with rounded corners and a hairline edge (as Hindcaster's `card about`), heading
+inside it. The footer already had a faint hairline above it; it's now clearer (cream at 32%).
+Everything since the last merge (About, credits, visit statistics, favicon) merged to `main`.
+
 ### 2026-11-10 — favicon options (design only)
 
 Three options in `design/favicon-options/`, drawn to the house recipe (48 by 48, circle r=21):

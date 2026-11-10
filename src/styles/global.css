@@ -144,7 +144,7 @@ section .working { padding: 40px 0; }
 .more .lines li:first-child { border-top: 1px solid var(--hair); }
 
 /* the footer as the other tools have it: 12px, centred, the full width (John, November 10th 2026) */
-footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--hair); color: var(--ink2); font-size: 12px; line-height: 1.6; text-align: center; }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid rgba(244, 234, 214, .32); color: var(--ink2); font-size: 12px; line-height: 1.6; text-align: center; }
 footer p + p { margin-top: 6px; }
 footer a { color: var(--ink2); }
 
@@ -196,8 +196,10 @@ footer a { color: var(--ink2); }
 /* the button's own icon, never caught by the pictures' rules */
 .share-btn svg, .frame .share-btn svg, .frame.year .share-btn svg { position: static; inset: auto; width: 18px; height: 18px; flex: none; display: inline-block; }
 
-/* About these figures */
-.about { margin-top: 20px; }
+/* About these figures: in a shaded box, as Hindcaster's (John, November 10th 2026) */
+.about { margin-top: 44px; padding: 28px 30px 26px; background: var(--raise); border-radius: 16px; box-shadow: 0 0 0 1px var(--hair); }
+.about .sec-head { margin-bottom: 14px; }
+.about h2 { font-size: clamp(22px, 2.6vw, 28px); }
 .about dl { margin: 0 0 14px; display: flex; flex-direction: column; }
 .about-row { display: grid; grid-template-columns: 300px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid var(--hair); }
 .about-row:last-child { border-bottom: 1px solid var(--hair); }
@@ -206,4 +208,4 @@ footer a { color: var(--ink2); }
 .about dd { margin: 0; color: var(--ink2); }
 .about .swatch { width: 14px; height: 14px; border-radius: 3px; box-shadow: 0 0 0 1px var(--hair); flex: none; }
 .about p { color: var(--ink2); font-size: 15px; margin-top: 12px; }
-@media (max-width: 720px) { .about-row { grid-template-columns: 1fr; gap: 2px; } }
+@media (max-width: 720px) { .about { padding: 20px 18px 18px; } .about-row { grid-template-columns: 1fr; gap: 2px; } }
