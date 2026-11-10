@@ -40,13 +40,21 @@ Key points:
   (`data/outcodes.json`, made October 30th 2026).
 - `src/lib/towns.ts` (Lightreader's, with the reach growing to 60 miles where nothing lies
   within 25) and `src/data/towns.json` (`npm run towns <Refueller's data/places.json>`).
-- `src/lib/sentences.ts`: every sentence the page says (draft wording).
+- `src/lib/sentences.ts`: every sentence the page says (wording agreed with John, November 10th 2026).
   `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — the sentences settled
+
+**John:** new and full Moon's shorter sentences and the circuit sentence on the two quarters
+only are right; a small meteor shower in a poor year goes under "See more" (built: the four
+smaller showers, when the verdict is "a poor year", however near). Stage 2's wording is agreed;
+John may still want to see some of it on the page. Next: stage 3.
+**Verified:** `npm run check` (20, exit code read), `npm run typecheck`.
 
 ### 2026-11-10 — the Moon's phase in John's wording
 

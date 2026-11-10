@@ -33,6 +33,8 @@ the opening, the Moon, each planet's line with its place and fists, "Looking ahe
 (`npm run sentence-sheet [<html>]`; `design/sentence-sheet-2026-11-10.md` and `.pdf`) is with
 John, with 16 numbered points. Next: his wording, then stage 3.
 
+**Done November 10th 2026:** the wording agreed with John over three rounds (SPEC §12).
+
 ## Stage 3: the page, with "The sky tonight"
 
 The app (Vite, React and TypeScript, as Lightreader), the postcode box, the Ember look, the

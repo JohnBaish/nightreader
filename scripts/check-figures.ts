@@ -192,4 +192,13 @@ check('Looking ahead shows 30 days, big showers three months and both eclipses; 
   assert.equal(g[3].lines.length, 10)
 })
 
+check('a small meteor shower in a poor year goes under See more, even when near', () => {
+  // from Reading on December 2nd 2026 the Ursids are 20 days off, with the Moon up all night
+  const g = sentences(RG1, 'Reading', '2026-12-02').groups
+  assert.ok(!g[2].lines.some((l) => l.startsWith('Ursids')))
+  assert.ok(g[3].lines.includes('Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.'))
+  // a big shower in a poor year still shows: the Geminids from Cardiff on October 1st 2027
+  assert.ok(sentences(place('CF10'), 'Cardiff', '2027-10-01').groups[2].lines.some((l) => l.startsWith('Geminids meteor shower')))
+})
+
 console.log(`\n${passed} checks passed`)

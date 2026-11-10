@@ -33,7 +33,7 @@ const POINTS = [
   'Meteor showers: “Perseids meteor shower: best tonight. A fair year for this annual event: 2h 2m of the night is Moon-free.” I added “meteor shower” after the name, as “Perseids” alone doesn’t say what it is. All eight showers listed come every year.',
   'Short spells no longer count: in view for less than 15 minutes, or well placed for less than three. Mercury on November 17th (three minutes) is now “not in view”.',
   'Welsh names: where a district in Wales has two names the Welsh one is shown (L: Caerdydd). The towns named in directions are still English (“roughly over Barry”), as the town list has only English names. In Scotland, districts with a Gaelic name show the English one for now (Inverness, not Inbhir Nis): would you like Gaelic there too?',
-  '“Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always, unless it covers less than 15%; everything else within a year under “See more”.',
+  '“Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always, unless it covers less than 15%; a small shower in a poor year, and everything else within a year, under “See more”.',
 ]
 
 const cases = CASES.map(([code, date, why]) => {

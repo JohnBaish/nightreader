@@ -156,7 +156,8 @@ export function aheadLines(place: Place, date: string): { soon: string[]; later:
   const firstOf = new Set<string>()
   for (const e of elongations(from, until)) if (!firstOf.has(e.name)) { firstOf.add(e.name); out.push({ at: e.at, line: `Best ${e.sky}s for ${e.name}: ${ukDate(e.at) === date ? `around now (${dayIn(date, date)})` : `around ${dayIn(ukDate(e.at), date)}`}, when it is furthest from the Sun.` }) }
   const showers = meteorShowers(place, from)
-  for (const m of showers) out.push({ at: m.peak, days: m.perHour >= BIG_SHOWER_PER_HOUR ? BIG_SHOWER_DAYS : SOON_DAYS, line: `${m.name} meteor shower: ${m.night.date === date ? 'best tonight' : `best on the night of ${dayIn(m.night.date, date)}`}. ${up(showerVerdict(m.night))}.` })
+  // a small shower in a poor year goes under the fold however near it is (John, November 10th 2026)
+  for (const m of showers) out.push({ at: m.peak, days: m.perHour >= BIG_SHOWER_PER_HOUR ? BIG_SHOWER_DAYS : showerVerdict(m.night).startsWith('a poor year') ? -1 : SOON_DAYS, line: `${m.name} meteor shower: ${m.night.date === date ? 'best tonight' : `best on the night of ${dayIn(m.night.date, date)}`}. ${up(showerVerdict(m.night))}.` })
   out.sort((a, b) => a.at.getTime() - b.at.getTime())
   const soon = (o: (typeof out)[number]) => o.always || o.at.getTime() - from.getTime() <= (o.days ?? SOON_DAYS) * 86_400_000
   return { soon: out.filter(soon).map((o) => o.line), later: out.filter((o) => !soon(o) && (o.eclipse || o.at < until)).map((o) => o.line) }

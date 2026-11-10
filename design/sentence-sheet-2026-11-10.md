@@ -118,12 +118,12 @@ True night runs from 18:04 to 05:38, 11h 35m in all. The Moon is up throughout.
 - Full Moon: today (November 24th).
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
-- Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
 - Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 
 **See more (folded away)**
 
+- Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Best evenings for Mercury: around February 3rd, when it is furthest from the Sun.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
@@ -162,13 +162,13 @@ True night runs from 18:00 to 05:48, 11h 48m in all. The Moon rises at 01:44; t
 
 - New Moon: December 9th.
 - Geminids meteor shower: best on the night of December 14th. A fair year for this annual event: 8h 40m of the night is Moon-free.
-- Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Full Moon: December 24th.
 - Quadrantids meteor shower: best on the night of January 3rd. A good year for this annual event: 11h 36m of the night is Moon-free.
 - Eclipse of the Sun: August 2nd, from 09:03 to 10:58. At 09:59 the Moon covers 42% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.
 
 **See more (folded away)**
 
+- Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.
 - Best mornings for Venus: around January 3rd, when it is furthest from the Sun.
 - Best evenings for Mercury: around February 3rd, when it is furthest from the Sun.
 - Jupiter at its best: February 11th, when it is opposite the Sun, at its brightest and up all night.
@@ -581,4 +581,4 @@ The sky is “very dark” from 23:20 to 02:57, 3h 37m in all. The Moon stays d
 6. Meteor showers: “Perseids meteor shower: best tonight. A fair year for this annual event: 2h 2m of the night is Moon-free.” I added “meteor shower” after the name, as “Perseids” alone doesn’t say what it is. All eight showers listed come every year.
 7. Short spells no longer count: in view for less than 15 minutes, or well placed for less than three. Mercury on November 17th (three minutes) is now “not in view”.
 8. Welsh names: where a district in Wales has two names the Welsh one is shown (L: Caerdydd). The towns named in directions are still English (“roughly over Barry”), as the town list has only English names. In Scotland, districts with a Gaelic name show the English one for now (Inverness, not Inbhir Nis): would you like Gaelic there too?
-9. “Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always, unless it covers less than 15%; everything else within a year under “See more”.
+9. “Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always, unless it covers less than 15%; a small shower in a poor year, and everything else within a year, under “See more”.
