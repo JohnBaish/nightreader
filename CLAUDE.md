@@ -51,6 +51,13 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — search title and description (merged to `main`)
+
+**John:** title "Nightreader – planets in the night sky from your postcode" (57 characters);
+description B ("When it’s properly dark tonight, where the Moon is, and which planets you can see from
+any postcode in Great Britain, through the year.", 132). In `index.html`; nothing in the app
+sets `document.title`. `noindex` stays until launch. **Verified:** checks, typecheck, lint, build.
+
 ### 2026-11-10 — link-preview picture B, with John's tagline (merged to `main`)
 
 **John:** B, with "The planets from your postcode, tonight and through the year." **What:**
