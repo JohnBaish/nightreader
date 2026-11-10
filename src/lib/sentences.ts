@@ -100,28 +100,15 @@ export function moonLines(place: Place, own: string, n: Night, moon: InView): st
 
 const list = (names: string[]) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`)
 
-/** The planets' lines: those in view in the order they appear, each with its place unless an
- *  earlier one stood in the same direction; then those not in view, together by reason. */
-export function planetLines(place: Place, own: string, planets: InView[]): string[] {
+/** The planets' lines, cut right down (John, November 10th 2026): when each is well placed or
+ *  in view, and when it's highest. Where and how high are in "Where and when to look". Those in
+ *  view come in the order they appear; then those not in view, together by reason. */
+export function planetLines(planets: InView[]): string[] {
   const start = (b: InView) => b.inView[0]?.from.getTime() ?? Infinity
   const shown = planets.filter((b) => b.level).sort((x, y) => start(x) - start(y))
-  const said = new Map<string, string>()
   const lines = shown.map((b) => {
-    const best = b.best!, full = where(place, own, best.azimuth)
-    const dir = said.has(full) ? `in the same direction as ${said.get(full)}` : full
-    if (!said.has(full)) said.set(full, b.name)
-    const height = `${Math.round(best.altitude)}° up (${fistWords(best.altitude)})`
-    const seen = b.inView.map(span).join(' and ')
-    if (b.level === 'low') return `${b.name} is low: in view from ${seen}, at best ${height} ${dir}, at ${clock(best.at)}. It needs a clear horizon.`
-    let spans: string
-    if (b.wellPlaced.length === 1 && b.inView.length === 1) {
-      const w = b.wellPlaced[0], v = b.inView[0]
-      const before = w.from.getTime() - v.from.getTime(), after = v.to.getTime() - w.to.getTime()
-      const extra = before >= 60_000 && after >= 60_000 ? `, and in view for ${duration(before)} before and ${duration(after)} after that window`
-        : before >= 60_000 ? `, and in view for ${duration(before)} before that` : after >= 60_000 ? `, and in view for ${duration(after)} after that` : ''
-      spans = `well placed from ${span(w)}${extra}`
-    } else spans = `well placed from ${b.wellPlaced.map(span).join(' and ')} (in view from ${seen})`
-    return `${b.name} is ${spans}. At its highest, at ${clock(best.at)}, it stands ${height} ${dir}.`
+    if (b.level === 'low') return `${b.name} is low: in view from ${b.inView.map(span).join(' and ')}.`
+    return `${b.name} is well placed from ${b.wellPlaced.map(span).join(' and ')}, and at its highest at ${clock(b.best!.at)}.`
   })
   const whys = [...new Set(planets.filter((b) => !b.level).map((b) => b.why!))]
   for (const why of whys) lines.push(`${list(planets.filter((b) => !b.level && b.why === why).map((b) => b.name))}: not in view tonight, ${why}.`)
@@ -175,7 +162,7 @@ export function sentences(place: Place, own: string, date: string): { title: str
     opening: opening(n),
     groups: [
       { heading: 'The Moon', lines: moonLines(place, own, n, moon) },
-      { heading: 'The planets', lines: planetLines(place, own, planets) },
+      { heading: 'The planets', lines: planetLines(planets) },
       { heading: 'Looking ahead', lines: ahead.soon },
       { heading: 'See more (folded away)', lines: ahead.later },
     ],

@@ -4,7 +4,7 @@
 // picture is wider than the screen, opens on south and is swiped sideways (John's option B).
 // From the agreed mock-up.
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { clock, compassPoint } from '../lib/format.ts'
 import { LOW, PLANETS, sunDepthNeeded, type PlanetName } from '../lib/night.ts'
 import type { District } from '../lib/postcode.ts'
@@ -48,12 +48,12 @@ function Fists({ altitude }: { altitude: number }) {
     <span className="fists" title={`${Math.round(altitude)}° up`}>
       {Array.from({ length: whole }, (_, i) => <svg key={i} viewBox="0 0 20 20" aria-hidden="true"><use href="#fist" /></svg>)}
       {half && <svg viewBox="0 0 10 20" style={{ width: 10 }} aria-hidden="true"><use href="#fist" width="20" height="20" /></svg>}
-      <span>{fistWords(altitude)}</span>
+      <span>{fistWords(altitude)} ({Math.round(altitude)}°)</span>
     </span>
   )
 }
 
-export function WhereToLook({ v, d, now }: { v: Tonight; d: District; now: Date }) {
+export function WhereToLook({ v, d, now, share }: { v: Tonight; d: District; now: Date; share?: ReactNode }) {
   const s = v.series!, n = v.night
   const frame = useRef<HTMLDivElement | null>(null), scroller = useRef<HTMLDivElement | null>(null), canvas = useRef<HTMLCanvasElement | null>(null)
   const [size, setSize] = useState<[number, number]>([0, 800])
@@ -236,6 +236,7 @@ export function WhereToLook({ v, d, now }: { v: Tonight; d: District; now: Date 
           ))}
         </svg>
       </div>
+      {share}
       <div className="when">
         <div className="clock">{clock(at)}</div>
         <div className="slide" style={{ ['--track' as string]: track }}>
@@ -257,8 +258,7 @@ export function WhereToLook({ v, d, now }: { v: Tonight; d: District; now: Date 
           )
         })}
       </ul>
-      <p className="fistnote"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#fist" /></svg><span>Hold a fist out at arm’s length: it covers about 10° of sky. Stack fists up from the horizon to find the height.</span></p>
-      <p className="northnote">Compass readings are from true north. A phone’s compass shows magnetic north unless it is set to true north; in Britain the two differ only slightly at present.</p>
+      <p className="fistnote"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#fist" /></svg><span>Hold a fist out at arm’s length: it covers about 10° of sky. Stack fists up from the horizon to find the height. Compass readings are from true north.</span></p>
     </>
   )
 }

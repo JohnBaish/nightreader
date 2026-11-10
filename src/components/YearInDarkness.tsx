@@ -3,7 +3,7 @@
 // sky, and moonlight by phase. Tapping or pointing at a night gives its figures. From the
 // agreed mock-up.
 
-import { useEffect, useRef, useState, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { clock, duration, longDate } from '../lib/format.ts'
 import { dayIn } from '../lib/sentences.ts'
 import { cssRgb, skyAt } from '../lib/skyColour.ts'
@@ -33,13 +33,13 @@ function MoonKey() {
   const night = skyAt(-18)
   const items: [string, number, number | null][] = [['Moon down', 0, null], ['Thin', 0.12, 0.12], ['Quarter', 0.25, 0.25], ['Half', 0.5, 0.5], ['Three quarters', 0.75, 0.75], ['Full', 1, 1]]
   return (
-    <div className="moonkey">
+    <div className="iconkey" style={{ ['--n' as string]: items.length }}>
       {items.map(([label, k, glyph]) => {
         const R = 9, ry = glyph === null ? 0 : Math.abs(1 - 2 * glyph) * R
         return (
           <div key={label}>
             {glyph === null
-              ? <svg viewBox="-11 -11 22 22" aria-hidden="true"><path d="M-8 4h16" stroke="var(--ink2)" strokeWidth="1.2" /><circle cy="9" r="5" fill="none" stroke="var(--ink2)" strokeDasharray="1.5 2.5" /></svg>
+              ? <svg viewBox="-11 -11 22 22" aria-hidden="true"><circle r={R} fill="none" stroke="var(--ink2)" strokeDasharray="2 2.6" /></svg>
               : <svg viewBox="-11 -11 22 22" aria-hidden="true"><circle r={R} fill="var(--raise)" stroke="var(--hair)" />{glyph > 0.02 && <path d={`M ${-R} 0 A ${R} ${R} 0 0 1 ${R} 0 A ${R} ${ry} 0 0 ${glyph > 0.5 ? 1 : 0} ${-R} 0 Z`} fill="var(--moon)" transform="rotate(90)" />}</svg>}
             <i style={{ background: cssRgb(night.map((v, i) => v + (WASH[i] - v) * k * 0.52) as [number, number, number]) }} />
             {label}
@@ -50,7 +50,29 @@ function MoonKey() {
   )
 }
 
-export function YearInDarkness({ y, name }: { y: YearView; name: string }) {
+/** The sky's key, to match the Moon's: the Sun sinking further below the horizon for each band. */
+function SkyKey() {
+  // the Sun's centre (in the drawing) and a height for each band's colour (degrees below the horizon)
+  const items: [string, number, number][] = [['Daylight', -7.5, 10], ['Half-light', -4, -3], ['Dark', 0, -9], ['Very dark', 3.8, -15], ['True night', 7.6, -19]]
+  return (
+    <div className="iconkey" style={{ ['--n' as string]: items.length }}>
+      {items.map(([label, cy, sun]) => (
+        <div key={label}>
+          <svg viewBox="-11 -11 22 22" aria-hidden="true">
+            <defs><clipPath id={`above${label}`}><rect x="-11" y="-11" width="22" height="7" /></clipPath></defs>
+            <circle cy={cy} r="3.2" fill="var(--accent)" fillOpacity={cy < -4 ? 1 : 0.18} stroke="var(--accent)" strokeOpacity={cy < -4 ? 0 : 0.8} strokeWidth="1" />
+            {cy === -4 && <circle cy={cy} r="3.2" fill="var(--accent)" clipPath={`url(#above${label})`} />}
+            <line x1="-10" x2="10" y1="-4" y2="-4" stroke="var(--ink2)" strokeWidth="1.2" />
+          </svg>
+          <i style={{ background: cssRgb(skyAt(sun)) }} />
+          {label}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export function YearInDarkness({ y, name, share }: { y: YearView; name: string; share?: ReactNode }) {
   const frame = useRef<HTMLDivElement | null>(null), canvas = useRef<HTMLCanvasElement | null>(null)
   const [size, setSize] = useState<[number, number]>([0, 800])
   const [chosen, setChosen] = useState(0)
@@ -92,10 +114,11 @@ export function YearInDarkness({ y, name }: { y: YearView; name: string }) {
     const r = e.currentTarget.getBoundingClientRect()
     setChosen(Math.max(0, Math.min(N - 1, Math.floor(((e.clientX - r.left - gl) / pw) * N))))
   }
-  // a tap away from the picture goes back to tonight
+  // a click or tap holds the chosen night (so it can be copied); a tap away goes back to tonight
+  const held = useRef(false)
   useEffect(() => {
     if (!chosen) return
-    const away = (e: Event) => { if (!frame.current?.contains(e.target as Node)) setChosen(0) }
+    const away = (e: Event) => { if ((e.target as Element).closest?.('.share-row, a[download]')) return; if (!frame.current?.contains(e.target as Node)) { held.current = false; setChosen(0) } }
     document.addEventListener('click', away)
     return () => document.removeEventListener('click', away)
   }, [chosen])
@@ -111,7 +134,7 @@ export function YearInDarkness({ y, name }: { y: YearView; name: string }) {
         <canvas ref={canvas} style={{ height: H }} />
         {W > 0 && (
           <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A year of nights at ${name}, coloured by how dark the sky is, with moonlight. Point at or tap a night for its figures.`}
-            onPointerDown={pick} onPointerMove={(e) => { if (e.pointerType === 'mouse' || e.buttons) pick(e) }} onPointerLeave={(e) => { if (e.pointerType === 'mouse') setChosen(0) }}>
+            onPointerDown={(e) => { held.current = true; pick(e) }} onPointerMove={(e) => { if (e.buttons || (e.pointerType === 'mouse' && !held.current)) pick(e) }} onPointerLeave={(e) => { if (e.pointerType === 'mouse' && !held.current) setChosen(0) }}>
             {[18, 21, 24, 27, 30].map((h) => (
               <g key={h}>
                 <line x1={gl} x2={W} y1={yOf(h * 60)} y2={yOf(h * 60)} stroke="var(--ink)" strokeOpacity={h === 24 ? 0.2 : 0.1} />
@@ -136,12 +159,9 @@ export function YearInDarkness({ y, name }: { y: YearView; name: string }) {
           </svg>
         )}
       </div>
+      {share}
       <div className="key">
-        <div>
-          <p className="keyhead">The sky</p>
-          <div className="keybar" style={{ background: `linear-gradient(90deg, ${[30, 12, 6, 2, 0, -3, -6, -9, -12, -18].map((a) => cssRgb(skyAt(a))).join(',')})` }} />
-          <div className="keywords"><span>Daylight</span><span>Half-light</span><span>Dark</span><span>Very dark</span><span>True night</span></div>
-        </div>
+        <div><p className="keyhead">The sky</p><SkyKey /></div>
         <div><p className="keyhead">Moonlight in the night</p><MoonKey /></div>
       </div>
       <div className="notes">

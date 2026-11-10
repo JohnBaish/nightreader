@@ -109,7 +109,7 @@ export function SkyTonight({ v, now }: { v: Tonight; now: Date }) {
   // a tap away from the picture puts the line away (as the other tools' charts)
   useEffect(() => {
     if (!tip) return
-    const away = (e: Event) => { if (!ref.current?.contains(e.target as Node)) setTip(null) }
+    const away = (e: Event) => { if ((e.target as Element).closest?.('.share-row, a[download]')) return; if (!ref.current?.contains(e.target as Node)) setTip(null) }
     document.addEventListener('click', away)
     return () => document.removeEventListener('click', away)
   }, [tip, ref])

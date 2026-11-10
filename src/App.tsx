@@ -3,15 +3,17 @@
 // "Where to look" and "The year in darkness" come in stages 4 and 5. A first-time visitor sees
 // the postcode box; the postcode is kept after "#" and on this device only (SPEC §2).
 
-import { Component, useEffect, useState, type ReactNode } from 'react'
+import { Component, useEffect, useRef, useState, type ReactNode } from 'react'
 import { MoonFace } from './components/MoonFace.tsx'
 import { PostcodeBox } from './components/PostcodeBox.tsx'
+import { ShareButton } from './components/ShareButton.tsx'
 import { SkyTonight } from './components/SkyTonight.tsx'
 import { WhereToLook } from './components/WhereToLook.tsx'
 import { YearInDarkness } from './components/YearInDarkness.tsx'
 import { lineColour } from './lib/lineColour.ts'
 import { clock } from './lib/format.ts'
 import { district, outwardCode, POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
+import { chartPicture, deliver, imageName } from './lib/shareImage.ts'
 import { tonightDate } from './lib/tonight.ts'
 import { townsRound } from './lib/towns.ts'
 import { useTonight } from './lib/useTonight.ts'
@@ -61,13 +63,34 @@ function Lines({ lines, marks }: { lines: string[]; marks?: boolean }) {
   )
 }
 
+const CREDIT = `nightreader.baish.net · Times in UK local time for the middle of the postcode district, calculated with Astronomy Engine (MIT licence). ${POSTCODE_CREDITS.map((c) => c.replace(/([^.])$/, '$1.')).join(' ')}`
+const STARS = 'Stars and constellation lines from d3-celestial (BSD licence), from the Hipparcos catalogue.'
+
+/** "Copy chart" / "Share chart" under a picture: the drawing found in `section` by `selector`. */
+function Share({ section, selector, heading, sub, credit, file, date, code }: {
+  section: React.RefObject<HTMLElement | null>; selector: string; heading: string; sub: () => string[]; credit: string; file: string; date: string; code: string
+}) {
+  return (
+    <div className="share-row">
+      <ShareButton what="chart" make={() => deliver(async () => {
+        const area = section.current?.querySelector<HTMLElement>(selector)
+        if (!area) throw new Error('No picture')
+        return chartPicture(area, { heading, sub: sub(), credit })
+      }, imageName(file, code, date), heading)} />
+    </div>
+  )
+}
+
 function Place({ d, now }: { d: District; now: Date }) {
   const date = tonightDate(d, now)
   const { view: v, year } = useTonight(d, date)
+  const skyRef = useRef<HTMLElement | null>(null), lookRef = useRef<HTMLElement | null>(null), yearRef = useRef<HTMLElement | null>(null)
   if (!v) return <p className="working" role="status">Working out tonight’s sky…</p>
   const [moon, planets, ahead, more] = v.groups
   // where no town lies to the south (Shetland, say), the line about towns is left out (John, November 10th)
   const hasTowns = townsRound(d, d.own).some((t) => t.bearing > 47 && t.bearing < 313)
+  const where = `${d.name} (${d.code})`
+  const text = (sel: string) => (sec: React.RefObject<HTMLElement | null>) => sec.current?.querySelector(sel)?.textContent?.trim() ?? ''
   return (
     <>
       <div className="hero">
@@ -83,31 +106,34 @@ function Place({ d, now }: { d: District; now: Date }) {
       </div>
       <Lines lines={moon.lines} />
 
-      <section>
+      <section ref={skyRef}>
         <div className="sec-head">
           <h2>The sky tonight</h2>
           <p className="sub">From sunset to sunrise. Each arc is the height of the Moon or a planet: solid where it’s in view, dotted where it’s up but lost in a bright sky or too low.</p>
         </div>
         {v.series && <SkyTonight v={v} now={now} />}
+        {v.series && <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} />}
         <Lines lines={planets.lines} marks />
       </section>
 
       {v.series && (
-        <section>
+        <section ref={lookRef}>
           <div className="sec-head">
-            <h2>Where to look</h2>
+            <h2>Where and when to look</h2>
             <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.</p>
           </div>
-          <WhereToLook key={v.date} v={v} d={d} now={now} />
+          <WhereToLook key={v.date} v={v} d={d} now={now}
+            share={<Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} />} />
         </section>
       )}
 
-      <section>
+      <section ref={yearRef}>
         <div className="sec-head">
           <h2>The year in darkness</h2>
           <p className="sub">Every night from tonight for a year, dusk at the top and dawn at the bottom. The pale slanting bands are moonlight.</p>
         </div>
-        {year ? <YearInDarkness key={year.from + d.code} y={year} name={d.name} /> : <p className="working" role="status">Working out the year…</p>}
+        {year ? <YearInDarkness key={year.from + d.code} y={year} name={d.name}
+          share={<Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} />} /> : <p className="working" role="status">Working out the year…</p>}
       </section>
 
       <section>

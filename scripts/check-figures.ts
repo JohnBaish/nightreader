@@ -168,9 +168,10 @@ check('the sentences: Reading on November 10th, a full Moon, midsummer, and a sh
   assert.deepEqual(opening(night(RG1, '2027-06-21')), { figure: 'No Moon-free night', under: 'The Moon is up throughout', note: '(True night is not reached tonight either.)', line: 'The sky is \u201cvery dark\u201d from 23:26 to 02:45, 3h\u00a019m in all. The Moon is up throughout.' })
   const h = opening(night(EH1, '2027-06-21'))
   assert.deepEqual([h.figure, h.under, h.note], ['42m', 'of Moon-free \u201cdark\u201d night', '(\u201cVery dark\u201d and true night are not reached tonight.)'])
-  // a well-placed planet; a direction already given isn't repeated; like reasons together
-  assert.equal(a.groups[1].lines[0], 'Saturn is well placed from 17:28 to 01:12, and in view for 29m before and 1h\u00a08m after that window. At its highest, at 21:20, it stands 40° up (four fists) in the south, between Bordon and Alton (near Hook).')
-  assert.match(a.groups[1].lines[1], /^Mars is well placed from 01:21 to 06:38, and in view for 1h\u00a05m before that\. .* in the same direction as Saturn\.$/)
+  // the planets' lines, cut right down (John, November 10th 2026); like reasons together
+  assert.equal(a.groups[1].lines[0], 'Saturn is well placed from 17:28 to 01:12, and at its highest at 21:20.')
+  assert.match(a.groups[1].lines[1], /^Mars is well placed from 01:21 to 06:38, and at its highest at \d\d:\d\d\.$/)
+  assert.ok(a.groups[1].lines.some((l) => /^Venus is low: in view from \d\d:\d\d to \d\d:\d\d\.$/.test(l)))
   const l = sentences(place('CF10'), 'Cardiff', '2027-08-12').groups
   assert.ok(l[1].lines.includes('Mercury, Venus and Jupiter: not in view tonight, too close to the Sun.'))
   assert.ok(l[2].lines.includes('Perseids meteor shower: best tonight. A fair year for this annual event: 2h\u00a02m of the night is Moon-free.'))

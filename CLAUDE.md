@@ -43,13 +43,43 @@ Key points:
 - `src/lib/sentences.ts`: every sentence the page says (wording agreed with John, November 10th 2026).
   `scripts/sentence-sheet.ts` (`npm run sentence-sheet [<html>]`).
 - **The page:** `src/App.tsx`, `src/components/` (`MoonFace`, `SkyTonight`, `WhereToLook`, `YearInDarkness`, `PostcodeBox`),
-  `src/lib/tonight.ts` and `yearView.ts` with their worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
+  `shareImage.ts` with `ShareButton.tsx`, `src/lib/tonight.ts` and `yearView.ts` with their worker and `useTonight.ts`, `skyColour.ts`, `postcode.ts`,
   `src/styles/global.css`. `src/data/stars.json` (`npm run stars`). `npm run dev`, `npm run build`, `npm run lint`.
 - `scripts/check-figures.ts` (`npm run check`), `scripts/figures-sheet.ts`
   (`npm run figures-sheet [YYYY-MM-DD]`). `npm run typecheck`.
 - `design/mockups/`: the agreed mock-up page and what builds it. `design/figures-sheet-*.md`.
 
 ## Log
+
+### 2026-11-10 — shorter planet lines, "Where and when to look", layout, sun key, footer, "Copy chart" (branch `claude/gracious-wright-pc7vy5`, not merged)
+
+**John:** the planets' lines cut right down ("Saturn is well placed from 17:28 to 01:12, and at
+its highest at 21:20." / "Venus is low: in view from 06:12 to 06:59."; the lines saying why a
+planet isn't in view are kept, for John to confirm); the degrees after the fists in the list
+("four fists (40°)"); "Where to look" becomes "Where and when to look"; the fists note now ends
+"Compass readings are from true north." and the longer true-north sentence is gone; the line
+beside each heading level with it on a computer; notes, sentences and the footer the full
+width; the two keys side by side, the sky's now with a Sun sinking below the horizon to match
+the Moons; "Moon down" a dashed ring; the footer 12px and centred, as the other tools; and
+"Copy chart" / "Share chart" under the three pictures, as Lightreader's.
+
+**What:** `planetLines()` (no place or height now: those are in the picture's list);
+`SkyKey()` in `YearInDarkness.tsx`; `src/lib/shareImage.ts` and `ShareButton.tsx` (from
+Lightreader): the picture is made from what's drawn on the page, in the Ember colours, with
+"NIGHTREADER", the heading, the place, the night (and the slider's time, or the chosen night's
+figures), and the credits; on a touch screen to the share sheet, on a computer copied. A click
+or tap on the year picture now holds the chosen night (pointing alone still shows it), so it can
+be copied; a tap away still goes back to tonight.
+
+**Verified:** `npm run check` (23, exit code read; the planets' check updated to the new
+wording), typecheck, lint, build. In Chromium at 1200px, 390px with touch and 844 by 390 with
+touch, Reading and Lerwick: no errors, no sideways scrolling; buttons 40px (44px on touch);
+the line beside each heading exactly level on a computer and sideways; all three pictures
+copied (read back from the clipboard) on a computer and saved on touch (headless browsers can't
+share), with a summer night held on the year picture. **Found and fixed on the way:** the saved
+picture's own download link counted as a "tap away" and put the year back to tonight.
+Pictures in `design/previews/tidy/`. **Couldn't be checked:** a real phone's share sheet;
+Safari's clipboard.
 
 ### 2026-11-10 — stage 5's wording agreed; merged to `main`
 
