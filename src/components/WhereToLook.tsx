@@ -236,9 +236,11 @@ export function WhereToLook({ v, d, now, share }: { v: Tonight; d: District; now
           ))}
         </svg>
       </div>
-      {share}
+      {/* the copy button: under the picture on a computer, beside the time on a phone (John, November 10th 2026) */}
+      <div className="share-pic">{share}</div>
       <div className="when">
         <div className="clock">{clock(at)}</div>
+        <div className="share-when">{share}</div>
         <div className="slide" style={{ ['--track' as string]: track }}>
           <input type="range" min="0" max={slots.length - 1} step="1" value={Math.min(idx, slots.length - 1)} aria-label="Time of night" aria-valuetext={`${clock(at)}, ${bandWord(sun)}`} onChange={(e) => setIdx(+e.target.value)} />
           <div className="ends"><span>Sunset {clock(n.sunset!)}</span><span>Sunrise {clock(n.sunrise!)}</span></div>

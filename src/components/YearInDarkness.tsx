@@ -52,17 +52,18 @@ function MoonKey() {
 
 /** The sky's key, to match the Moon's: the Sun sinking further below the horizon for each band. */
 function SkyKey() {
-  // the Sun's centre (in the drawing) and a height for each band's colour (degrees below the horizon)
-  const items: [string, number, number][] = [['Daylight', -7.5, 10], ['Half-light', -4, -3], ['Dark', 0, -9], ['Very dark', 3.8, -15], ['True night', 7.6, -19]]
+  // the Sun's centre (in the drawing, horizon at -3) and a height for each band's colour (degrees below the horizon)
+  const items: [string, number, number][] = [['Daylight', -9, 10], ['Half-light', -3, -3], ['Dark', 2.5, -9], ['Very dark', 6.5, -15], ['True night', 10, -19]]
   return (
     <div className="iconkey" style={{ ['--n' as string]: items.length }}>
       {items.map(([label, cy, sun]) => (
         <div key={label}>
-          <svg viewBox="-11 -11 22 22" aria-hidden="true">
-            <defs><clipPath id={`above${label}`}><rect x="-11" y="-11" width="22" height="7" /></clipPath></defs>
-            <circle cy={cy} r="3.2" fill="var(--accent)" fillOpacity={cy < -4 ? 1 : 0.18} stroke="var(--accent)" strokeOpacity={cy < -4 ? 0 : 0.8} strokeWidth="1" />
-            {cy === -4 && <circle cy={cy} r="3.2" fill="var(--accent)" clipPath={`url(#above${label})`} />}
-            <line x1="-10" x2="10" y1="-4" y2="-4" stroke="var(--ink2)" strokeWidth="1.2" />
+          <svg viewBox="-14 -14 28 28" aria-hidden="true">
+            <defs><clipPath id={`above${label}`}><rect x="-14" y="-14" width="28" height="11" /></clipPath></defs>
+            {cy < -3 && [0, 45, 90, 135, 180, 225, 270, 315].map((a) => <line key={a} x1="0" y1={cy - 6} x2="0" y2={cy - 7.6} stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" transform={`rotate(${a} 0 ${cy})`} />)}
+            <circle cy={cy} r="4" fill="var(--accent)" fillOpacity={cy < -3 ? 1 : 0.2} stroke="var(--accent)" strokeOpacity={cy < -3 ? 0 : 0.85} strokeWidth="1.1" />
+            {cy === -3 && <circle cy={cy} r="4" fill="var(--accent)" clipPath={`url(#above${label})`} />}
+            <line x1="-13" x2="13" y1="-3" y2="-3" stroke="var(--ink2)" strokeWidth="1.3" />
           </svg>
           <i style={{ background: cssRgb(skyAt(sun)) }} />
           {label}
@@ -159,11 +160,11 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
           </svg>
         )}
       </div>
-      {share}
       <div className="key">
         <div><p className="keyhead">The sky</p><SkyKey /></div>
         <div><p className="keyhead">Moonlight in the night</p><MoonKey /></div>
       </div>
+      {share}
       <div className="notes">
         <p>Small discs along the top mark each full Moon, and rings each new Moon.</p>
         {y.noTrueNight.map((r) => <p key={r[0]}>{span(r)} the sky over {name} never reaches true night, so those weeks are measured by “very dark” instead.</p>)}

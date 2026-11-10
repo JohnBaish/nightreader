@@ -51,6 +51,18 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — larger Suns in the key; the copy buttons moved (same branch, not merged)
+
+**John:** keep the "not in view" lines; the dark look for the copied pictures is right; no copy
+button for the Moon. Larger Suns in the sky's key (now 28px, with rays on the daylight Sun; the
+Moons drawn at the same size to keep the two keys level). On a phone, "Share chart" for "Where
+and when to look" sits beside the time (on a computer it stays under the picture; the button is
+in the page twice, one shown at each width). Under "The year in darkness" the button now comes
+after the key, at every width.
+**Verified:** `npm run check` (23, exit code read), typecheck, lint, build; in Chromium at
+1200px, 390px with touch and 844 by 390 with touch, Reading and Lerwick: no errors, no
+sideways scrolling; all three pictures copied or saved again. Close-ups in `design/previews/tidy/`.
+
 ### 2026-11-10 — shorter planet lines, "Where and when to look", layout, sun key, footer, "Copy chart" (branch `claude/gracious-wright-pc7vy5`, not merged)
 
 **John:** the planets' lines cut right down ("Saturn is well placed from 17:28 to 01:12, and at
