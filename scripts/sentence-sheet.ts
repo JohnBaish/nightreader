@@ -25,7 +25,7 @@ const CASES: [code: string, date: string, why: string][] = [
   ['RG1', '2027-07-04', 'a new Moon in summer: Moon-free, but only “very dark”'],
 ]
 const POINTS = [
-  'The opening in summer, reworked from your notes. Where the Moon is up throughout (F, J): “No Moon-free night / True night is not reached tonight”. Where some of it is Moon-free (H, M): “42m / of Moon-free “dark” night / (“Very dark” and true night are not reached tonight.)”. Is that right?',
+  'The opening in summer. Where the Moon is up throughout (F, J): “No Moon-free night / The Moon is up throughout / (True night is not reached tonight either.)” (agreed, November 10th). Where some of it is Moon-free (H, M): “42m / of Moon-free “dark” night / (“Very dark” and true night are not reached tonight.)”.',
   'What each Moon phase means, after its name: for example “Waning gibbous, 92% lit. “Gibbous” means more than half lit; “waning” means shrinking, night by night, after full.” All eight are drafts; seven show in these examples. The eighth: “Waxing crescent. A crescent is less than half lit; “waxing” means growing, night by night, towards full.”',
   'A well-placed planet, as you suggested: “Saturn is well placed from 17:28 to 01:12, and in view for 29m before and 1h 8m after that window.” Lengths are written the site’s way (“29m”, “1h 8m”) rather than “33 minutes”: is that all right?',
   'A direction already given isn’t repeated: “Mars … stands 54° up (five and a half fists) in the same direction as Saturn.” Does that read naturally?',
@@ -33,7 +33,7 @@ const POINTS = [
   'Meteor showers: “Perseids meteor shower: best tonight. A fair year for this annual event: 2h 2m of the night is Moon-free.” I added “meteor shower” after the name, as “Perseids” alone doesn’t say what it is. All eight showers listed come every year.',
   'Short spells no longer count: in view for less than 15 minutes, or well placed for less than three. Mercury on November 17th (three minutes) is now “not in view”.',
   'Welsh names: where a district in Wales has two names the Welsh one is shown (L: Caerdydd). The towns named in directions are still English (“roughly over Barry”), as the town list has only English names. In Scotland, districts with a Gaelic name show the English one for now (Inverness, not Inbhir Nis): would you like Gaelic there too?',
-  '“Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always; everything else within a year folded away. The fold’s label is still to word.',
+  '“Looking ahead” trimmed as you set out: the next 30 days; the four big meteor showers (Quadrantids, Eta Aquariids, Perseids, Geminids) three months ahead; the next eclipse of the Sun and of the Moon always, unless it covers less than 15%; everything else within a year under “See more”.',
 ]
 
 const cases = CASES.map(([code, date, why]) => {

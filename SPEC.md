@@ -142,7 +142,8 @@ Wales with two names shows the Welsh one; the eclipse safety sentence is "Lookin
 without proper protection is dangerous and should be avoided."
 
 "Looking ahead" shows the next 30 days, the four big meteor showers three months ahead and the
-next eclipse of each kind always, with the rest of the year under a fold (John, November 10th).
+next eclipse of each kind always (unless it covers less than 15%), with the rest of the year
+under "See more" (John, November 10th).
 No Gaelic names.
 
-Open now: the summer opening when the Moon is up throughout, and the Moon phase wording.
+Open now: the Moon phase wording.

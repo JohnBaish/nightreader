@@ -48,6 +48,14 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — small eclipses folded; "See more"; the summer opening agreed
+
+**John:** an eclipse covering less than 15% goes under the fold; the fold is "See more"; F and
+J read "No Moon-free night / The Moon is up throughout / (True night is not reached tonight
+either.)". The Moon phase sentences are being worked through in the thread (he wants the
+explanations kept, without the words on how much is lit); nothing built for those yet.
+`SMALL_ECLIPSE` in `sentences.ts`. **Verified:** `npm run check` (19), `npm run typecheck`.
+
 ### 2026-11-10 — "Looking ahead" trimmed
 
 **John:** 30 days, with a fold; eclipses always; the four big meteor showers three months

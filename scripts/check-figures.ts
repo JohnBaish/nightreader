@@ -160,7 +160,7 @@ check('the sentences: Reading on November 10th, a full Moon, midsummer, and a sh
   assert.equal(a.groups[1].lines[4], 'Mercury: not in view tonight, too close to the Sun.')
   assert.equal(opening(night(RG1, '2026-11-24')).figure, 'No Moon-free night')
   // summer: the opening says which kinds of night aren't reached
-  assert.deepEqual(opening(night(RG1, '2027-06-21')), { figure: 'No Moon-free night', under: 'True night is not reached tonight', note: '', line: 'The sky is \u201cvery dark\u201d from 23:26 to 02:45, 3h\u00a019m in all. The Moon is up throughout.' })
+  assert.deepEqual(opening(night(RG1, '2027-06-21')), { figure: 'No Moon-free night', under: 'The Moon is up throughout', note: '(True night is not reached tonight either.)', line: 'The sky is \u201cvery dark\u201d from 23:26 to 02:45, 3h\u00a019m in all. The Moon is up throughout.' })
   const h = opening(night(EH1, '2027-06-21'))
   assert.deepEqual([h.figure, h.under, h.note], ['42m', 'of Moon-free \u201cdark\u201d night', '(\u201cVery dark\u201d and true night are not reached tonight.)'])
   // a well-placed planet; a direction already given isn't repeated; like reasons together
@@ -185,9 +185,10 @@ check('place names: Welsh in Wales, one name elsewhere, the English name kept fo
 
 check('Looking ahead shows 30 days, big showers three months and both eclipses; the rest is folded', () => {
   const g = sentences(RG1, 'Reading', '2026-11-10').groups
-  assert.deepEqual(g[2].lines.map((l) => l.split(':')[0]), ['Leonids meteor shower', 'Best mornings for Mercury', 'Full Moon', 'New Moon', 'Geminids meteor shower', 'Quadrantids meteor shower', 'Eclipse of the Sun', 'Eclipse of the Moon'])
+  assert.deepEqual(g[2].lines.map((l) => l.split(':')[0]), ['Leonids meteor shower', 'Best mornings for Mercury', 'Full Moon', 'New Moon', 'Geminids meteor shower', 'Quadrantids meteor shower', 'Eclipse of the Sun'])
+  assert.ok(g[3].lines.some((l) => l.startsWith('Eclipse of the Moon: January 12th 2028.'))) // 3% covered: under the fold
   assert.equal(g[3].lines[0].split(':')[0], 'Ursids meteor shower') // a small shower 42 days off
-  assert.equal(g[3].lines.length, 9)
+  assert.equal(g[3].lines.length, 10)
 })
 
 console.log(`\n${passed} checks passed`)

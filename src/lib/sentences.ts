@@ -56,7 +56,7 @@ export function opening(n: Night): { figure: string; under: string; note: string
   else if (inDark.length === 1 && inDark[0].to >= n.darkest.to) moon = `The Moon rises at ${clock(inDark[0].from)}; the sky is at its darkest before that.`
   else moon = `The Moon is up ${inDark.map((s) => `from ${span(s)}`).join(' and ')}.`
   return none
-    ? { figure: 'No Moon-free night', under: missed || 'The Moon is up for the whole of true night', note: '', line: `${runs} ${moon}` }
+    ? { figure: 'No Moon-free night', under: missed ? 'The Moon is up throughout' : 'The Moon is up for the whole of true night', note: missed ? `(${missed} either.)` : '', line: `${runs} ${moon}` }
     : { figure: duration(n.moonFreeMs), under: missed ? `of Moon-free ${kind} night` : 'of Moon-free true night', note: missed ? `(${missed}.)` : '', line: `${runs} ${moon}` }
 }
 
@@ -135,6 +135,8 @@ export function showerVerdict(n: Night): string {
 /** How far ahead "Looking ahead" shows things before the fold (John, November 10th 2026):
  *  30 days; the four big meteor showers (50 or more an hour at best) three months; the next
  *  eclipse of the Sun and of the Moon always. Everything else within a year is under the fold. */
+/** An eclipse covering less than this share goes under the fold unless it's within 30 days. */
+export const SMALL_ECLIPSE = 0.15
 export const SOON_DAYS = 30, BIG_SHOWER_DAYS = 92, BIG_SHOWER_PER_HOUR = 50
 
 /** Looking ahead, in date order: what shows at once, and what is folded away. */
@@ -143,8 +145,8 @@ export function aheadLines(place: Place, date: string): { soon: string[]; later:
   const out: { at: Date; line: string; always?: boolean; days?: number }[] = []
   const seen = new Set<string>()
   for (const q of moonPhases(from, 8)) if ((q.phase === 'New Moon' || q.phase === 'Full Moon') && !seen.has(q.phase)) { seen.add(q.phase); out.push({ at: q.at, line: `${q.phase}: ${onDay(ukDate(q.at), date)}.` }) }
-  for (const e of solarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, from ${clock(e.begin)} to ${clock(e.end)}. At ${clock(e.peak)} the Moon covers ${Math.round(e.covered * 100)}% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.`, always: true })
-  for (const e of lunarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Moon: ${onDay(ukDate(e.peak), date)}. At ${clock(e.peak)} the Earth’s shadow covers ${e.kind === 'total' ? 'all' : `${Math.round(e.covered * 100)}%`} of the Moon, which is ${Math.round(e.altitude)}° up.`, always: true })
+  for (const e of solarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, from ${clock(e.begin)} to ${clock(e.end)}. At ${clock(e.peak)} the Moon covers ${Math.round(e.covered * 100)}% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.`, always: e.covered >= SMALL_ECLIPSE })
+  for (const e of lunarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Moon: ${onDay(ukDate(e.peak), date)}. At ${clock(e.peak)} the Earth’s shadow covers ${e.kind === 'total' ? 'all' : `${Math.round(e.covered * 100)}%`} of the Moon, which is ${Math.round(e.altitude)}° up.`, always: e.kind === 'total' || e.covered >= SMALL_ECLIPSE })
   for (const o of oppositions(from)) if (o.at < until) out.push({ at: o.at, line: `${o.name} at its best: ${onDay(ukDate(o.at), date)}, when it is opposite the Sun, at its brightest and up all night.` })
   const firstOf = new Set<string>()
   for (const e of elongations(from, until)) if (!firstOf.has(e.name)) { firstOf.add(e.name); out.push({ at: e.at, line: `Best ${e.sky}s for ${e.name}: ${ukDate(e.at) === date ? `around now (${dayIn(date, date)})` : `around ${dayIn(ukDate(e.at), date)}`}, when it is furthest from the Sun.` }) }
@@ -169,7 +171,7 @@ export function sentences(place: Place, own: string, date: string): { title: str
       { heading: 'The Moon', lines: moonLines(place, own, n, moon) },
       { heading: 'The planets', lines: planetLines(place, own, planets) },
       { heading: 'Looking ahead', lines: ahead.soon },
-      { heading: 'Looking ahead: more, folded away', lines: ahead.later },
+      { heading: 'See more (folded away)', lines: ahead.later },
     ],
   }
 }
