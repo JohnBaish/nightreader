@@ -51,6 +51,17 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — compass readings: three mock-ups (branch only, not merged)
+
+For John's request. In the real page behind `?compass=a`, `b` or `c` (`COMPASS_MOCK` in
+`WhereToLook.tsx`; without it the page is as live; to remove once he chooses): A, the reading
+as a small label after the direction ("116° SE", as a phone's compass shows it); B, A plus a
+scale of degrees along the horizon of the picture; C, A plus a small dial with a needle.
+Readings are from true north; a phone's compass shows magnetic north unless set to true
+north, about a degree different in Britain at present (not checked against a source).
+Pictures in `design/previews/compass/`. Checked at 1200px and 390px with touch: no errors,
+no sideways scrolling.
+
 ### 2026-11-10 — the footer's two paragraphs swapped (merged to `main`)
 
 **John** (after seeing the live page): the credits first, then the paragraph about the
