@@ -51,6 +51,14 @@ Key points:
 
 ## Log
 
+### 2026-11-10 — Vercel project created; stage 3 approved (same branch)
+
+**John:** created the Vercel project; "Nothing to change. It looks fantastic." `main` has no
+page yet, so its first build is expected to fail until stage 3 is merged (as Lightreader's
+did). This entry is the push that starts the branch's own preview; its address, by the house
+pattern (not opened from here): `https://nightreader-git-claude-adoring-davinci-drczxf-john-baish.vercel.app`.
+Next: stage 4, "Where to look".
+
 ### 2026-11-10 — stage 3's wording, from John (same branch, not merged)
 
 **John:** the first visit's heading as drafted; its line "Proper darkness tonight, with the
