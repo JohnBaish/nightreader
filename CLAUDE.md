@@ -110,6 +110,10 @@ year scrolls without changing the night, a sideways drag and a tap still pick; a
 picture shows its label. Links: `#BT1` and `#ZZ99` for a newcomer, `#BT1` with a saved place,
 Cancel, `#QQ1` and `#EH1` typed. All three pictures copied (1200px) or saved (touch), the year's
 with its keys. **Couldn't be checked:** a real phone; Safari.
+**Afterwards:** live on nightreader.baish.net (the served script has the new wording);
+"Delete merged branches" run (trial, then real): `git ls-remote --heads origin` shows only `main`
+(`claude/adoring-davinci-drczxf`, `claude/gracious-wright-pc7vy5` and this branch gone). Tracker
+updated.
 
 ### 2026-11-11 — the tab icon held open (design only, straight to `main`)
 
