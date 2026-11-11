@@ -52,6 +52,12 @@ Key points:
 
 ## Log
 
+### 2026-11-11 — the tab icon held open (design only, straight to `main`)
+
+**John:** holding on the icon for now; it's an open question in the tracker. One picture each
+for D and F, alone at four sizes and in a tab beside Lightreader's, light and dark:
+`design/previews/favicon-D.png` and `favicon-F.png`.
+
 ### 2026-11-10 — favicon options, round 2 (design only, straight to `main`)
 
 **John:** asked how close favicon B is to the Premier Inn logo (written descriptions only: a
