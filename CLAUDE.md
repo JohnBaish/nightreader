@@ -52,6 +52,22 @@ Key points:
 
 ## Log
 
+### 2026-11-11 — eclipse and planet dates checked against published sources (notes only, straight to `main`)
+
+**John:** check them (the last open accuracy item). Found by web search (secondary sources:
+Orbital Radar, Wikipedia, EarthSky, Star Walk, in-the-sky.org, Japan's National Astronomical
+Observatory, Tutiempo). **Agree:** the eclipse of the Sun on August 2nd 2027 (Reading 09:02,
+09:59, 10:58 BST, 42%; London published 09:04, 10:00, 11:00, 41.9%); the Moon's on January 12th
+2028 (04:13, Moon 35° up) and December 31st 2028 (16:51, Moon about 6° up); Jupiter's best on
+February 11th 2027, Mars's February 19th 2027 (ours 7 and 12 minutes from the published times),
+Saturn's October 18th 2027; Venus's best mornings January 3rd 2027 (47°); Mercury's six in 2027
+and November 20th 2026, all on the same UK dates. **Found:** the eclipse of the Sun on January
+26th 2028 (Reading 56%, from 15:35 until sunset at 16:42; greatest at 16:48, just after sunset)
+is left out at Reading and Edinburgh, as the rule needs the Sun up at the greatest moment; it's
+listed at Penzance. **Noted:** the Moon's eclipse is given as the share of its face covered
+(3% on January 12th 2028); published figures usually give the share of its width (6.8%). Both
+put to John; nothing changed.
+
 ### 2026-11-11 — the first fresh look, and every change from it (branch `claude/bold-davinci-xsyxaf`, merged to `main`)
 
 **The review** (`/fresh-look`, at `7419d6b`, November 10th; report and PDF sent; nothing changed
