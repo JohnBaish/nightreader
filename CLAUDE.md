@@ -56,7 +56,7 @@ Key points:
 
 **John:** holding on the icon for now; it's an open question in the tracker. One picture each
 for D and F, alone at four sizes and in a tab beside Lightreader's, light and dark:
-`design/previews/favicon-D.png` and `favicon-F.png`.
+`design/previews/favicon-D.png` and `favicon-F.png`, and the current one, `favicon-B.png`.
 
 ### 2026-11-10 — favicon options, round 2 (design only, straight to `main`)
 
