@@ -168,7 +168,18 @@ export function aheadLines(place: Place, date: string): { soon: string[]; later:
   const out: { at: Date; line: string; always?: boolean; days?: number; eclipse?: boolean }[] = []
   const seen = new Set<string>()
   for (const q of moonPhases(from, 8)) if ((q.phase === 'New Moon' || q.phase === 'Full Moon') && !seen.has(q.phase)) { seen.add(q.phase); out.push({ at: q.at, line: `${q.phase}: ${onDay(ukDate(q.at), date)}.` }) }
-  for (const e of solarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, from ${clock(e.begin)} to ${clock(e.end)}. At ${clock(e.peak)} the Moon covers ${Math.round(e.covered * 100)}% of the Sun. Looking at the Sun without proper protection is dangerous and should be avoided.`, always: e.covered >= SMALL_ECLIPSE, eclipse: true })
+  const SAFE = 'Looking at the Sun without proper protection is dangerous and should be avoided.'
+  for (const e of solarEclipses(place, from, 1)) {
+    // the Sun setting or rising part-way through (John, November 11th 2026)
+    const pc = (x: number) => `${Math.round(x * 100)}%`
+    const start = e.rises ? `from sunrise at ${clock(e.rises.at)}` : `from ${clock(e.begin)}`
+    const finish = e.sets ? `until sunset at ${clock(e.sets.at)}` : `to ${clock(e.end)}`
+    const what = e.peakUp || (!e.sets && !e.rises) ? `${start} ${finish}. At ${clock(e.peak)} the Moon covers ${pc(e.covered)} of the Sun.`
+      : e.sets ? `${start} ${finish}, when the Moon covers ${pc(e.sets.covered)} of the Sun.`
+      : `${start} ${finish}. At sunrise the Moon covers ${pc(e.rises!.covered)} of the Sun.`
+    const shown = e.peakUp || (!e.sets && !e.rises) ? e.covered : e.sets?.covered ?? e.rises!.covered
+    out.push({ at: e.peak, line: `Eclipse of the Sun: ${onDay(ukDate(e.peak), date)}, ${what} ${SAFE}`, always: shown >= SMALL_ECLIPSE, eclipse: true })
+  }
   for (const e of lunarEclipses(place, from, 1)) out.push({ at: e.peak, line: `Eclipse of the Moon: ${onDay(ukDate(e.peak), date)}. At ${clock(e.peak)} the Earth’s shadow covers ${e.kind === 'total' ? 'all' : `${Math.round(e.covered * 100)}%`} of the Moon, which is ${Math.round(e.altitude)}° up.`, always: e.kind === 'total' || e.covered >= SMALL_ECLIPSE, eclipse: true })
   for (const o of oppositions(from)) if (o.at < until) out.push({ at: o.at, line: `${o.name} at its best: ${onDay(ukDate(o.at), date)}, when it is opposite the Sun, at its brightest and up all night.` })
   const firstOf = new Set<string>()

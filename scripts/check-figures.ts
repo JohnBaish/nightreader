@@ -5,7 +5,7 @@
 
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { SHOWERS, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, sunReaches } from '../src/lib/ahead.ts'
+import { SHOWERS, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, sunCovered, sunReaches } from '../src/lib/ahead.ts'
 import { clock, duration } from '../src/lib/format.ts'
 import { LOW, WELL, fists, moonLook, moonUp, night, nights, phaseName, sky, sunDepthNeeded } from '../src/lib/night.ts'
 import { placeNames } from '../src/lib/places.ts'
@@ -208,6 +208,15 @@ check('the fresh look (November 11th 2026): phase names, clock changes, the Moon
   // 3.1: no Gaelic halves, no bare postcodes
   for (const code of Object.keys(data.outcodes)) { const d = district(code)!; assert.ok(!d.name.includes(' / ') && d.name !== code, code) }
   assert.deepEqual(['IV27', 'TR22', 'PH42'].map((c) => district(c)!.name), ['Lairg', 'St Agnes', 'Isle of Eigg'])
+})
+
+check('eclipses of the Sun that set or rise part-way through are listed (John, November 11th 2026)', () => {
+  const at = (code: string) => { const a = aheadLines(place(code), '2027-09-01'); return [...a.soon, ...a.later].find((l) => l.startsWith('Eclipse of the Sun'))! }
+  assert.equal(at('RG1').split('. Looking')[0], 'Eclipse of the Sun: January 26th, from 15:36 until sunset at 16:42, when the Moon covers 55% of the Sun')
+  assert.equal(at('TR18').split('. Looking')[0], 'Eclipse of the Sun: January 26th, from 15:34 until sunset at 17:05. At 16:48 the Moon covers 55% of the Sun')
+  // the overlap of the two discs agrees with Astronomy Engine's own figure at the greatest moment
+  const e = solarEclipses(RG1, new Date('2027-07-01T00:00:00Z'), 1)[0]
+  assert.ok(Math.abs(sunCovered(RG1, e.peak) - e.covered) < 0.002)
 })
 
 check('place names: Welsh in Wales, one name elsewhere, the English name kept for directions', () => {

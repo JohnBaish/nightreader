@@ -2,7 +2,7 @@
 // showers, each worked out for the place.
 
 import {
-  Body, Illumination, NextLocalSolarEclipse, NextLunarEclipse, NextMoonQuarter, Observer, SearchLocalSolarEclipse,
+  Body, Equator, Illumination, NextLocalSolarEclipse, SearchRiseSet, NextLunarEclipse, NextMoonQuarter, Observer, SearchLocalSolarEclipse,
   GeoVector, RotateVector, Rotation_EQJ_ECL, SearchLunarEclipse, SearchMaxElongation, SearchMoonQuarter, SearchRelativeLongitude,
   SiderealTime, SphereFromVector,
 } from 'astronomy-engine'
@@ -32,13 +32,44 @@ export function lunarEclipses(place: Place, from: Date, count: number): { kind: 
   return out
 }
 
-/** Eclipses of the Sun seen from the place, with the Sun up at the peak. */
-export function solarEclipses(place: Place, from: Date, count: number): { kind: string; begin: Date; peak: Date; end: Date; covered: number; altitude: number }[] {
+/** How much of the Sun's disc the Moon covers at `at`, seen from the place (0 to 1): the overlap
+ *  of two discs, from their sizes and how far apart they are. */
+export function sunCovered(place: Place, at: Date): number {
+  const obs = new Observer(place.latitude, place.longitude, 0), RAD = Math.PI / 180, AU_KM = 149_597_870.7
+  const s = Equator(Body.Sun, at, obs, true, true), m = Equator(Body.Moon, at, obs, true, true)
+  const unit = (e: { ra: number; dec: number }) => [Math.cos(e.dec * RAD) * Math.cos(e.ra * 15 * RAD), Math.cos(e.dec * RAD) * Math.sin(e.ra * 15 * RAD), Math.sin(e.dec * RAD)]
+  const a = unit(s), b = unit(m), d = Math.acos(Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))
+  const R = Math.asin(696_000 / (s.dist * AU_KM)), r = Math.asin(1737.4 / (m.dist * AU_KM))
+  if (d >= R + r) return 0
+  if (d <= Math.abs(R - r)) return r >= R ? 1 : (r * r) / (R * R)
+  const part = (x: number, y: number) => x * x * Math.acos((d * d + x * x - y * y) / (2 * d * x))
+  const area = part(R, r) + part(r, R) - 0.5 * Math.sqrt((-d + R + r) * (d + R - r) * (d - R + r) * (d + R + r))
+  return area / (Math.PI * R * R)
+}
+
+/** Eclipses of the Sun seen from the place, with the Sun up for at least part of them (John,
+ *  November 11th 2026: January 26th 2028 is at its greatest just after sunset at Reading, but
+ *  most of it is seen). `sets` or `rises`: the Sun sets or rises during it, with how much of the
+ *  Sun is covered at that moment. */
+export type SolarEclipse = { kind: string; begin: Date; peak: Date; end: Date; covered: number; altitude: number; sets?: { at: Date; covered: number }; rises?: { at: Date; covered: number }; peakUp?: boolean }
+export function solarEclipses(place: Place, from: Date, count: number): SolarEclipse[] {
   const obs = new Observer(place.latitude, place.longitude, 0)
-  const out = []
+  const out: SolarEclipse[] = []
   let e = SearchLocalSolarEclipse(from, obs)
   for (let tries = 0; out.length < count && tries < 40; tries++) {
-    if (e.peak.altitude > 0) out.push({ kind: e.kind, begin: e.partial_begin.time.date, peak: e.peak.time.date, end: e.partial_end.time.date, covered: e.obscuration, altitude: e.peak.altitude })
+    const base = { kind: e.kind, begin: e.partial_begin.time.date, peak: e.peak.time.date, end: e.partial_end.time.date, covered: e.obscuration, altitude: e.peak.altitude }
+    if (e.peak.altitude > 0) {
+      // still part-hidden by the horizon at one end: the Sun rising or setting during it
+      const rise = e.partial_begin.altitude <= 0 ? SearchRiseSet(Body.Sun, obs, +1, base.begin, 1) : null
+      const set = e.partial_end.altitude <= 0 ? SearchRiseSet(Body.Sun, obs, -1, base.peak, 1) : null
+      out.push({ ...base, ...(rise && { rises: { at: rise.date, covered: sunCovered(place, rise.date) } }), ...(set && { sets: { at: set.date, covered: sunCovered(place, set.date) } }), peakUp: true })
+    } else if (e.partial_begin.altitude > 0) {
+      const set = SearchRiseSet(Body.Sun, obs, -1, base.begin, 1)
+      if (set) out.push({ ...base, sets: { at: set.date, covered: sunCovered(place, set.date) } })
+    } else if (e.partial_end.altitude > 0) {
+      const rise = SearchRiseSet(Body.Sun, obs, +1, base.begin, 1)
+      if (rise) out.push({ ...base, rises: { at: rise.date, covered: sunCovered(place, rise.date) } })
+    }
     e = NextLocalSolarEclipse(e.peak.time, obs)
   }
   return out

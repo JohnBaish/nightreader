@@ -52,6 +52,23 @@ Key points:
 
 ## Log
 
+### 2026-11-11 — eclipses of the Sun at sunset or sunrise (merged to `main`)
+
+**John:** 1a (list an eclipse of the Sun when the Sun is up for part of it) and 2a (keep the
+Moon's eclipses as the share of its face); make it live. **What:** `solarEclipses()` in
+`ahead.ts` keeps an eclipse when the Sun is up at its start or end, not only at its greatest;
+`sunCovered()` works out how much of the Sun is covered at any moment (the overlap of the two
+discs; it agrees with Astronomy Engine's own figure at the greatest moment, 42.1% on August 2nd
+2027). The sentence: "Eclipse of the Sun: January 26th, from 15:36 until sunset at 16:42, when
+the Moon covers 55% of the Sun." (John's draft, with the percentage at sunset rather than "about
+half"; Claude's to match: "from sunrise at … to …. At sunrise the Moon covers …"). Found while
+checking: Penzance's line said "from 15:34 to 17:57", past sunset; an eclipse ending after
+sunset (or starting before sunrise) now stops at sunset ("from 15:34 until sunset at 17:05. At
+16:48 the Moon covers 55% of the Sun."). Reading's next eclipses: January 26th 2028, then June
+1st 2030. **Verified:** `npm run check` (25, exit code read; new check), typecheck, lint, build;
+Chromium at 1200px, 390px and 844 by 390 with touch, Reading and Penzance on September 1st 2027:
+the lines as above, no errors, no sideways scrolling.
+
 ### 2026-11-11 — eclipse and planet dates checked against published sources (notes only, straight to `main`)
 
 **John:** check them (the last open accuracy item). Found by web search (secondary sources:
