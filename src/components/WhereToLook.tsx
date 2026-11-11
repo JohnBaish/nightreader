@@ -16,6 +16,7 @@ import { describeToward, townsRound } from '../lib/towns.ts'
 const AZ0 = 45, AZ1 = 315, ALT_MAX = 74, LAND = 78, RAD = Math.PI / 180
 const COMPASS: [number, string][] = [[90, 'EAST'], [135, 'SOUTH-EAST'], [180, 'SOUTH'], [225, 'SOUTH-WEST'], [270, 'WEST']]
 const smooth = (x: number, a: number, b: number) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
+const andList = (names: string[]) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`)
 const bandWord = (sun: number) => (sun > 0 ? 'Daylight' : sun > -6 ? 'Half-light' : sun > -12 ? 'Dark' : sun > -18 ? 'Very dark' : 'True night')
 
 // The compass reading for a direction, as a phone's compass gives it ("96° E"), with a small
@@ -247,7 +248,8 @@ export function WhereToLook({ v, d, now, share }: { v: Tonight; d: District; now
         <div className="band">{bandWord(sun)}</div>
       </div>
       <ul className="look">
-        {bodies.map((b) => {
+        {/* those in view first; the rest grouped on a line each (the fresh look's 2.4; John, November 11th 2026) */}
+        {bodies.filter((b) => b.shown).map((b) => {
           const toward = b.shown ? describeToward(d, b.az, d.own) : ''
           return (
             <li key={b.name} className={b.shown && !b.low ? '' : 'off'}>
@@ -258,6 +260,12 @@ export function WhereToLook({ v, d, now, share }: { v: Tonight; d: District; now
             </li>
           )
         })}
+        {([['Below the horizon', bodies.filter((b) => !b.up)], ['Up, but lost in the bright sky', bodies.filter((b) => b.up && b.washed)]] as const).map(([words, group]) => group.length > 0 && (
+          <li key={words} className="off group">
+            <span />
+            <span className="where">{words}: {andList(group.map((b) => b.name))}.</span>
+          </li>
+        ))}
       </ul>
       <p className="fistnote"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#fist" /></svg><span>Hold a fist out at arm’s length: it covers about 10° of sky. Stack fists up from the horizon to find the height. Compass readings are from true north.</span></p>
     </>

@@ -2,21 +2,18 @@
 // bundled list and never sent anywhere (SPEC §2). From Lightreader's, for Great Britain.
 
 import { useState, type FormEvent } from 'react'
-import { district, outwardCode, type District } from '../lib/postcode.ts'
+import { district, outwardCode, postcodeProblem, type District } from '../lib/postcode.ts'
 
-export function PostcodeBox({ onChoose, onCancel }: { onChoose: (d: District) => void; onCancel?: () => void }) {
+/** `problem`: a message to show from the start (a link to an unknown postcode). */
+export function PostcodeBox({ onChoose, onCancel, problem = '' }: { onChoose: (d: District) => void; onCancel?: () => void; problem?: string }) {
   const [typed, setTyped] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState(problem)
 
   function submit(e: FormEvent) {
     e.preventDefault()
     const code = outwardCode(typed)
-    if (!typed.trim()) return setError('Type a postcode first.')
-    if (!code) return setError('That doesn’t look like a postcode. Try one like RG1 or RG1 8FR.')
-    const d = district(code)
-    if (!d) return setError(/^BT/.test(code)
-      ? 'Northern Ireland isn’t covered yet: its postcodes aren’t in the open data used by Nightreader.'
-      : `${code} isn’t a postcode district in Great Britain that Nightreader knows.`)
+    const d = code ? district(code) : null
+    if (!d) return setError(postcodeProblem(typed))
     onChoose(d)
   }
 

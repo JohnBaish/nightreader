@@ -20,7 +20,7 @@ export function ukParts(at: Date): UkParts {
 }
 
 /** Minutes UK clock time is ahead of UTC at an instant (0 for GMT, 60 for BST). */
-function offsetMinutes(at: Date): number {
+export function offsetMinutes(at: Date): number {
   const p = ukParts(at)
   const asUtc = Date.UTC(+p.date.slice(0, 4), +p.date.slice(5, 7) - 1, +p.date.slice(8, 10), p.hour, p.minute)
   return Math.round((asUtc - Math.floor(at.getTime() / 60000) * 60000) / 60000)

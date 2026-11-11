@@ -6,6 +6,7 @@ import { useEffect, useId, useMemo, useRef, useState, type PointerEvent } from '
 import { clock } from '../lib/format.ts'
 import type { InView, Span } from '../lib/night.ts'
 import { cssRgb, moonlit } from '../lib/skyColour.ts'
+import { useTouchPick } from '../lib/touchPick.ts'
 import type { Tonight } from '../lib/tonight.ts'
 import { ukParts } from '../lib/ukTime.ts'
 
@@ -77,13 +78,16 @@ export function SkyTonight({ v, now }: { v: Tonight; now: Date }) {
     const boxes: { x: number; y: number; w: number }[] = [], labels: { name: string; x: number; y: number }[] = []
     const shown = arcs.filter((a) => a.points.length > 1)
     for (const a of shown) {
-      const tw = a.name.length * 7.6 + 8, others = shown.filter((o) => o !== a).flatMap((o) => o.points)
-      const clear = (bx: number, by: number) => by > 26 && by < H - land - 22
+      // its own arc counts too, so a name never sits on its own line (the fresh look's 2.2)
+      const tw = a.name.length * 7.6 + 8, lines = shown.flatMap((o) => o.points)
+      const clear = (bx: number, by: number) => bx >= 6 && bx + tw <= W - 6 && by > 26 && by < H - land - 22
         && !boxes.some((b) => bx < b.x + b.w + 6 && bx + tw + 6 > b.x && by < b.y + 20 && by + 20 > b.y)
-        && !others.some((p) => p[0] > bx - 2 && p[0] < bx + tw + 2 && p[1] > by - 2 && p[1] < by + 22)
+        && !lines.some((p) => p[0] > bx - 2 && p[0] < bx + tw + 2 && p[1] > by - 2 && p[1] < by + 22)
       let placed: { x: number; y: number; w: number } | null = null
-      out: for (const dy of [-26, 8]) for (const f of [0.5, 0.35, 0.65, 0.22, 0.78, 0.12, 0.88]) {
-        const p = a.points[Math.floor((a.points.length - 1) * f)], bx = Math.max(6, Math.min(W - tw - 6, p[0] - tw / 2)), by = p[1] + dy
+      const fs = [0.5, 0.35, 0.65, 0.22, 0.78, 0.12, 0.88, 0, 1]
+      out: for (const [dx, dy] of [[0, -26], [0, 8], [12, -10], [-12, -10], [0, -40], [0, 22]] as const) for (const f of fs) {
+        const p = a.points[Math.round((a.points.length - 1) * f)]
+        const bx = dx > 0 ? p[0] + dx : dx < 0 ? p[0] + dx - tw : Math.max(6, Math.min(W - tw - 6, p[0] - tw / 2)), by = p[1] + dy
         if (clear(bx, by)) { placed = { x: bx, y: by, w: tw }; break out }
       }
       if (!placed) { const p = a.points[Math.floor(a.points.length / 2)]; placed = { x: Math.max(6, Math.min(W - tw - 6, p[0] - tw / 2)), y: Math.max(28, p[1] - 26), w: tw } }
@@ -106,6 +110,7 @@ export function SkyTonight({ v, now }: { v: Tonight; now: Date }) {
     const t = t0 + (x / W) * (t1 - t0)
     setTip({ x, i: Math.max(0, Math.min(rows - 1, Math.round((t - s.from) / s.step))) })
   }
+  const pointer = useTouchPick(move, move)
   // a tap away from the picture puts the line away (as the other tools' charts)
   useEffect(() => {
     if (!tip) return
@@ -120,7 +125,7 @@ export function SkyTonight({ v, now }: { v: Tonight; now: Date }) {
     <div className="frame" ref={ref}>
       {drawn && (
         <svg viewBox={`0 0 ${W} ${H}`} style={{ height: H }} role="img" aria-label="How high the Moon and each planet stand through the night. The sentences below say the same in words."
-          onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => { if (e.pointerType === 'mouse') setTip(null) }}>
+          {...pointer} onPointerLeave={(e) => { if (e.pointerType === 'mouse') setTip(null) }}>
           <defs>
             <linearGradient id={`${id}sky`} x1="0" y1="0" x2="1" y2="0">{drawn.stops.map((st, i) => <stop key={i} offset={st.offset.toFixed(4)} stopColor={st.colour} />)}</linearGradient>
             <linearGradient id={`${id}depth`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="var(--night)" stopOpacity=".42" /><stop offset="1" stopColor="var(--night)" stopOpacity="0" /></linearGradient>

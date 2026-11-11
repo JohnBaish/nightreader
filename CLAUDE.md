@@ -52,6 +52,65 @@ Key points:
 
 ## Log
 
+### 2026-11-11 — the first fresh look, and every change from it (branch `claude/bold-davinci-xsyxaf`, merged to `main`)
+
+**The review** (`/fresh-look`, at `7419d6b`, November 10th; report and PDF sent; nothing changed
+during it). Findings: 2.1 a vertical swipe over the year picture changed the night; 2.2 planet
+names sometimes on their own arc; 2.3 no swipe hint on phones; 2.4 five "Below the horizon"
+rows; 2.5 the fist ruler over star names; 2.6 the shared year picture had no key, and no label
+for the first part-month; 2.7 the year's notes ("From June 21st…" for a run already under way,
+"either" after next year's sentence); 3.1 four districts showing Gaelic and English, six only a
+postcode; 3.2 clock-change nights looked an hour out; 3.3 "last quarter, 69% lit"; 3.4 meteor
+verdicts ignored when the shower's source is up; 3.5 the Moon's "highest" at the start of the
+night; 3.6 links to unknown postcodes gave no message; 4.1 About didn't explain the moonlight
+shading; 4.2 About's darkest swatches barely showed; 4.3 the main script is large; 5.1–5.10
+left alone (compass "193° S", Daylight's colour, "RG47", Back, squashed view on short screens,
+directions across the sea, footer links, privacy confirmed, speed, the clock-change hour gap).
+
+**John (November 11th):** make every suggested change and put it live; 3.2 (a), 3.3 (a), 2.4
+(a); 4.3 and 5.1–5.10 left alone. His answers: names IV48 Sconser, KW13 Forsinard, PH30 Corrour,
+PH42 Isle of Eigg (TR22 St Agnes and SO97 Southampton as Lightreader), and Lairg, Iochdar,
+Struan, Strontian; "The clocks go forward an hour at 01:00." / "…back an hour at 02:00.";
+phases as the agreed table (New and Full unchanged, a quarter only from 40% to 60% lit); showers
+judged while the source is 20° up, with "…Moon-free while the shower is well up" and "from here
+the shower is barely above the horizon before dawn"; "Swipe the picture to look east or west.";
+"Below the horizon: …" and "Up, but lost in the bright sky: …"; the notes as "Until August 7th
+the sky over Edinburgh never reaches true night, so for those weeks the figures count “very
+dark” time instead." (option i, replacing "measured by"); "It is highest just after sunset, at
+16:20, when it stands …"; About: "The moonlight in the pictures indicates only the Moon’s
+position and fullness, not the overall brightness of the sky."; unknown links show the box's
+own message.
+
+**What:** `src/lib/touchPick.ts` (a finger picks only on a tap or a sideways drag; used by the
+year and "The sky tonight"); labels in "The sky tonight" keep off every arc, their own too, with
+more places tried; the swipe hint (`.swipe-hint`, shown below 752px, where the view is wider than
+its frame); the "Where and when to look" list puts what's in view first and groups the rest; a
+dark strip behind the ruler; `src/lib/yearKeys.ts` (the two keys, used by the page and now drawn
+under the shared year picture, rows balanced); the first part-month labelled; the year's notes
+paired by summer, "Until …" for a run under way, and a run reaching the year's end followed to
+its real end (Edinburgh's 2028 run now "to August 6th 2028", not cut at June 19th); `NAMED` in
+`places.ts`; `clockChange()` and `phaseName()`; `radiantWindow()` in `ahead.ts`; the Moon's
+highest point "just after sunset" / "just before sunrise" (the sunrise wording is Claude's, to
+match); `postcodeProblem()` shared by the box and links (Cancel puts the address back); About's
+sentence and clearer swatch edges.
+
+**Correction to the report:** 3.5's example was wrong. On December 14th the Moon really is
+highest at 16:20 (it crosses the south then), so that sentence was right and is unchanged; the
+new wording appears on nights when the Moon is still falling at sunset (December 12th and 13th)
+or still climbing at sunrise (December 3rd to 5th). Changed by the new meteor rule: the Leonids
+2026 move from "fair" to "very good", the Geminids from "fair" to "good", the Eta Aquariids to
+"poor" everywhere in Britain.
+
+**Verified:** `npm run check` (24, exit code read; new: phase names, clock changes, the Moon at
+the ends of the night, showers by their source, every district named), typecheck, lint, build.
+In Chromium at 1200px, 390px, 844 by 390, 667 by 320 and 320px with touch: Reading tonight,
+Edinburgh at midsummer, Lairg, Reading on March 27th 2027, St Agnes at full Moon: no errors (bar
+Vercel's statistics script, local only), no sideways scrolling. Touch: a vertical swipe over the
+year scrolls without changing the night, a sideways drag and a tap still pick; a tap on the sky
+picture shows its label. Links: `#BT1` and `#ZZ99` for a newcomer, `#BT1` with a saved place,
+Cancel, `#QQ1` and `#EH1` typed. All three pictures copied (1200px) or saved (touch), the year's
+with its keys. **Couldn't be checked:** a real phone; Safari.
+
 ### 2026-11-11 — the tab icon held open (design only, straight to `main`)
 
 **John:** holding on the icon for now; it's an open question in the tracker. One picture each

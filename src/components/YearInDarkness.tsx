@@ -6,7 +6,9 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { clock, duration, longDate } from '../lib/format.ts'
 import { dayIn } from '../lib/sentences.ts'
-import { cssRgb, skyAt } from '../lib/skyColour.ts'
+import { skyAt } from '../lib/skyColour.ts'
+import { useTouchPick } from '../lib/touchPick.ts'
+import { MOON_KEY, SKY_KEY } from '../lib/yearKeys.ts'
 import { FIRST_HOUR, ROWS, STEP_MINUTES, YEAR_NIGHTS, type YearNight, type YearView } from '../lib/yearView.ts'
 
 const WASH = [174, 184, 238] // the colour of a moonlit sky, as skyColour.ts
@@ -30,18 +32,16 @@ function Readout({ n, first, today }: { n: YearNight; first: boolean; today: str
 }
 
 function MoonKey() {
-  const night = skyAt(-18)
-  const items: [string, number, number | null][] = [['Moon down', 0, null], ['Thin', 0.12, 0.12], ['Quarter', 0.25, 0.25], ['Half', 0.5, 0.5], ['Three quarters', 0.75, 0.75], ['Full', 1, 1]]
   return (
-    <div className="iconkey" style={{ ['--n' as string]: items.length }}>
-      {items.map(([label, k, glyph]) => {
+    <div className="iconkey" style={{ ['--n' as string]: MOON_KEY.length }}>
+      {MOON_KEY.map(({ label, glyph, colour }) => {
         const R = 9, ry = glyph === null ? 0 : Math.abs(1 - 2 * glyph) * R
         return (
           <div key={label}>
             {glyph === null
               ? <svg viewBox="-11 -11 22 22" aria-hidden="true"><circle r={R} fill="none" stroke="var(--ink2)" strokeDasharray="2 2.6" /></svg>
               : <svg viewBox="-11 -11 22 22" aria-hidden="true"><circle r={R} fill="var(--raise)" stroke="var(--hair)" />{glyph > 0.02 && <path d={`M ${-R} 0 A ${R} ${R} 0 0 1 ${R} 0 A ${R} ${ry} 0 0 ${glyph > 0.5 ? 1 : 0} ${-R} 0 Z`} fill="var(--moon)" transform="rotate(90)" />}</svg>}
-            <i style={{ background: cssRgb(night.map((v, i) => v + (WASH[i] - v) * k * 0.52) as [number, number, number]) }} />
+            <i style={{ background: colour }} />
             {label}
           </div>
         )
@@ -53,10 +53,10 @@ function MoonKey() {
 /** The sky's key, to match the Moon's: the Sun sinking further below the horizon for each band. */
 function SkyKey() {
   // the Sun's centre (in the drawing, horizon at -3) and a height for each band's colour (degrees below the horizon)
-  const items: [string, number, number][] = [['Daylight', -9, 10], ['Half-light', -3, -3], ['Dark', 2.5, -9], ['Very dark', 6.5, -15], ['True night', 10, -19]]
+  const items = SKY_KEY.map((k, i) => ({ ...k, cy: [-9, -3, 2.5, 6.5, 10][i] }))
   return (
     <div className="iconkey" style={{ ['--n' as string]: items.length }}>
-      {items.map(([label, cy, sun]) => (
+      {items.map(({ label, cy, colour }) => (
         <div key={label}>
           <svg viewBox="-14 -14 28 28" aria-hidden="true">
             <defs><clipPath id={`above${label}`}><rect x="-14" y="-14" width="28" height="11" /></clipPath></defs>
@@ -65,7 +65,7 @@ function SkyKey() {
             {cy === -3 && <circle cy={cy} r="4" fill="var(--accent)" clipPath={`url(#above${label})`} />}
             <line x1="-13" x2="13" y1="-3" y2="-3" stroke="var(--ink2)" strokeWidth="1.3" />
           </svg>
-          <i style={{ background: cssRgb(skyAt(sun)) }} />
+          <i style={{ background: colour }} />
           {label}
         </div>
       ))}
@@ -117,6 +117,7 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
   }
   // a click or tap holds the chosen night (so it can be copied); a tap away goes back to tonight
   const held = useRef(false)
+  const pointer = useTouchPick((e) => { held.current = true; pick(e) }, (e) => { if (e.buttons || (e.pointerType === 'mouse' && !held.current)) pick(e) })
   useEffect(() => {
     if (!chosen) return
     const away = (e: Event) => { if ((e.target as Element).closest?.('.share-row, a[download]')) return; if (!frame.current?.contains(e.target as Node)) { held.current = false; setChosen(0) } }
@@ -125,9 +126,11 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
   }, [chosen])
 
   const yOf = (clockMinutes: number) => gt + ((clockMinutes - FIRST_HOUR * 60) / ((ROWS - 1) * STEP_MINUTES)) * ph
-  const firsts = y.nights.map((n, i) => ({ i, month: +n.date.slice(5, 7) - 1 })).filter(({ i }) => y.nights[i].date.endsWith('-01'))
+  // the part-month at the start counts too, so it gets a label when there's room (the fresh look's 2.6)
+  const firsts = y.nights.map((n, i) => ({ i, month: +n.date.slice(5, 7) - 1 })).filter(({ i }) => i === 0 || y.nights[i].date.endsWith('-01'))
   const x = gl + ((chosen + 0.5) / N) * pw
-  const span = ([a, b]: [string, string]) => `From ${dayIn(a, y.from)} to ${dayIn(b, y.from)}`
+  // a run already under way tonight reads "Until …" (the fresh look's 2.7)
+  const span = ([a, b]: [string, string]) => (a === y.from ? `Until ${dayIn(b, y.from)}` : `From ${dayIn(a, y.from)} to ${dayIn(b, y.from)}`)
   return (
     <>
       <div className="readrow"><Readout n={y.nights[chosen]} first={chosen === 0} today={y.from} /><div className="cp cp-read cp-wide">{share}</div></div>
@@ -135,7 +138,8 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
         <canvas ref={canvas} style={{ height: H }} />
         {W > 0 && (
           <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A year of nights at ${name}, coloured by how dark the sky is, with moonlight. Point at or tap a night for its figures.`}
-            onPointerDown={(e) => { held.current = true; pick(e) }} onPointerMove={(e) => { if (e.buttons || (e.pointerType === 'mouse' && !held.current)) pick(e) }} onPointerLeave={(e) => { if (e.pointerType === 'mouse' && !held.current) setChosen(0) }}>
+            {...pointer}
+            onPointerLeave={(e) => { if (e.pointerType === 'mouse' && !held.current) setChosen(0) }}>
             {[18, 21, 24, 27, 30].map((h) => (
               <g key={h}>
                 <line x1={gl} x2={W} y1={yOf(h * 60)} y2={yOf(h * 60)} stroke="var(--ink)" strokeOpacity={h === 24 ? 0.2 : 0.1} />
@@ -143,11 +147,12 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
               </g>
             ))}
             {firsts.map(({ i, month }, k) => {
-              const end = firsts[k + 1]?.i ?? N, tx = gl + (i / N) * pw, room = ((end - i) / N) * pw >= (narrow ? 22 : 34)
+              const end = firsts[k + 1]?.i ?? N, tx = gl + (i / N) * pw, width = ((end - i) / N) * pw
+              const word = !narrow && width >= 34 ? MONTHS[month].toUpperCase() : width >= 14 ? MONTHS[month][0] : ''
               return (
                 <g key={i}>
-                  <line x1={tx} x2={tx} y1={gt + ph} y2={gt + ph + 5} stroke="var(--ink)" strokeOpacity=".4" />
-                  {room && <text x={gl + ((i + end) / 2 / N) * pw} y={H - 9} fontSize={narrow ? 11 : 12.5} textAnchor="middle" fillOpacity=".78" letterSpacing=".06em">{narrow ? MONTHS[month][0] : MONTHS[month].toUpperCase()}</text>}
+                  {(i > 0 || y.nights[0].date.endsWith('-01')) && <line x1={tx} x2={tx} y1={gt + ph} y2={gt + ph + 5} stroke="var(--ink)" strokeOpacity=".4" />}
+                  {word && <text x={gl + ((i + end) / 2 / N) * pw} y={H - 9} fontSize={narrow ? 11 : 12.5} textAnchor="middle" fillOpacity=".78" letterSpacing=".06em">{word}</text>}
                 </g>
               )
             })}
@@ -167,8 +172,13 @@ export function YearInDarkness({ y, name, share }: { y: YearView; name: string; 
       <div className="cp cp-below cp-phone">{share}</div>
       <div className="notes">
         <p>Small discs along the top mark each full Moon, and rings each new Moon.</p>
-        {y.noTrueNight.map((r) => <p key={r[0]}>{span(r)} the sky over {name} never reaches true night, so those weeks are measured by “very dark” instead.</p>)}
-        {y.noVeryDark.map((r) => <p key={r[0]}>{span(r)} it doesn’t reach “very dark” either, only “dark”.</p>)}
+        {/* each summer's two notes together, in date order (the fresh look's 2.7; John's wording, November 11th 2026) */}
+        {y.noTrueNight.map((r) => (
+          <div key={r[0]}>
+            <p>{span(r)} the sky over {name} never reaches true night, so for those weeks the figures count “very dark” time instead.</p>
+            {y.noVeryDark.filter((v) => v[0] >= r[0] && v[1] <= r[1]).map((v) => <p key={v[0]}>{span(v)} it doesn’t reach “very dark” either, only “dark”.</p>)}
+          </div>
+        ))}
       </div>
     </>
   )

@@ -30,6 +30,16 @@ export function district(code: string): District | null {
   return { code, latitude: d[0], longitude: d[1], name: names.shown, own: names.own }
 }
 
+/** What's wrong with something typed, or in a link, that isn't a district Nightreader knows. */
+export function postcodeProblem(typed: string): string {
+  if (!typed.trim()) return 'Type a postcode first.'
+  const code = outwardCode(typed)
+  if (!code) return 'That doesn’t look like a postcode. Try one like RG1 or RG1 8FR.'
+  return /^BT/.test(code)
+    ? 'Northern Ireland isn’t covered yet: its postcodes aren’t in the open data used by Nightreader.'
+    : `${code} isn’t a postcode district in Great Britain that Nightreader knows.`
+}
+
 const KEY = 'nightreader.postcode'
 
 /** The last postcode district chosen, kept on this device only. Blocked storage (a private

@@ -2,12 +2,12 @@
 // John can read and reword them in the sentence sheet before any page is built. The wording
 // is draft until he agrees it.
 
-import { elongations, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses } from './ahead.ts'
+import { elongations, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, type Shower } from './ahead.ts'
 import { clock, compassPoint, duration, longDate, ordinal } from './format.ts'
-import { fists, moonLook, night, sky, type InView, type Night, type Span } from './night.ts'
+import { fists, moonLook, night, phaseName, sky, type InView, type Night, type Span } from './night.ts'
 import { dayFigures, type Place } from './sun.ts'
 import { describeToward } from './towns.ts'
-import { addDays, ukParts } from './ukTime.ts'
+import { addDays, offsetMinutes, ukParts } from './ukTime.ts'
 import { numberWord } from './words.ts'
 
 export type Group = { heading: string; lines: string[] }
@@ -39,8 +39,24 @@ const span = (s: Span) => `${clock(s.from)} to ${clock(s.to)}`
 const WORD = { 'true night': 'true night', 'very dark': '“very dark”', dark: '“dark”' } as const
 const up = (s: string) => s[0].toUpperCase() + s.slice(1)
 
+/** On the two nights a year the clocks change, a sentence saying so, as the times either side
+ *  look an hour out (the fresh look's 3.2; John, November 11th 2026). UK clocks go forward at
+ *  01:00 GMT and back at 02:00 BST. */
+export function clockChange(n: Night): string {
+  if (!n.sunset || !n.sunrise) return ''
+  const before = offsetMinutes(n.sunset), after = offsetMinutes(n.sunrise)
+  if (after > before) return 'The clocks go forward an hour at 01:00.'
+  if (after < before) return 'The clocks go back an hour at 02:00.'
+  return ''
+}
+
 /** The opening: the big figure, the words under it, and the sentence beside the Moon. */
 export function opening(n: Night): { figure: string; under: string; note: string; line: string } {
+  const o = openingWords(n), clocks = clockChange(n)
+  return clocks ? { ...o, line: `${o.line} ${clocks}` } : o
+}
+
+function openingWords(n: Night): { figure: string; under: string; note: string; line: string } {
   if (!n.darkest) return { figure: 'No darkness tonight', under: 'Half-light all night', note: '', line: 'The Sun stays close below the horizon, so the sky never gets dark.' }
   const kind = WORD[n.darkest.kind], none = n.moonFreeMs < 30_000, all = n.darkMs - n.moonFreeMs < 30_000
   // the length is left out when the big figure above already gives it, the Moon being down
@@ -86,7 +102,8 @@ export function phaseLine(phase: string, lit: number, round: number): string {
 /** The Moon tonight: its phase, its rising and setting, and its highest point after dark. */
 export function moonLines(place: Place, own: string, n: Night, moon: InView): string[] {
   const look = moonLook(place, n.darkest ? new Date((n.darkest.from.getTime() + n.darkest.to.getTime()) / 2) : n.sunset!)
-  const lines = [phaseLine(look.phase, n.moonLit, look.round)]
+  // named from the same lit share the sentence gives, so the two always agree
+  const lines = [phaseLine(phaseName(n.moonLit, look.round * 360), n.moonLit, look.round)]
   const from = n.sunset!, to = n.sunrise!
   if (!n.moonUp.length) lines.push('It stays below the horizon all night.')
   for (const s of n.moonUp) {
@@ -97,7 +114,16 @@ export function moonLines(place: Place, own: string, n: Night, moon: InView): st
     else if (sets) lines.push(`It is already up at sunset, and sets at ${clock(s.to)} ${at(s.to)}.`)
     else lines.push('It is up all night.')
   }
-  if (moon.best) lines.push(`At its highest during the night, at ${clock(moon.best.at)}, it stands ${Math.round(moon.best.altitude)}° up (${fistWords(moon.best.altitude)}) ${where(place, own, moon.best.azimuth)}.`)
+  if (moon.best) {
+    // still falling at sunset, or still climbing at sunrise, its highest is at the very start or
+    // end of the night, and the sentence says so (the fresh look's 3.5; John, November 11th 2026)
+    const b = moon.best, first = moon.inView[0], last = moon.inView[moon.inView.length - 1]
+    const close = (a: Date, c: Date) => Math.abs(a.getTime() - c.getTime()) <= 10 * 60_000
+    const stands = `it stands ${Math.round(b.altitude)}° up (${fistWords(b.altitude)}) ${where(place, own, b.azimuth)}`
+    if (close(b.at, first.from) && n.moonUp[0].from <= from) lines.push(`It is highest just after sunset, at ${clock(b.at)}, when ${stands}.`)
+    else if (close(b.at, last.to) && n.moonUp[n.moonUp.length - 1].to >= to) lines.push(`It is highest just before sunrise, at ${clock(b.at)}, when ${stands}.`)
+    else lines.push(`At its highest during the night, at ${clock(b.at)}, ${stands}.`)
+  }
   return lines
 }
 
@@ -118,13 +144,15 @@ export function planetLines(planets: InView[]): string[] {
   return lines
 }
 
-/** A meteor shower's verdict, from how much of the darkest stretch has no Moon. */
-export function showerVerdict(n: Night): string {
-  if (!n.darkest) return 'a poor year for this annual event: the sky never gets dark that night'
-  const share = n.moonFreeMs / n.darkMs
-  if (share >= 0.75) return share > 0.99 ? 'a very good year for this annual event: no Moon at all' : `a good year for this annual event: ${duration(n.moonFreeMs)} of the night is Moon-free`
-  if (share >= 0.35) return `a fair year for this annual event: ${duration(n.moonFreeMs)} of the night is Moon-free`
-  return n.moonFreeMs < 30_000 ? 'a poor year for this annual event: the Moon is up all night' : `a poor year for this annual event: only ${duration(n.moonFreeMs)} of the night is Moon-free`
+/** A meteor shower's verdict, from how much of the time its source is well up (20° or more,
+ *  in the darkest stretch) has no Moon (the fresh look's 3.4; John, November 11th 2026). */
+export function showerVerdict(m: Pick<Shower, 'night' | 'upMs' | 'freeMs'>): string {
+  if (!m.night.darkest) return 'a poor year for this annual event: the sky never gets dark that night'
+  if (m.upMs < 60 * 60_000) return 'a poor year for this annual event: from here the shower is barely above the horizon before dawn'
+  const share = m.freeMs / m.upMs, free = duration(m.freeMs), when = 'while the shower is well up'
+  if (share >= 0.75) return share > 0.99 ? `a very good year for this annual event: no Moon ${when}` : `a good year for this annual event: ${free} of the night is Moon-free ${when}`
+  if (share >= 0.35) return `a fair year for this annual event: ${free} of the night is Moon-free ${when}`
+  return m.freeMs < 30_000 ? `a poor year for this annual event: the Moon is up the whole time the shower is well up` : `a poor year for this annual event: only ${free} of the night is Moon-free ${when}`
 }
 
 /** How far ahead "Looking ahead" shows things before the fold (John, November 10th 2026):
@@ -147,7 +175,7 @@ export function aheadLines(place: Place, date: string): { soon: string[]; later:
   for (const e of elongations(from, until)) if (!firstOf.has(e.name)) { firstOf.add(e.name); out.push({ at: e.at, line: `Best ${e.sky}s for ${e.name}: ${ukDate(e.at) === date ? `around now (${dayIn(date, date)})` : `around ${dayIn(ukDate(e.at), date)}`}, when it is furthest from the Sun.` }) }
   const showers = meteorShowers(place, from)
   // a small shower in a poor year goes under the fold however near it is (John, November 10th 2026)
-  for (const m of showers) out.push({ at: m.peak, days: m.perHour >= BIG_SHOWER_PER_HOUR ? BIG_SHOWER_DAYS : showerVerdict(m.night).startsWith('a poor year') ? -1 : SOON_DAYS, line: `${m.name} meteor shower: ${m.night.date === date ? 'best tonight' : `best on the night of ${dayIn(m.night.date, date)}`}. ${up(showerVerdict(m.night))}.` })
+  for (const m of showers) out.push({ at: m.peak, days: m.perHour >= BIG_SHOWER_PER_HOUR ? BIG_SHOWER_DAYS : showerVerdict(m).startsWith('a poor year') ? -1 : SOON_DAYS, line: `${m.name} meteor shower: ${m.night.date === date ? 'best tonight' : `best on the night of ${dayIn(m.night.date, date)}`}. ${up(showerVerdict(m))}.` })
   out.sort((a, b) => a.at.getTime() - b.at.getTime())
   const soon = (o: (typeof out)[number]) => o.always || o.at.getTime() - from.getTime() <= (o.days ?? SOON_DAYS) * 86_400_000
   return { soon: out.filter(soon).map((o) => o.line), later: out.filter((o) => !soon(o) && (o.eclipse || o.at < until)).map((o) => o.line) }

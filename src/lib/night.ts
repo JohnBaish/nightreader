@@ -73,7 +73,18 @@ export function moonUp(place: Place, from: Date, to: Date): Span[] {
   return spans
 }
 
-const PHASES = ['New Moon', 'Waxing crescent', 'First quarter', 'Waxing gibbous', 'Full Moon', 'Waning gibbous', 'Last quarter', 'Waning crescent']
+/** The phase's name (John, November 11th 2026, after the fresh look's 3.3). New and Full Moon
+ *  cover the eighth of the month round each (up to about 4% lit, and about 96% or more); a
+ *  quarter only while the Moon looks close to half lit, 40% to 60%; crescent below that,
+ *  gibbous above. `angle` is how far round its monthly circuit, 0 to 360 (MoonPhase). */
+export function phaseName(lit: number, angle: number): string {
+  const a = ((angle % 360) + 360) % 360, waxing = a < 180
+  if (a < 22.5 || a >= 337.5) return 'New Moon'
+  if (a >= 157.5 && a < 202.5) return 'Full Moon'
+  if (lit < 0.4) return waxing ? 'Waxing crescent' : 'Waning crescent'
+  if (lit <= 0.6) return waxing ? 'First quarter' : 'Last quarter'
+  return waxing ? 'Waxing gibbous' : 'Waning gibbous'
+}
 
 /** The Moon as it looks from `place` at `at`: how much is lit, the phase's name, and which way
  *  its bright edge points (degrees from straight up, positive towards the left, as on the sky). */
@@ -86,7 +97,7 @@ export function moonLook(place: Place, at: Date): { lit: number; phase: string; 
   const parallactic = Math.atan2(Math.sin(hourAngle), Math.tan(place.latitude * RAD) * Math.cos(dm) - Math.sin(dm) * Math.cos(hourAngle))
   return {
     lit: Illumination(Body.Moon, at).phase_fraction,
-    phase: PHASES[Math.floor(((MoonPhase(at) + 22.5) % 360) / 45)],
+    phase: phaseName(Illumination(Body.Moon, at).phase_fraction, MoonPhase(at)),
     round: MoonPhase(at) / 360,
     tilt: (((brightLimb - parallactic) / RAD + 540) % 360) - 180,
     altitude: moon.altitude,

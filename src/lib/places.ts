@@ -11,7 +11,16 @@ const ENGLISH = new Set((data.places as [string, number, number, number][]).map(
  *  the place is Welsh). */
 const WELSH_AREAS = new Set(['CF', 'SA', 'NP', 'LL', 'LD', 'SY', 'CH', 'HR'])
 
+/** Districts whose name is set here (the fresh look's 3.1; John, November 11th 2026): six the
+ *  list gives no place for (TR22 and SO97 as Lightreader), and four with a Gaelic and an English
+ *  name where neither is in the town list, shown in English (no Gaelic names, November 10th). */
+export const NAMED: Record<string, string> = {
+  TR22: 'St Agnes', SO97: 'Southampton', IV48: 'Sconser', KW13: 'Forsinard', PH30: 'Corrour', PH42: 'Isle of Eigg',
+  IV27: 'Lairg', HS8: 'Iochdar', IV56: 'Struan', PH36: 'Strontian',
+}
+
 export function placeNames(code: string, name: string): { shown: string; own: string } {
+  if (NAMED[code]) return { shown: NAMED[code], own: NAMED[code] }
   const parts = name.split(' / ').map((x) => x.trim())
   if (parts.length !== 2) return { shown: name, own: name }
   const [a, b] = parts

@@ -13,8 +13,9 @@ import { WhereToLook } from './components/WhereToLook.tsx'
 import { YearInDarkness } from './components/YearInDarkness.tsx'
 import { lineColour } from './lib/lineColour.ts'
 import { clock } from './lib/format.ts'
-import { district, outwardCode, POSTCODE_CREDITS, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
-import { chartPicture, deliver, imageName } from './lib/shareImage.ts'
+import { district, outwardCode, POSTCODE_CREDITS, postcodeProblem, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
+import { chartPicture, deliver, imageName, type PictureText } from './lib/shareImage.ts'
+import { MOON_KEY, SKY_KEY } from './lib/yearKeys.ts'
 import { tonightDate } from './lib/tonight.ts'
 import { townsRound } from './lib/towns.ts'
 import { useTonight } from './lib/useTonight.ts'
@@ -48,10 +49,14 @@ class SafetyNet extends Component<{ children: ReactNode }, { failed: boolean }> 
   }
 }
 
+const hashText = () => decodeURIComponent(location.hash.slice(1)).trim()
 const fromHash = (): District | null => {
-  const code = outwardCode(decodeURIComponent(location.hash.slice(1)))
+  const code = outwardCode(hashText())
   return code ? district(code) : null
 }
+/** A link to a postcode Nightreader doesn't know (#BT1, #ZZ99): the box's own message, shown with
+ *  the box open (the fresh look's 3.6; John, November 11th 2026). */
+const hashProblem = (): string => (hashText() && !fromHash() ? postcodeProblem(hashText()) : '')
 
 function Lines({ lines, marks }: { lines: string[]; marks?: boolean }) {
   return (
@@ -68,15 +73,15 @@ const CREDIT = `nightreader.baish.net · Times in UK local time for the middle o
 const STARS = 'Stars and constellation lines from d3-celestial by Olaf Frohn (BSD licence), from XHIP, an extended Hipparcos compilation (Anderson and Francis, 2012).'
 
 /** "Copy" / "Share" for a picture: the drawing found in `section` by `selector`. */
-function Share({ section, selector, heading, sub, credit, file, date, code }: {
-  section: React.RefObject<HTMLElement | null>; selector: string; heading: string; sub: () => string[]; credit: string; file: string; date: string; code: string
+function Share({ section, selector, heading, sub, credit, file, date, code, keys }: {
+  section: React.RefObject<HTMLElement | null>; selector: string; heading: string; sub: () => string[]; credit: string; file: string; date: string; code: string; keys?: PictureText['keys']
 }) {
   return (
     <div className="share-row">
       <ShareButton what="" make={() => deliver(async () => {
         const area = section.current?.querySelector<HTMLElement>(selector)
         if (!area) throw new Error('No picture')
-        return chartPicture(area, { heading, sub: sub(), credit })
+        return chartPicture(area, { heading, sub: sub(), credit, keys })
       }, imageName(file, code, date), heading)} />
     </div>
   )
@@ -94,7 +99,7 @@ function Place({ d, now }: { d: District; now: Date }) {
   const text = (sel: string) => (sec: React.RefObject<HTMLElement | null>) => sec.current?.querySelector(sel)?.textContent?.trim() ?? ''
   const skyShare = <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} />
   const lookShare = <Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} />
-  const yearShare = year && <Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} />
+  const yearShare = year && <Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} keys={[{ heading: 'The sky', items: SKY_KEY }, { heading: 'Moonlight in the night', items: MOON_KEY }]} />
   return (
     <>
       <div className="hero">
@@ -125,7 +130,7 @@ function Place({ d, now }: { d: District; now: Date }) {
         <section ref={lookRef}>
           <div className="sec-head">
             <h2>Where and when to look</h2>
-            <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.</p>
+            <p className="sub">Facing south, with east on the left and west on the right. {hasTowns && 'The towns along the horizon are where they really lie from here. '}Slide through the night.<span className="swipe-hint"> Swipe the picture to look east or west.</span></p>
           </div>
           <WhereToLook key={v.date} v={v} d={d} now={now}
             share={lookShare} />
@@ -160,16 +165,22 @@ function Place({ d, now }: { d: District; now: Date }) {
 export default function App() {
   const now = useNow()
   const [d, setD] = useState<District | null>(() => fromHash() ?? savedDistrict())
-  const [changing, setChanging] = useState(false)
+  const [problem, setProblem] = useState(hashProblem)
+  const [changing, setChanging] = useState(() => !!problem)
   const choose = (next: District) => {
     saveDistrict(next.code)
     history.replaceState(null, '', `#${next.code}`)
     setD(next)
     setChanging(false)
+    setProblem('')
   }
   // The postcode after "#" (it never reaches a server): followed when it changes.
   useEffect(() => {
-    const onHash = () => { const next = fromHash(); if (next) { saveDistrict(next.code); setD(next) } }
+    const onHash = () => {
+      const next = fromHash()
+      if (next) { saveDistrict(next.code); setD(next); setProblem(''); setChanging(false) }
+      else if (hashText()) { setProblem(hashProblem()); setChanging(true) }
+    }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
@@ -190,7 +201,7 @@ export default function App() {
           <div className="welcome">
             {!d && <h1>The night sky from your postcode</h1>}
             {!d && <p className="lede">Proper darkness tonight, with the Moon out of the way, and the visible planets, anywhere in Great Britain.</p>}
-            <PostcodeBox onChoose={choose} onCancel={d ? () => setChanging(false) : undefined} />
+            <PostcodeBox key={problem} onChoose={choose} onCancel={d ? () => { setChanging(false); if (problem) history.replaceState(null, '', `#${d.code}`); setProblem('') } : undefined} problem={problem} />
             {!d && (
               <p className="welcome-about">
                 Nightreader works out, for any postcode in Great Britain, when the sky is truly dark tonight, when the Moon is

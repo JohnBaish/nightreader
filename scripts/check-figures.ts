@@ -7,9 +7,9 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { SHOWERS, lunarEclipses, meteorShowers, moonPhases, oppositions, solarEclipses, sunReaches } from '../src/lib/ahead.ts'
 import { clock, duration } from '../src/lib/format.ts'
-import { LOW, WELL, fists, moonLook, moonUp, night, nights, sky, sunDepthNeeded } from '../src/lib/night.ts'
+import { LOW, WELL, fists, moonLook, moonUp, night, nights, phaseName, sky, sunDepthNeeded } from '../src/lib/night.ts'
 import { placeNames } from '../src/lib/places.ts'
-import { opening, phaseLine, sentences } from '../src/lib/sentences.ts'
+import { aheadLines, clockChange, opening, phaseLine, sentences } from '../src/lib/sentences.ts'
 import { dayFigures, type Place } from '../src/lib/sun.ts'
 import { describeToward, townsRound } from '../src/lib/towns.ts'
 import { district } from '../src/lib/postcode.ts'
@@ -176,12 +176,38 @@ check('the sentences: Reading on November 10th, a full Moon, midsummer, and a sh
   assert.ok(a.groups[1].lines.some((l) => /^Venus is low: in view from \d\d:\d\d to \d\d:\d\d\.$/.test(l)))
   const l = sentences(place('CF10'), 'Cardiff', '2027-08-12').groups
   assert.ok(l[1].lines.includes('Mercury, Venus and Jupiter: not in view tonight, too close to the Sun.'))
-  assert.ok(l[2].lines.includes('Perseids meteor shower: best tonight. A fair year for this annual event: 2h\u00a02m of the night is Moon-free.'))
+  assert.ok(l[2].lines.includes('Perseids meteor shower: best tonight. A fair year for this annual event: 2h\u00a01m of the night is Moon-free while the shower is well up.'))
   // a spell of a few minutes doesn't count: Mercury on November 17th was in view for three
   assert.equal(sentences(RG1, 'Reading', '2026-11-17').groups[1].lines[4], 'Mercury: not in view tonight, too low while the sky is dark.')
   assert.ok(sentences(RG1, 'Reading', '2027-08-12').groups[2].lines.some((x) => x.endsWith('Looking at the Sun without proper protection is dangerous and should be avoided.')))
   assert.ok(sentences(RG1, 'Reading', '2026-11-24').groups[2].lines.includes('Full Moon: today (November 24th).'))
   for (const g of a.groups) for (const l of g.lines) assert.ok(!/undefined|NaN|null/.test(l), l)
+})
+
+check('the fresh look (November 11th 2026): phase names, clock changes, the Moon at the ends of the night, showers by their source, names', () => {
+  // 3.3: a quarter only from 40% to 60% lit; New and Full as before
+  assert.equal(phaseName(0.69, 248), 'Waning gibbous')
+  assert.equal(phaseName(0.5, 90), 'First quarter')
+  assert.equal(phaseName(0.39, 77), 'Waxing crescent')
+  assert.equal(phaseName(0.61, 102), 'Waxing gibbous')
+  assert.equal(phaseName(0.03, 20), 'New Moon')
+  assert.equal(phaseName(0.97, 200), 'Full Moon')
+  assert.equal(sentences(RG1, 'Reading', '2027-03-27').groups[0].lines[0], 'A shrinking Moon, bulging in its phase between full and half (waning gibbous), 69% lit.')
+  // 3.2: the clocks
+  assert.ok(opening(night(RG1, '2027-03-27')).line.endsWith('The clocks go forward an hour at 01:00.'))
+  assert.ok(opening(night(RG1, '2027-10-30')).line.endsWith('The clocks go back an hour at 02:00.'))
+  assert.equal(clockChange(night(RG1, '2026-11-10')), '')
+  // 3.5: still falling at sunset, or still climbing at sunrise
+  assert.ok(sentences(RG1, 'Reading', '2026-12-13').groups[0].lines.some((x) => x.startsWith('It is highest just after sunset, at 15:55, when it stands 19° up (two fists)')))
+  assert.ok(sentences(RG1, 'Reading', '2026-12-03').groups[0].lines.some((x) => x.startsWith('It is highest just before sunrise, at 07:50')))
+  assert.ok(sentences(RG1, 'Reading', '2026-12-14').groups[0].lines.some((x) => x.startsWith('At its highest during the night, at 16:20'))) // its true peak
+  // 3.4: showers judged while their source is 20° up
+  const g = aheadLines(RG1, '2026-11-10'), all = [...g.soon, ...g.later]
+  assert.ok(all.includes('Leonids meteor shower: best on the night of November 17th. A very good year for this annual event: no Moon while the shower is well up.'))
+  assert.ok(all.includes('Eta Aquariids meteor shower: best on the night of May 6th. A poor year for this annual event: from here the shower is barely above the horizon before dawn.'))
+  // 3.1: no Gaelic halves, no bare postcodes
+  for (const code of Object.keys(data.outcodes)) { const d = district(code)!; assert.ok(!d.name.includes(' / ') && d.name !== code, code) }
+  assert.deepEqual(['IV27', 'TR22', 'PH42'].map((c) => district(c)!.name), ['Lairg', 'St Agnes', 'Isle of Eigg'])
 })
 
 check('place names: Welsh in Wales, one name elsewhere, the English name kept for directions', () => {
@@ -203,7 +229,7 @@ check('a small meteor shower in a poor year goes under See more, even when near'
   // from Reading on December 2nd 2026 the Ursids are 20 days off, with the Moon up all night
   const g = sentences(RG1, 'Reading', '2026-12-02').groups
   assert.ok(!g[2].lines.some((l) => l.startsWith('Ursids')))
-  assert.ok(g[3].lines.includes('Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up all night.'))
+  assert.ok(g[3].lines.includes('Ursids meteor shower: best on the night of December 22nd. A poor year for this annual event: the Moon is up the whole time the shower is well up.'))
   // a big shower in a poor year still shows: the Geminids from Cardiff on October 1st 2027
   assert.ok(sentences(place('CF10'), 'Cardiff', '2027-10-01').groups[2].lines.some((l) => l.startsWith('Geminids meteor shower')))
 })

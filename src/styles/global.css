@@ -126,7 +126,8 @@ h2 { font-size: clamp(26px, 3.4vw, 36px); }
 .iconkey svg { width: 28px; height: 28px; display: block; margin: 0 auto 5px; }
 .iconkey i { display: block; height: 12px; border-radius: 3px; box-shadow: 0 0 0 1px var(--hair); margin-bottom: 5px; }
 .notes { margin-top: 18px; color: var(--ink2); font-size: 15px; }
-.notes p + p { margin-top: 8px; }
+.notes p + p, .notes div + div, .notes p + div { margin-top: 8px; }
+.notes div p + p { margin-top: 4px; }
 section .working { padding: 40px 0; }
 @media (max-width: 720px) { .key { flex-direction: column; } .key > div { width: 100%; } .iconkey { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); max-width: calc(var(--n) * 70px); } }
 
@@ -207,6 +208,14 @@ footer a { color: var(--ink2); }
 .about dt { font-weight: 600; display: flex; align-items: center; gap: 10px; }
 .about dt span { font-weight: 400; color: var(--ink2); }
 .about dd { margin: 0; color: var(--ink2); }
-.about .swatch { width: 14px; height: 14px; border-radius: 3px; box-shadow: 0 0 0 1px var(--hair); flex: none; }
+.about .swatch { width: 14px; height: 14px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(244, 234, 214, .42); flex: none; } /* a clearer edge, so the darkest show on the panel (fresh look 4.2) */
 .about p { color: var(--ink2); font-size: 15px; margin-top: 12px; }
 @media (max-width: 720px) { .about { padding: 20px 18px 18px; } .about-row { grid-template-columns: 1fr; gap: 2px; } }
+
+/* the fresh look (November 11th 2026): the swipe hint only where the view is wider than the
+   frame (frame narrower than 720px), and a faint strip behind the ruler of fists */
+.swipe-hint { display: none; }
+@media (max-width: 751px) { .swipe-hint { display: inline; } }
+.frame .ruler { background: linear-gradient(90deg, rgba(8, 11, 34, .82) 0, rgba(8, 11, 34, .82) 34px, rgba(8, 11, 34, 0) 46px); }
+.look li.group { grid-template-columns: 22px minmax(0, 1fr); }
+.look li.group .where { grid-column: 2; }

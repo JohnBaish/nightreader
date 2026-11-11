@@ -4,7 +4,7 @@
 import {
   Body, Illumination, NextLocalSolarEclipse, NextLunarEclipse, NextMoonQuarter, Observer, SearchLocalSolarEclipse,
   GeoVector, RotateVector, Rotation_EQJ_ECL, SearchLunarEclipse, SearchMaxElongation, SearchMoonQuarter, SearchRelativeLongitude,
-  SphereFromVector,
+  SiderealTime, SphereFromVector,
 } from 'astronomy-engine'
 import { night, position, type Night } from './night.ts'
 import type { Place } from './sun.ts'
@@ -99,11 +99,33 @@ export function sunReaches(longitude: number, from: Date): Date {
 
 /** Each shower's next peak, and the night nearest it at the place (the night before a peak that
  *  falls before UK midday, otherwise the night that follows). */
-export function meteorShowers(place: Place, from: Date): { name: string; perHour: number; peak: Date; night: Night }[] {
+export function meteorShowers(place: Place, from: Date): Shower[] {
   return SHOWERS.map((s) => {
     const peak = sunReaches(s.sunLongitude, from)
     const uk = ukParts(peak)
     const date = uk.hour < 12 ? new Date(Date.parse(uk.date + 'T00:00:00Z') - 86_400_000).toISOString().slice(0, 10) : uk.date
-    return { name: s.name, perHour: s.perHour, peak, night: night(place, date) }
+    const n = night(place, date)
+    return { name: s.name, perHour: s.perHour, peak, night: n, ...radiantWindow(place, n, s.radiant) }
   }).sort((a, b) => a.peak.getTime() - b.peak.getTime())
+}
+
+/** The shower's source counts as "well up" from this height (John, November 11th 2026). */
+export const RADIANT_UP = 20
+
+export type Shower = { name: string; perHour: number; peak: Date; night: Night; upMs: number; freeMs: number }
+
+/** How long, within the night's darkest stretch, the shower's source is at least RADIANT_UP
+ *  degrees up, and how much of that time the Moon is down (the fresh look's 3.4). Minute by
+ *  minute. */
+export function radiantWindow(place: Place, n: Night, [ra, dec]: [number, number]): { upMs: number; freeMs: number } {
+  if (!n.darkest) return { upMs: 0, freeMs: 0 }
+  const RAD = Math.PI / 180, p = place.latitude * RAD, d = dec * RAD, minSin = Math.sin(RADIANT_UP * RAD)
+  let up = 0, free = 0
+  for (let t = n.darkest.from.getTime(); t < n.darkest.to.getTime(); t += 60_000) {
+    const at = new Date(t), H = (SiderealTime(at) * 15 + place.longitude - ra) * RAD
+    if (Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(H) < minSin) continue
+    up++
+    if (!n.moonUp.some((s) => t >= s.from.getTime() && t < s.to.getTime())) free++
+  }
+  return { upMs: up * 60_000, freeMs: free * 60_000 }
 }

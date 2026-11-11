@@ -90,7 +90,21 @@ async function layers(area: HTMLElement, w: number, h: number, scale: number): P
   return out
 }
 
-export type PictureText = { heading: string; sub: string[]; credit: string }
+/** `keys`: rows of coloured swatches with words, drawn under the picture (the year's two keys). */
+export type PictureText = { heading: string; sub: string[]; credit: string; keys?: { heading: string; items: { label: string; colour: string }[] }[] }
+
+const SWATCH_W = 78, SWATCH_GAP = 8
+
+/** How the keys sit: each key's heading, then its swatches in rows that fit `width`. */
+function keyLayout(keys: NonNullable<PictureText['keys']>, width: number): { heading: string; rows: { label: string; colour: string }[][] }[] {
+  const per = Math.max(1, Math.floor((width + SWATCH_GAP) / (SWATCH_W + SWATCH_GAP)))
+  return keys.map((k) => {
+    // rows balanced, so a key that wraps splits evenly (six as three and three)
+    const n = Math.ceil(k.items.length / per), each = Math.ceil(k.items.length / n)
+    return { heading: k.heading, rows: Array.from({ length: n }, (_, r) => k.items.slice(r * each, r * each + each)) }
+  })
+}
+const KEY_HEAD = 26, KEY_ROW = 46
 
 /** The picture: the name, heading, sub-lines, the drawing from `area`, and the credit, in the Ember colours. */
 export async function chartPicture(area: HTMLElement, t: PictureText): Promise<HTMLCanvasElement> {
@@ -105,7 +119,9 @@ export async function chartPicture(area: HTMLElement, t: PictureText): Promise<H
   probe.font = `15px ${FIG}`
   const subs = t.sub.flatMap((s) => wrap(probe, s, W - 2 * PAD))
   const top = 98 + subs.length * 22 + 14
-  const H = top + bodyH + 22 + credit.length * 16 + 22
+  const keys = t.keys ? keyLayout(t.keys, W - 2 * PAD) : []
+  const keysH = keys.reduce((h, k) => h + KEY_HEAD + k.rows.length * KEY_ROW, keys.length ? 14 : 0)
+  const H = top + bodyH + keysH + 22 + credit.length * 16 + 22
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(W * scale); canvas.height = Math.round(H * scale)
   const ctx = canvas.getContext('2d')!
@@ -127,8 +143,25 @@ export async function chartPicture(area: HTMLElement, t: PictureText): Promise<H
   ctx.restore()
   ctx.strokeStyle = c('--hair'); ctx.lineWidth = 1
   ctx.beginPath(); ctx.roundRect(bx + 0.5, top + 0.5, bodyW - 1, bodyH - 1, 14); ctx.stroke()
+  // the keys, so a shared picture can be read on its own
+  let y = top + bodyH + (keys.length ? 14 : 0)
+  for (const k of keys) {
+    ctx.fillStyle = c('--ink2'); ctx.font = `600 11.5px ${FIG}`
+    ctx.fillText(k.heading.toUpperCase(), PAD, y + 18)
+    y += KEY_HEAD
+    for (const row of k.rows) {
+      row.forEach((it, i) => {
+        const x = PAD + i * (SWATCH_W + SWATCH_GAP)
+        ctx.fillStyle = it.colour; ctx.beginPath(); ctx.roundRect(x, y, SWATCH_W, 12, 3); ctx.fill()
+        ctx.strokeStyle = c('--hair'); ctx.beginPath(); ctx.roundRect(x + 0.5, y + 0.5, SWATCH_W - 1, 11, 3); ctx.stroke()
+        ctx.fillStyle = c('--ink'); ctx.font = `11.5px ${FIG}`; ctx.textAlign = 'center'
+        ctx.fillText(it.label, x + SWATCH_W / 2, y + 28); ctx.textAlign = 'left'
+      })
+      y += KEY_ROW
+    }
+  }
   ctx.fillStyle = c('--ink2'); ctx.font = `12px ${FIG}`
-  credit.forEach((s, i) => ctx.fillText(s, PAD, top + bodyH + 30 + i * 16))
+  credit.forEach((s, i) => ctx.fillText(s, PAD, y + 30 + i * 16))
   return canvas
 }
 

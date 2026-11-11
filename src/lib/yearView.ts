@@ -4,7 +4,7 @@
 // Worked out in the worker.
 
 import { Body, Illumination, NextMoonQuarter, SearchMoonQuarter } from 'astronomy-engine'
-import { nights, position, type DarkKind } from './night.ts'
+import { night, nights, position, type DarkKind } from './night.ts'
 import { sunPosition, type Place } from './sun.ts'
 import { addDays, ukInstant } from './ukTime.ts'
 
@@ -56,8 +56,18 @@ export function yearView(place: Place, from: string): YearView {
   const t0 = ukInstant(from, 12).getTime(), end = t0 + YEAR_NIGHTS * 86_400_000
   for (let q = SearchMoonQuarter(new Date(t0 - 86_400_000)); q.time.date.getTime() < end; q = NextMoonQuarter(q))
     if (q.quarter % 2 === 0) phases.push({ x: (q.time.date.getTime() - t0) / 86_400_000, full: q.quarter === 2 })
+  // a run still going on the year's last night is followed on to its real end, so the note
+  // doesn't stop it short (the fresh look's 2.7)
+  const last = list[list.length - 1].date
+  const finish = (rs: [string, string][], test: (k: DarkKind | null) => boolean) => rs.map(([a, b]): [string, string] => {
+    if (b !== last) return [a, b]
+    let end = b
+    for (let k = 1; k <= 120; k++) { const d = addDays(b, k); if (!test(night(place, d).darkest?.kind ?? null)) break; end = d }
+    return [a, end]
+  })
   return {
     from, sun, moon, nights: list, phases,
-    noTrueNight: runs(list, (n) => n.kind !== 'true night'), noVeryDark: runs(list, (n) => n.kind === 'dark' || n.kind === null),
+    noTrueNight: finish(runs(list, (n) => n.kind !== 'true night'), (k) => k !== 'true night'),
+    noVeryDark: finish(runs(list, (n) => n.kind === 'dark' || n.kind === null), (k) => k === 'dark' || k === null),
   }
 }

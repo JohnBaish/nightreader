@@ -23,7 +23,7 @@ export function About() {
           </div>
         ))}
       </dl>
-      <p>“Moon-free” means the Moon is below the horizon.</p>
+      <p>“Moon-free” means the Moon is below the horizon. The moonlight in the pictures indicates only the Moon’s position and fullness, not the overall brightness of the sky.</p>
       <p>
         The planets are Mercury, Venus, Mars, Jupiter and Saturn. A planet is well placed when it’s at least 20° up, and low
         (needing a clear horizon) from 10° to 20°. The sky also has to be dark enough to see it. The brighter the planet, the

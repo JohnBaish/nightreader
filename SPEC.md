@@ -48,7 +48,9 @@ night: no made-up figures, no decoration standing in for data.
 ## 4. The Moon (Agreed)
 
 Drawn at its true phase and tilted as it appears from the place. Phase name, share lit,
-moonrise and moonset. The moonlight shading in the pictures shows when the Moon is up and how
+moonrise and moonset. **Phase names (John, November 11th 2026):** New Moon up to about 4% lit and
+Full Moon from about 96%, as before; a quarter only from 40% to 60% lit; crescent below that,
+gibbous above. The moonlight shading in the pictures shows when the Moon is up and how
 full it is; it isn't a measurement of brightness, and the page says so.
 
 ## 5. The planets, and "in view"
@@ -98,12 +100,16 @@ A short list in date order, each line worked out for the place:
 3. Mars, Jupiter and Saturn at their best (opposite the Sun); the best mornings or evenings
    for Mercury and Venus.
 4. Meteor showers, each with a plain verdict from that night's Moon: "Geminids, December
-   14th: a good year, the Moon sets early."
+   14th: a good year, the Moon sets early." **Since November 11th 2026:** the verdict counts only the
+   Moon-free time while the shower's source is at least 20° up ("… Moon-free while the shower is
+   well up"); where it's well up for less than an hour, "from here the shower is barely above the
+   horizon before dawn".
 
 ## 8. Places and data
 
 1. **Agreed.** Postcode districts: Refueller's list for Great Britain (2,863 districts, from
-   OS Open Names), with its three credit lines.
+   OS Open Names), with its three credit lines. Ten districts' names are set by hand (`NAMED` in `src/lib/places.ts`):
+   six the list has no place for, and four shown in English rather than Gaelic.
 2. **Built.** The town list for Great Britain (`src/data/towns.json`: 1,426 towns and cities and
    666 smaller places districts are named after), from Refueller's place list. **Agreed (John, November 10th 2026):** where
    nothing lies within the rule's 25 miles, the reach grows to 60. Shetland still gets the compass
