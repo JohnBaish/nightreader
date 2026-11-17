@@ -47,6 +47,9 @@ export function longDate(date: string, withYear = false): string {
 
 /** "1h 20m", "47m", "2h" (never "2h 0m"), and "less than a minute" for anything shorter
  *  than a minute. Rounded to the nearest minute, from the exact length (rule H). */
+/** "November 17th", for a UK date "YYYY-MM-DD" (the words sent with a shared picture). */
+export const monthDay = (date: string) => longDate(date).replace(/^\S+ /, '')
+
 export function duration(ms: number): string {
   const abs = Math.abs(ms)
   if (abs < MINUTE) return 'less than a minute'

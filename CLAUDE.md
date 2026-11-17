@@ -52,6 +52,17 @@ Key points:
 
 ## Log
 
+### 2026-11-17 — words with a shared picture (branch `claude/happy-turing-3so1yn`, not merged)
+
+**John** (after testing shares on iPhone and Android, in Lightreader's thread): every Share button sends a sentence, a link
+to the same place (`#RG4`, sent separately) and a title ("Nightreader: The sky tonight"). His wording: "The night sky
+over Caversham (RG4) on November 17th, sunset to sunrise, from Nightreader."; "Where to look in the night sky from
+Caversham (RG4) at 21:20 on November 17th, from Nightreader." (the slider's time; after midnight, the next day's date);
+"The year in darkness for Caversham (RG4), from Nightreader." `ShareWords`, `shareWords()` and `deliver(…, words)` in
+`shareImage.ts`; `monthDay()` in `format.ts`; a `words` prop on `Share` in `App.tsx`. **Checked:** tsc, lint, checks (25),
+build; in Chromium as an iPhone 13, the share sheet replaced by a recorder, `#RG4` and `#EH1`: the words and links above;
+no errors.
+
 ### 2026-11-11 — eclipses of the Sun at sunset or sunrise (merged to `main`)
 
 **John:** 1a (list an eclipse of the Sun when the Sun is up for part of it) and 2a (keep the

@@ -12,11 +12,12 @@ import { SkyTonight } from './components/SkyTonight.tsx'
 import { WhereToLook } from './components/WhereToLook.tsx'
 import { YearInDarkness } from './components/YearInDarkness.tsx'
 import { lineColour } from './lib/lineColour.ts'
-import { clock } from './lib/format.ts'
+import { clock, monthDay } from './lib/format.ts'
 import { district, outwardCode, POSTCODE_CREDITS, postcodeProblem, saveDistrict, savedDistrict, type District } from './lib/postcode.ts'
-import { chartPicture, deliver, imageName, type PictureText } from './lib/shareImage.ts'
+import { chartPicture, deliver, imageName, shareWords, type PictureText } from './lib/shareImage.ts'
 import { MOON_KEY, SKY_KEY } from './lib/yearKeys.ts'
 import { tonightDate } from './lib/tonight.ts'
+import { addDays } from './lib/ukTime.ts'
 import { townsRound } from './lib/towns.ts'
 import { useTonight } from './lib/useTonight.ts'
 
@@ -73,8 +74,10 @@ const CREDIT = `nightreader.baish.net · Times in UK local time for the middle o
 const STARS = 'Stars and constellation lines from d3-celestial by Olaf Frohn (BSD licence), from XHIP, an extended Hipparcos compilation (Anderson and Francis, 2012).'
 
 /** "Copy" / "Share" for a picture: the drawing found in `section` by `selector`. */
-function Share({ section, selector, heading, sub, credit, file, date, code, keys }: {
+function Share({ section, selector, heading, sub, credit, file, date, code, keys, words }: {
   section: React.RefObject<HTMLElement | null>; selector: string; heading: string; sub: () => string[]; credit: string; file: string; date: string; code: string; keys?: PictureText['keys']
+  /** The sentence sent with the picture (John, November 17th 2026), worked out when pressed. */
+  words: () => string
 }) {
   return (
     <div className="share-row">
@@ -82,7 +85,7 @@ function Share({ section, selector, heading, sub, credit, file, date, code, keys
         const area = section.current?.querySelector<HTMLElement>(selector)
         if (!area) throw new Error('No picture')
         return chartPicture(area, { heading, sub: sub(), credit, keys })
-      }, imageName(file, code, date), heading)} />
+      }, imageName(file, code, date), shareWords(heading, words(), code))} />
     </div>
   )
 }
@@ -97,9 +100,13 @@ function Place({ d, now }: { d: District; now: Date }) {
   const hasTowns = townsRound(d, d.own).some((t) => t.bearing > 47 && t.bearing < 313)
   const where = `${d.name} (${d.code})`
   const text = (sel: string) => (sec: React.RefObject<HTMLElement | null>) => sec.current?.querySelector(sel)?.textContent?.trim() ?? ''
-  const skyShare = <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} />
-  const lookShare = <Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} />
-  const yearShare = year && <Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} keys={[{ heading: 'The sky', items: SKY_KEY }, { heading: 'Moonlight in the night', items: MOON_KEY }]} />
+  const skyShare = <Share section={skyRef} selector=".frame" heading="The sky tonight" sub={() => [where, `Tonight, ${v.title}, from sunset to sunrise`]} credit={CREDIT} file="sky-tonight" date={v.date} code={d.code} words={() => `The night sky over ${where} on ${monthDay(v.date)}, sunset to sunrise, from Nightreader.`} />
+  const lookShare = <Share section={lookRef} selector=".pano-inner" heading="Where and when to look" sub={() => [where, `${v.title} at ${text('.clock')(lookRef)}, facing south`]} credit={`${CREDIT} ${STARS}`} file="where-to-look" date={v.date} code={d.code} words={() => {
+    // a time after midnight belongs to the next day's date
+    const at = text('.clock')(lookRef), late = Number(at.slice(0, 2)) < 12
+    return `Where to look in the night sky from ${where} at ${at} on ${monthDay(late ? addDays(v.date, 1) : v.date)}, from Nightreader.`
+  }} />
+  const yearShare = year && <Share section={yearRef} selector=".frame.year" heading="The year in darkness" sub={() => [where, ...(yearRef.current?.querySelector<HTMLElement>('.readout')?.innerText.split('\n').map((l) => l.trim()).filter(Boolean) ?? [])]} credit={CREDIT} file="year-in-darkness" date={year.from} code={d.code} keys={[{ heading: 'The sky', items: SKY_KEY }, { heading: 'Moonlight in the night', items: MOON_KEY }]} words={() => `The year in darkness for ${where}, from Nightreader.`} />
   return (
     <>
       <div className="hero">
