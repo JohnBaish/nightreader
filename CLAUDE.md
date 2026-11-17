@@ -11,7 +11,7 @@ Read these first, in this order:
 2. `PLAN.md`: the staged build. Work one stage at a time.
 3. The mock-ups John agreed: https://claude.ai/artifact/UDWU52EtUoMi9d7JYEMB57 (source in
    `design/mockups/`; rebuild with `node design/mockups/data.mjs` then `build.mjs`).
-4. `HOUSE-STYLE.md` (copied from clockwheel `49cbf9e` on November 10th 2026, with
+4. `HOUSE-STYLE.md` (copied from clockwheel `49cbf9e` on November 10th 2026, re-copied at `ba9c802` on November 17th 2026, with
    `.claude/skills/fresh-look/`; clockwheel holds the master copies). Nightreader may depart from
    it for beauty's sake (SPEC §2): dark for everyone, its own colours.
 
@@ -52,7 +52,7 @@ Key points:
 
 ## Log
 
-### 2026-11-17 — words with a shared picture (branch `claude/happy-turing-3so1yn`, not merged)
+### 2026-11-17 — words with a shared picture (branch `claude/happy-turing-3so1yn`, merged)
 
 **John** (after testing shares on iPhone and Android, in Lightreader's thread): every Share button sends a sentence, a link
 to the same place (`#RG4`, sent separately) and a title ("Nightreader: The sky tonight"). His wording: "The night sky
@@ -61,7 +61,7 @@ Caversham (RG4) at 21:20 on November 17th, from Nightreader." (the slider's time
 "The year in darkness for Caversham (RG4), from Nightreader." `ShareWords`, `shareWords()` and `deliver(…, words)` in
 `shareImage.ts`; `monthDay()` in `format.ts`; a `words` prop on `Share` in `App.tsx`. **Checked:** tsc, lint, checks (25),
 build; in Chromium as an iPhone 13, the share sheet replaced by a recorder, `#RG4` and `#EH1`: the words and links above;
-no errors.
+no errors. **Live** at John's word; `HOUSE-STYLE.md` re-copied (new §17, sharing a picture).
 
 ### 2026-11-11 — eclipses of the Sun at sunset or sunrise (merged to `main`)
 
